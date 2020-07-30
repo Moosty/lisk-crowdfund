@@ -15,6 +15,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,18 +62,19 @@ export const SingleCard = (props) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title="AQUA Project"
+        subheader="September 14, 2020"
       />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
+        image={props.image}
         title="Paella dish"
       />
       <CardContent>
+      <Chip className="mb-2"variant="outlined" size="small" style={{letterSpacing: 2}} color="primary" label={props.category} />
+      	<h1 className="font-medium">{props.title}</h1>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          {props.text}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
