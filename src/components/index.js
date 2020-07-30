@@ -1,5 +1,7 @@
-import { Example } from "./Example";
+import { Menu } from "./Menu";
+import { SingleCard } from "./card/SingleCard";
 
 export {
-  Example,
+  Menu,
+  SingleCard,
 }
