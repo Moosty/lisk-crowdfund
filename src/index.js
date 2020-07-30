@@ -1,12 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import './styles/main.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Crowdfund, Overview, SignIn, SignUp, Wallet } from "./views";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Switch>
+        <Route path="/signin">
+          <SignIn />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+        <Route path="/wallet">
+          <Wallet />
+        </Route>
+        <Route path="/crowdfund">
+          <Crowdfund />
+        </Route>
+        <Route path="/overview">
+          <Overview />
+        </Route>
+        <Route path="/">
+          <App />
+        </Route>
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
