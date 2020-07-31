@@ -10,20 +10,23 @@ export const Overview = (props) => {
  <div className="bg-fixed sm:bg-scroll" style={{backgroundImage:"url(/images/pexels-photo-3951901.jpeg)", height:"40vh" }}>
 	 <div className="w-full h-full" style={{backgroundColor: "#1a202c94"}}>
 	 	<div className="p-12 text-center lg:p-24">
-	 		<h1 className="text-xl sm:text-3xl sm:text-center lg:text-5l text-white font-extrabold">Lisk Crowd</h1>
+	 		<h1 className="text-xl sm:text-3xl sm:text-center lg:text-5xl text-white font-extrabold">Lisk Crowd | A Regulated Crowdfund Platform</h1>
 	 		<span className="text-xl text-center text-white">A Regulated Crowdfund Platform</span>
-		 		<div className="flex sm:flex-col lg:flex-row mt-4">
-			 		<Button size="small" variant="contained" color="primary" style={{marginRight: 10}}>
+		 		<div className="mt-10 mx-auto w-1/4">
+        <div className="mx-auto w-9/12 flex sm:flex-col lg:flex-row mt-4 content-center items-center">
+			 		<Button size="large" variant="contained" color="primary" style={{marginRight: 10}}>
 			        Explore
 			      </Button>
-			      <Button  variant="contained" color="secondary">
-			        Invest
+			      <Button  size="large" variant="contained" color="secondary">
+			        Start your crowdfund
 			      </Button>
 	      		</div>
+          </div>
 	 	</div>
 	 </div>
   </div>
-  <div className="p-2 justify-center flex flex-wrap max-w-screen-lg	lg:max-w-full sm:flex-col lg:flex-row">
+  <div className="mt-10 mx-auto w-12/12 lg:w-9/12">
+  <div className="p-2 flex flex-wrap sm:flex-start	lg:max-w-full sm:flex-col lg:flex-row">
     <SingleCard
     text="A new kind of mask. Zero compromise between breathing & looking great"
     title="The Face Mask - Premium look & Air Filtration"
@@ -58,12 +61,13 @@ export const Overview = (props) => {
     text="A new organisational form. Accessible for everyone online."
     title="The Lisk DAO"
     category="DEFI"
-    image="/images/pexels-photo-1070360.jpeg" />
+    image="/images/flight-sky-earth-space.jpg" />
     <SingleCard
     text="A new kind of sneakers. A decentralized application that tracks the history and life path of valuable items."
     title="The Smart Inventory Project"
     category="DEFI"
     image="/images/pexels-photo-1070360.jpeg" />
+  </div>
   </div>
   </div>;
 }

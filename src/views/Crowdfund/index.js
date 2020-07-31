@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, SingleCard } from '../../components' ;
+import { Menu, SingleCard, Timeline } from '../../components' ;
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
@@ -46,15 +46,15 @@ export const Crowdfund = (props) => {
 
   return <div>
   <Menu />
- <div className="bg-fixed sm:bg-scroll" >
-	 <div className="w-4/6 mx-auto mt-20 h-full flex flex-row" >
-	 	<div className="w-2/4" style={{backgroundImage:"url(/images/pexels-photo-3951901.jpeg)", backgroundSize:"cover"}}>
+ <div className="bg-fixed sm:bg-scroll mt-20 " >
+	 <div className="w-full px-5 lg:px-0 lg:w-4/6 mx-auto h-full flex flex-col lg:flex-row" >
+	 	<div className="w-full lg:w-2/4 bg-contain lg:bg-cover" style={{backgroundImage:"url(/images/pexels-photo-3951901.jpeg)"}}>
 	 	
 	 	</div>
-	 	<div className="w-2/4 lg:pt-0 lg:px-12 lg:p-10" style={{backgroundColor: "white"}}>
+	 	<div className="w-full lg:w-2/4 lg:pt-0 lg:px-12 lg:p-10" style={{backgroundColor: "white"}}>
 	 		<Chip className="mb-2"variant="outlined" size="medium" style={{letterSpacing: 2}} color="primary" label="DEFI" />
-	 		<h1 className="text-xl sm:text-3xl lg:text-5l text-grey font-bold">Lisk Crowd - A Regulated Crowdfund Campaign</h1>
-	 		<span className="text-xl text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec porta metus. 
+	 		<h1 className="text-xl sm:text-3xl lg:text-5l lg:leading-8 text-grey font-bold mb-2">Lisk Crowd - A Regulated Crowdfund Campaign</h1>
+	 		<span className="text-lg text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec porta metus. 
 	 		Quisque mollis tortor sit amet metus tempus lacinia. Aliquam maximus odio auctor malesuada maximus. Etiam ac eros magna. 
 	 		Morbi ut tortor porttitor, elementum tellus vel, imperdiet enim. Morbi tincidunt consectetur nibh, eget viverra nulla aliquam finibus. 
 	 		Cras malesuada, augue ut sollicitudin mattis, erat libero pulvinar ante, ac accumsan massa est eu lectus.</span>
@@ -99,7 +99,9 @@ export const Crowdfund = (props) => {
 	 	</div>
 
 	 </div>
+	  <Timeline />
   </div>
+
   
   </div>;
 }
