@@ -23,7 +23,7 @@ export const Overview = (props) => {
 	 	</div>
 	 </div>
   </div>
-  <div className="p-2 sm:p-12 flex-grow max-w-screen-lg	lg:max-w-full sm:flex-col lg:flex-row sm:object-center">
+  <div className="p-2 sm:p-12 flex flex-grow max-w-screen-lg	lg:max-w-full sm:flex-col lg:flex-row sm:object-center">
   <SingleCard
   text="A new kind of mask. Zero compromise between breathing & looking great"
   title="The Face Mask - Premium look & Air Filtration"
