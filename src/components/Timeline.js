@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+  return ['Select campaign settings', 'Create an ad group', 'Create an ad', 'last'];
 }
 
 function getStepContent(step) {
@@ -37,6 +37,8 @@ function getStepContent(step) {
       return 'Step 2: What is an ad group anyways?';
     case 2:
       return 'Step 3: This is the bit I really care about!';
+    case 3:
+      return 'Step 4: This is the bit I really care about!';
     default:
       return 'Unknown step';
   }

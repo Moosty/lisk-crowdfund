@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, SingleCard, Timeline } from '../../components' ;
+import { Menu, SingleCard, Timeline, ButtonBases, TimelineVertical } from '../../components' ;
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
@@ -49,14 +49,14 @@ export const Crowdfund = (props) => {
  <div className="bg-fixed sm:bg-scroll mt-20 " >
 	 <div className="w-full px-5 lg:px-0 lg:w-4/6 mx-auto h-full flex flex-col lg:flex-row" >
 	 	<div className="w-full lg:w-2/4 bg-contain lg:bg-cover" style={{backgroundImage:"url(/images/pexels-photo-3951901.jpeg)"}}>
-	 	
+
 	 	</div>
 	 	<div className="w-full lg:w-2/4 lg:pt-0 lg:px-12 lg:p-10" style={{backgroundColor: "white"}}>
 	 		<Chip className="mb-2"variant="outlined" size="medium" style={{letterSpacing: 2}} color="primary" label="DEFI" />
 	 		<h1 className="text-xl sm:text-3xl lg:text-5l lg:leading-8 text-grey font-bold mb-2">Lisk Crowd - A Regulated Crowdfund Campaign</h1>
-	 		<span className="text-lg text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec porta metus. 
-	 		Quisque mollis tortor sit amet metus tempus lacinia. Aliquam maximus odio auctor malesuada maximus. Etiam ac eros magna. 
-	 		Morbi ut tortor porttitor, elementum tellus vel, imperdiet enim. Morbi tincidunt consectetur nibh, eget viverra nulla aliquam finibus. 
+	 		<span className="text-lg text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec porta metus.
+	 		Quisque mollis tortor sit amet metus tempus lacinia. Aliquam maximus odio auctor malesuada maximus. Etiam ac eros magna.
+	 		Morbi ut tortor porttitor, elementum tellus vel, imperdiet enim. Morbi tincidunt consectetur nibh, eget viverra nulla aliquam finibus.
 	 		Cras malesuada, augue ut sollicitudin mattis, erat libero pulvinar ante, ac accumsan massa est eu lectus.</span>
 	 		<Card className="w-full my-5">
       <CardHeader
@@ -79,7 +79,7 @@ export const Crowdfund = (props) => {
       		<div>
       		<h1>€307,409 EUR</h1>
       		</div>
-      		
+
       		<div>
       		755 Backers
       		</div>
@@ -88,7 +88,7 @@ export const Crowdfund = (props) => {
       	  <BorderLinearProgress variant="determinate" value={50} />
       	 </div>
       </div>
-		 		<div className="flex sm:flex-col lg:flex-row mt-4">
+		 		<div className="flex lg:flex-row mt-4">
 			 		<Button className=" " variant="contained" color="primary" style={{marginRight: 10}}>
 			        Back it
 			      </Button>
@@ -100,8 +100,17 @@ export const Crowdfund = (props) => {
 
 	 </div>
 	  <Timeline />
+    <div className="mt-12">
+    <Timeline />
+    </div>
+    <div className="flex align-center mt-12">
+    <TimelineVertical />
+    </div>
+    <div className="mt-12">
+    <ButtonBases />
+    </div>
   </div>
 
-  
+
   </div>;
 }

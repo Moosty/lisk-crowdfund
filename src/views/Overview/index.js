@@ -13,11 +13,11 @@ export const Overview = (props) => {
 	 		<h1 className="text-xl sm:text-3xl sm:text-center lg:text-5xl text-white font-extrabold">Lisk Crowd | A Regulated Crowdfund Platform</h1>
 	 		<span className="text-xl text-center text-white">A Regulated Crowdfund Platform</span>
 		 		<div className="mt-10 mx-auto w-1/4">
-        <div className="mx-auto w-9/12 flex sm:flex-col lg:flex-row mt-4 content-center items-center">
-			 		<Button size="large" variant="contained" color="primary" style={{marginRight: 10}}>
-			        Explore
+        <div className="mx-auto flex  content-center items-center">
+			 		<Button variant="contained" color="primary" style={{marginRight: 10}}>
+			        Explore Projects
 			      </Button>
-			      <Button  size="large" variant="contained" color="secondary">
+			      <Button  variant="contained" color="secondary">
 			        Start your crowdfund
 			      </Button>
 	      		</div>
@@ -41,7 +41,7 @@ export const Overview = (props) => {
     text="A new kind of something. Zero compromise between being fast & awesome"
     title="The Fast Bike - Premium look Cant Beat This "
     category="DEFI"
-    image="/images/pexels-photo-1149601.jpeg" />
+    image="/images/pexels-photo-3951901.jpeg" />
     <SingleCard
     text="A new kind of rocket. Zero compromise between flying & looking great"
     title="The Huge Rocket - Zero compromise between flying & looking great"
