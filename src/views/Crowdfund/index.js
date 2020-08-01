@@ -45,12 +45,11 @@ export const Crowdfund = (props) => {
 	const classes = useStyles();
 
   return <div>
-  <Menu />
- <div className="bg-fixed sm:bg-scroll mt-20 " >
+    <Menu />
+ <div className="bg-fixed sm:bg-scroll mt-20" >
 	 <div className="w-full px-5 lg:px-0 lg:w-4/6 mx-auto h-full flex flex-col lg:flex-row" >
-	 	<div className="w-full lg:w-2/4 bg-contain lg:bg-cover" style={{backgroundImage:"url(/images/pexels-photo-3951901.jpeg)"}}>
-
-	 	</div>
+    <div className="w-full lg:w-2/4 bg-contain lg:bg-cover" style={{backgroundImage:"url(/images/pexels-photo-3951901.jpeg)"}}>
+  	</div>
 	 	<div className="w-full lg:w-2/4 lg:pt-0 lg:px-12 lg:p-10" style={{backgroundColor: "white"}}>
 	 		<Chip className="mb-2"variant="outlined" size="medium" style={{letterSpacing: 2}} color="primary" label="DEFI" />
 	 		<h1 className="text-xl sm:text-3xl lg:text-5l lg:leading-8 text-grey font-bold mb-2">Lisk Crowd - A Regulated Crowdfund Campaign</h1>
@@ -95,20 +94,23 @@ export const Crowdfund = (props) => {
 			      <Button className="" variant="contained" color="secondary">
 			        Follow
 			      </Button>
-	      		</div>
+	      </div>
 	 	</div>
 
 	 </div>
+
+   <div className="p-24 bg-gray-200 w-full px-5 lg:px-0 lg:w-4/6 mx-auto h-full flex flex-col lg:flex-row" >
 	  <Timeline />
-    <div className="mt-12">
+   </div>
+   <div className="p-24 bg-gray-200 w-full px-5 lg:px-0 lg:w-4/6 mx-auto h-full flex flex-col lg:flex-row" >
     <Timeline />
-    </div>
-    <div className="flex align-center mt-12">
+   </div>
+   <div className="p-24 bg-gray-200 w-full px-5 lg:px-0 lg:w-4/6 mx-auto h-full flex flex-col lg:flex-row" >
     <TimelineVertical />
-    </div>
-    <div className="mt-12">
+   </div>
+   <div className="mx-auto">
     <ButtonBases />
-    </div>
+   </div>
   </div>
 
 
