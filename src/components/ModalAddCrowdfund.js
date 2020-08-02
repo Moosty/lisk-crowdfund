@@ -3,16 +3,19 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { Menu, SingleCard, Timeline, ButtonBases, TimelineVertical } from '../components' ;
 
 const useStyles = makeStyles((theme) => ({
   modal: {
+    minWidth: '50rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
   paper: {
+    minWidth: '60%',
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -33,7 +36,7 @@ export const ModalAddCrowdfund = (props) => {
   return (
     <div>
       <button type="button" onClick={handleOpen}>
-        react-transition-group
+        Create Crowdfund
       </button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -49,8 +52,9 @@ export const ModalAddCrowdfund = (props) => {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Transition modal</h2>
-            <p id="transition-modal-description">react-transition-group animates me.</p>
+            <h1>Create your own Crowdfund</h1>
+            <Timeline />
+           
           </div>
         </Fade>
       </Modal>

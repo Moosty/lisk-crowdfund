@@ -19,9 +19,9 @@ import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 250,
+    maxWidth: 350,
     margin: 10,
-    minWidth: 250,
+    minWidth: 350,
   },
   media: {
     height: 0,
