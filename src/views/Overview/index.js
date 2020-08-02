@@ -5,11 +5,11 @@ import Button from '@material-ui/core/Button';
 
 export const Overview = (props) => {
 
-  return <div>
+  return <div class="bg-red-500 sm:bg-green-500 md:bg-blue-500 lg:bg-pink-500 xl:bg-teal-500">
   <Menu />
  <div className="bg-fixed sm:bg-scroll" style={{backgroundImage:"url(/images/pexels-photo-3951901.jpeg)", height:"40vh" }}>
-	 <div className="w-full h-full" style={{backgroundColor: "#1a202c94"}}>
-	 	<div className="p-12 text-center lg:p-24">
+	 <div className="w-full flex-auto h-full" style={{backgroundColor: "#1a202c94"}}>
+	 	<div className="p-12 text-center md:p-12 lg:p-24">
 	 		<h1 className="text-xl sm:text-3xl sm:text-center lg:text-5xl text-white font-extrabold">Lisk Crowd | A Regulated Crowdfund Platform</h1>
 	 		<span className="text-xl text-center text-white">A Regulated Crowdfund Platform</span>
 		 		<div className="mt-10 mx-auto w-1/4">
@@ -25,8 +25,8 @@ export const Overview = (props) => {
 	 	</div>
 	 </div>
   </div>
-  <div className="mt-10 mx-auto w-12/12 lg:w-9/12">
-  <div className="p-2 flex flex-wrap sm:flex-start	lg:max-w-full sm:flex-col lg:flex-row">
+  <div className="mt-5 w-12/12 lg:w-12/12">
+  <div className="p-2 container mx-auto flex flex-col mx-auto flex-wrap sm:flex-start	lg:max-w-full  sm:flex-row lg:flex-row">
     <SingleCard
     text="A new kind of mask. Zero compromise between breathing & looking great"
     title="The Face Mask - Premium look & Air Filtration"
