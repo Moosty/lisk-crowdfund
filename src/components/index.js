@@ -3,6 +3,7 @@ import { SingleCard } from "./card/SingleCard";
 import { Timeline } from "./Timeline";
 import { ButtonBases } from "./ButtonBases";
 import { TimelineVertical } from "./TimelineVertical";
+import { ModalAddCrowdfund } from "./ModalAddCrowdfund";
 
 
 export {
@@ -10,5 +11,6 @@ export {
   SingleCard,
   Timeline,
   ButtonBases,
-  TimelineVertical
+  TimelineVertical,
+  ModalAddCrowdfund
 }
