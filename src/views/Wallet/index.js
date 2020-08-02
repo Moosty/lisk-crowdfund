@@ -1,6 +1,9 @@
 import React from 'react';
+import { Menu, SingleCard, ModalAddCrowdfund } from '../../components' ;
 
 export const Wallet = (props) => {
 
-  return <div>Wallet</div>;
+  return <div>
+  	<ModalAddCrowdfund />
+  </div>;
 }
