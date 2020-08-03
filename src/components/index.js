@@ -8,6 +8,7 @@ import { SignInForm } from "./SignInForm";
 import { ModalSignIn } from "./ModalSignIn";
 import { MobileMenu } from "./MobileMenu"; 
 import { TopBar } from "./TopBar";
+import { SingleItem } from "./SingleItem";
 
 
 export {
@@ -19,5 +20,6 @@ export {
   ModalAddCrowdfund,
   SignInForm,
   ModalSignIn,
-  MobileMenu
+  MobileMenu,
+  SingleItem
 }
