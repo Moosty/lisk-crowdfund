@@ -17,7 +17,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import { SingleCard, Timeline, ButtonBases, TimelineVertical, ModalAddCrowdfund } from '../components' ;
+import { SingleCard, Timeline, ButtonBases, TimelineVertical, ModalAddCrowdfund, ModalSignIn } from '../components' ;
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
 
 const drawerWidth = 240;
 
@@ -76,6 +78,16 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  small: {
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    marginTop: 4,
+    marginBottom: 4,
+  },
 }));
 
 export const TopBar = (props) => {
@@ -109,12 +121,21 @@ export const TopBar = (props) => {
             edge="start"
             className={clsx(classes.menuButton, open && classes.hide)}
           >
-            <MenuIcon />
+            <div className="flex flex-row justify-evenly ">
+		        <MenuIcon
+		        className="justify-center content-center" />
+		        <Avatar  alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" className={classes.small} />
+			        <div className="flex-col flex mx-4 ">
+				        <h1 className="text-sm font-bold ">Raphael</h1>
+				        <h2 className="text-sm">15.420 LSK</h2>
+			        </div>
+			        
+		        
+	        </div>
           </IconButton>
-          <Typography variant="h6" noWrap>
-            LiskCrowd
-          </Typography>
+          
            <ModalAddCrowdfund />
+           <ModalSignIn />
         </Toolbar>
 
       </AppBar>
@@ -128,13 +149,20 @@ export const TopBar = (props) => {
         }}
       >
         <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+          <div onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
+          </div>
         </div>
         <Divider />
+	        <div className="flex flex-col p-2 items-center">
+	        <Avatar  alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" className={classes.large} />
+	        <h1 className="text-lg font-bold ">Raphael</h1>
+	        <h2 className="text-xl mb-4">15.420 LSK</h2>
+	        <Button size="small" variant="contained" color="secondary" className="my-4">My Wallet</Button>
+	        </div>
+        <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['Overview', 'Wallet', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
