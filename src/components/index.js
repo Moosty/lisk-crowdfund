@@ -6,8 +6,10 @@ import { TimelineVertical } from "./TimelineVertical";
 import { ModalAddCrowdfund } from "./ModalAddCrowdfund";
 import { SignInForm } from "./SignInForm";
 import { ModalSignIn } from "./ModalSignIn";
-import { MobileMenu } from "./MobileMenu"; 
+import { MobileMenu } from "./MobileMenu";
 import { TopBar } from "./TopBar";
+import { TabsCrowdfund } from "./TabsCrowdfund";
+import { ProjectInfo } from "./ProjectInfo";
 
 
 export {
@@ -19,5 +21,7 @@ export {
   ModalAddCrowdfund,
   SignInForm,
   ModalSignIn,
-  MobileMenu
+  MobileMenu,
+  TabsCrowdfund,
+  ProjectInfo
 }
