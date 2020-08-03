@@ -1,6 +1,9 @@
 .App {
   text-align: center;
 }
+:focus {
+  outline: none!important;
+  }
 
 .App-logo {
   height: 40vmin;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, SingleCard, Timeline, ButtonBases, TimelineVertical } from '../../components' ;
+import { TopBar, SingleCard, Timeline, ButtonBases, TimelineVertical } from '../../components' ;
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
@@ -45,7 +45,7 @@ export const Crowdfund = (props) => {
 	const classes = useStyles();
 
   return <div>
-    <Menu />
+    <TopBar />
  <div className="bg-fixed sm:bg-scroll lg:m-5 pt-10"  >
 	 <div className="w-full mx-auto px-5 h-full flex flex-col lg:px-0 lg:w-4/6 lg:flex-row" >
     <div className="w-full bg-contain lg:w-3/4  lg:bg-cover" style={{backgroundImage:"url(/images/pexels-photo-3951901.jpeg)"}}>

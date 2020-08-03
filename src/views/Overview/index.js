@@ -1,12 +1,12 @@
 import React from 'react';
-import { Menu, SingleCard } from '../../components' ;
+import { TopBar, SingleCard } from '../../components' ;
 import Button from '@material-ui/core/Button';
 
 
 export const Overview = (props) => {
 
   return <div class="bg-red-500 sm:bg-green-500 md:bg-blue-500 lg:bg-pink-500 xl:bg-teal-500">
-  <Menu />
+  <TopBar />
  <div className="bg-fixed sm:bg-scroll" style={{backgroundImage:"url(/images/pexels-photo-3951901.jpeg)", height:"40vh" }}>
 	 <div className="w-full flex-auto h-full" style={{backgroundColor: "#1a202c94"}}>
 	 	<div className="p-12 text-center md:p-12 lg:p-24">
