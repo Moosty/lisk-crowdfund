@@ -37,7 +37,7 @@ export const ModalSignIn = (props) => {
   return (
     <div>
       <Button variant="outlined" color="secondary" onClick={handleOpen}>
-        Start Crowdfund
+        Sign in
       </Button>
       <Modal
 

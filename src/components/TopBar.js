@@ -35,14 +35,15 @@ const useStyles = makeStyles((theme) => ({
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
+    marginRight: drawerWidth,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+  
+    float: 'right',
   },
   hide: {
     display: 'none',
@@ -69,14 +70,14 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: -drawerWidth,
+    marginRight: -drawerWidth,
   },
   contentShift: {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    marginLeft: 0,
+    marginRight: 0,
   },
   small: {
     width: theme.spacing(3),
@@ -113,36 +114,40 @@ export const TopBar = (props) => {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar style={{BackgroundColor:"#262b38"}}>
-          <IconButton
+        <Toolbar style={{BackgroundColor:"#262b38", display:"flex", justifyContent: "flex-end"}}>
+         
+          
+           <ModalAddCrowdfund />
+           <ModalSignIn />
+           <div className="">
+            <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             className={clsx(classes.menuButton, open && classes.hide)}
           >
-            <div className="flex flex-row justify-evenly ">
-		        <MenuIcon
-		        className="justify-center content-center" />
+            <div className="flex flex-row h-full items-center justify-evenly ">
+		        
 		        <Avatar  alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" className={classes.small} />
 			        <div className="flex-col flex mx-4 ">
 				        <h1 className="text-sm font-bold ">Raphael</h1>
 				        <h2 className="text-sm">15.420 LSK</h2>
 			        </div>
+			       <MenuIcon
+		        className="justify-center content-center mr-10" />
 			        
 		        
 	        </div>
           </IconButton>
-          
-           <ModalAddCrowdfund />
-           <ModalSignIn />
+          </div>
         </Toolbar>
 
       </AppBar>
       <Drawer
         className={classes.drawer}
         variant="persistent"
-        anchor="left"
+        anchor="right"
         open={open}
         classes={{
           paper: classes.drawerPaper,
