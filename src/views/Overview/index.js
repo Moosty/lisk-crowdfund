@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 export const Overview = (props) => {
 
-  return <div class="bg-red-500 sm:bg-green-500 md:bg-blue-500 lg:bg-white xl:bg-white-100">
+  return <div class="bg-red-500 sm:bg-green-500 md:bg-blue-500 lg:bg-white xl:bg-white-100 overflow-hidden">
   <TopBar />
  <div className="bg-fixed sm:bg-scroll" style={{backgroundImage:"url(/images/pexels-photo-3951901.jpeg)", height:"40vh" }}>
 	 <div className="w-full flex-auto h-full" style={{backgroundColor: "#1a202c94"}}>

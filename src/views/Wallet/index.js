@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 export const Wallet = (props) => {
 
-  return <div className="bg-white">
+  return <div className="bg-white overflow-hidden">
   <TopBar />
  <div className="bg-fixed sm:bg-scroll" style={{backgroundImage:"url(/images/pexels-photo-3951901.jpeg)", height:"40vh" }}>
 	 <div className="w-full flex-auto h-full" style={{backgroundColor: "#1a202c94"}}>

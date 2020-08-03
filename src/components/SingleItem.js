@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -16,6 +16,9 @@ import Typography from '@material-ui/core/Typography';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Paper from '@material-ui/core/Paper';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Button from '@material-ui/core/Button';
+import Badge from '@material-ui/core/Badge';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +34,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const BorderLinearProgress = withStyles((theme) => ({
+  root: {
+    height: 20,
+    borderRadius: 5,
+  },
+  colorPrimary: {
+    backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
+  },
+  bar: {
+    borderRadius: 5,
+    backgroundColor: '#1a90ff',
+  },
+}))(LinearProgress);
+
 function generate(element) {
   return [0, 1, 2].map((value) =>
     React.cloneElement(element, {
@@ -45,8 +62,10 @@ export const SingleItem = (props) => {
   const [secondary, setSecondary] = React.useState(false);
 
   return (
-    <div className="mb-4 bg-gray-100 w-8/12 mx-auto">
-                <ListItem className="mb-2">
+    
+    <Paper className="w-8/12 mb-6 p-4 mx-auto flex flex-col h-full ">
+                 
+                <div className=" flex h-full items-center flex-row mb-4">
                   <ListItemAvatar>
                   <Avatar
                    
@@ -57,10 +76,14 @@ export const SingleItem = (props) => {
                     primary="Crowdfund campaign Title"
                     secondary="Project title"
                   />
-                </ListItem>,
+                    <Button variant="contained" color="secondary">Vote</Button>
+                  </div>
+                  <BorderLinearProgress variant="determinate" value={50} />
+                
             
           
-       
-    </div>
+     
+    </Paper>
+     
   );
 }
