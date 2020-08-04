@@ -41,6 +41,5 @@ export {
   ProjectUpdates,
   Header,
   CardsContainer,
-
   Header2
 }
