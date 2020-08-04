@@ -13,6 +13,13 @@ import HotelIcon from '@material-ui/icons/Hotel';
 import RepeatIcon from '@material-ui/icons/Repeat';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { UpdateComment, UpdateVote, UpdateEnd, UpdateStart, UpdateClaim } from './' ;
+
+//* Timeline Components    *//
+//* - UpdateComment:       *//
+//* - UpdateEnd:           *//
+//* - UpdateVote:          *//
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,6 +35,8 @@ export const TimelineVertical = (props) => {
 
   return (
     <Timeline align="alternate">
+      <UpdateStart />
+
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
@@ -49,6 +58,61 @@ export const TimelineVertical = (props) => {
           </Paper>
         </TimelineContent>
       </TimelineItem>
+
+      <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant="body2" color="textSecondary">
+            9:30 am
+          </Typography>
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineDot>
+            <FastfoodIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper elevation={3} className={classes.paper}>
+            <Typography variant="h6" component="h1">
+              Eat
+            </Typography>
+            <Typography>Because you need strength</Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+
+      <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant="body2" color="textSecondary">
+            9:30 am
+          </Typography>
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineDot>
+            <FastfoodIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper elevation={3} className={classes.paper}>
+            <Typography variant="h6" component="h1">
+              Eat
+            </Typography>
+            <Typography>Because you need strength</Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+
+      <UpdateClaim />
+
+      <UpdateComment />
+      <UpdateVote />
+
+      <UpdateComment />
+      <UpdateVote />
+
+      <UpdateEnd />
+
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
@@ -101,6 +165,8 @@ export const TimelineVertical = (props) => {
           </Paper>
         </TimelineContent>
       </TimelineItem>
+
+
     </Timeline>
   );
 }
