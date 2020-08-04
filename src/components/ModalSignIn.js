@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   paper: {
-    
+
     backgroundColor: theme.palette.background.paper,
-    
+
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -56,7 +56,7 @@ export const ModalSignIn = (props) => {
           <div className="w-full sm:w-9/12 xl:w-2/4 ">
             <h1>Create your own Crowdfund</h1>
             <SignInForm />
-           
+
           </div>
         </Fade>
       </Modal>

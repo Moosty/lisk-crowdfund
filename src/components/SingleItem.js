@@ -24,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     maxWidth: "100%",
-    marginBottom: 10,
+    marginBottom: 10, 
   },
   demo: {
     backgroundColor: theme.palette.background.paper,
   },
   title: {
-    margin: theme.spacing(4, 0, 2), 
+    margin: theme.spacing(4, 0, 2),
   },
 }));
 
@@ -62,13 +62,13 @@ export const SingleItem = (props) => {
   const [secondary, setSecondary] = React.useState(false);
 
   return (
-    
+
     <Paper className="w-5/12 mb-6 p-4 mx-auto flex flex-col h-full m-4 ">
-                 
+
                 <div className=" flex h-full items-center flex-row mb-4">
                   <ListItemAvatar>
                   <Avatar
-                   
+
                 src={props.src}
                 />
                   </ListItemAvatar>
@@ -79,10 +79,10 @@ export const SingleItem = (props) => {
                     <Button variant="contained" color="secondary">Vote</Button>
                   </div>
                   <BorderLinearProgress variant="determinate" value={50} />
-                
-            
-          
-     
+
+
+
+
     </Paper>
 
   );
