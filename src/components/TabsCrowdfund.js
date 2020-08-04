@@ -3,8 +3,9 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import Badge from '@material-ui/core/Badge';
 
-import { ProjectInfo, ProjectUpdates, SimpleBadge } from './' ;
+import { ProjectInfo, ProjectUpdates } from './' ;
 
 
 const AntTabs = withStyles({
@@ -77,10 +78,11 @@ export const TabsCrowdfund = (props) => {
       <div className={classes.demo1}>
         <AntTabs value={value} onChange={handleChange} aria-label="ant example">
           <AntTab label="Info" />
-          <SimpleBadge badgeContent={4} color="secondary">
             <AntTab label="Updates" />
-          </SimpleBadge>
-          <AntTab label="Engagement" />
+          <Badge badgeContent={4} color="primary">
+
+          <AntTab label="Engagement" />      </Badge>
+
         </AntTabs>
         <Typography className={classes.padding} />
       </div>

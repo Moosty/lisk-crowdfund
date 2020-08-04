@@ -11,7 +11,6 @@ import { TopBar } from "./TopBar";
 import { TabsCrowdfund } from "./TabsCrowdfund";
 import { ProjectInfo } from "./ProjectInfo";
 import { ProjectUpdates } from "./ProjectUpdates";
-import { SimpleBadge } from "./SimpleBadge";
 
 
 
@@ -28,5 +27,4 @@ export {
   TabsCrowdfund,
   ProjectInfo,
   ProjectUpdates,
-  SimpleBadge
 }
