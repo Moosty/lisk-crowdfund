@@ -1,10 +1,10 @@
 import React from 'react';
-import { TopBar, SingleCard } from '../../components' ;
-import Button from '@material-ui/core/Button';
+import { TopBar, Header, CardsContainer } from '../../components' ;
 
 
 export const Overview = (props) => {
 
+<<<<<<< HEAD
   return <div class="bg-red-500 sm:bg-green-500 md:bg-blue-500 lg:bg-white xl:bg-white-100 overflow-hidden">
   <TopBar />
  <div className="bg-fixed sm:bg-scroll" style={{backgroundImage:"url(/images/pexels-photo-3951901.jpeg)", height:"40vh" }}>
@@ -69,5 +69,11 @@ export const Overview = (props) => {
     image="/images/pexels-photo-1070360.jpeg" />
   </div>
   </div>
+=======
+  return <div class="bg-red-500 sm:bg-green-500 md:bg-blue-500 lg:bg-pink-500 xl:bg-teal-500">
+    <TopBar />
+    <Header />
+    <CardsContainer />
+>>>>>>> crowdfundtabs
   </div>;
 }
