@@ -20,6 +20,7 @@ export const Crowdfund = (props) => {
 
      <div className=" w-full px-5 lg:px-0 lg:w-4/6 mx-auto h-full flex flex-col lg:flex-row" >
       <TabsCrowdfund />
+      <TimelineVertical />
      </div>
     </div>
 
