@@ -13,6 +13,7 @@ import { ProjectInfo } from "./ProjectInfo";
 import { ProjectUpdates } from "./ProjectUpdates";
 import { Header } from "./Header";
 import { Header2 } from "./Header2";
+import { SingleItem } from "./SingleItem";
 
 import { CardsContainer } from "./CardsContainer";
 
@@ -33,5 +34,6 @@ export {
   ProjectUpdates,
   Header,
   CardsContainer,
-  Header2
+  Header2,
+  SingleItem
 }
