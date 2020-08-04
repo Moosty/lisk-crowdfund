@@ -25,11 +25,10 @@ export const Wallet = (props) => {
 	 	</div>
 	 </div>
   </div>
-  <div className="mt-5 w-12/12 ">
-  <SingleItem />
-  <SingleItem />
-  <SingleItem />
-  <SingleItem />
+  <div className="mt-5 w-12/12 flex flex-col ">
+  <SingleItem src="/images/pexels-photo-3951901.jpeg" title="Crowdfundcampaign Title" subtitle="Project name" />
+  <SingleItem src="/images/pexels-photo-1149601.jpeg" title="Best Sneakers in the world" subtitle="Aqua Project" />
+ 
   </div>
   </div>;
 }

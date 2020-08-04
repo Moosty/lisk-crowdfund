@@ -63,18 +63,18 @@ export const SingleItem = (props) => {
 
   return (
     
-    <Paper className="w-8/12 mb-6 p-4 mx-auto flex flex-col h-full ">
+    <Paper className="w-5/12 mb-6 p-4 mx-auto flex flex-col h-full m-4 ">
                  
                 <div className=" flex h-full items-center flex-row mb-4">
                   <ListItemAvatar>
                   <Avatar
                    
-                src={"/images/pexels-photo-3951901.jpeg"}
+                src={props.src}
                 />
                   </ListItemAvatar>
                   <ListItemText
-                    primary="Crowdfund campaign Title"
-                    secondary="Project title"
+                    primary={props.title}
+                    secondary={props.subtitle}
                   />
                     <Button variant="contained" color="secondary">Vote</Button>
                   </div>
@@ -84,6 +84,6 @@ export const SingleItem = (props) => {
           
      
     </Paper>
-     
+
   );
 }

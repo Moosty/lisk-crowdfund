@@ -6,9 +6,18 @@ import { TimelineVertical } from "./TimelineVertical";
 import { ModalAddCrowdfund } from "./ModalAddCrowdfund";
 import { SignInForm } from "./SignInForm";
 import { ModalSignIn } from "./ModalSignIn";
-import { MobileMenu } from "./MobileMenu"; 
+import { MobileMenu } from "./MobileMenu";
 import { TopBar } from "./TopBar";
+
 import { SingleItem } from "./SingleItem";
+
+import { TabsCrowdfund } from "./TabsCrowdfund";
+import { ProjectInfo } from "./ProjectInfo";
+import { ProjectUpdates } from "./ProjectUpdates";
+import { Header } from "./Header";
+import { Header2 } from "./Header2";
+
+import { CardsContainer } from "./CardsContainer";
 
 
 export {
@@ -21,5 +30,12 @@ export {
   SignInForm,
   ModalSignIn,
   MobileMenu,
-  SingleItem
+  SingleItem,
+  TabsCrowdfund,
+  ProjectInfo,
+  ProjectUpdates,
+  Header,
+  CardsContainer,
+  Header2
+
 }
