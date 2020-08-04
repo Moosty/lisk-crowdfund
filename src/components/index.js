@@ -12,6 +12,8 @@ import { TabsCrowdfund } from "./TabsCrowdfund";
 import { ProjectInfo } from "./ProjectInfo";
 import { ProjectUpdates } from "./ProjectUpdates";
 import { Header } from "./Header";
+import { Header2 } from "./Header2";
+
 import { CardsContainer } from "./CardsContainer";
 
 
@@ -30,5 +32,6 @@ export {
   ProjectInfo,
   ProjectUpdates,
   Header,
-  CardsContainer
+  CardsContainer,
+  Header2
 }
