@@ -10,6 +10,9 @@ import { MobileMenu } from "./MobileMenu";
 import { TopBar } from "./TopBar";
 import { TabsCrowdfund } from "./TabsCrowdfund";
 import { ProjectInfo } from "./ProjectInfo";
+import { ProjectUpdates } from "./ProjectUpdates";
+import { SimpleBadge } from "./SimpleBadge";
+
 
 
 export {
@@ -23,5 +26,7 @@ export {
   ModalSignIn,
   MobileMenu,
   TabsCrowdfund,
-  ProjectInfo
+  ProjectInfo,
+  ProjectUpdates,
+  SimpleBadge
 }
