@@ -11,6 +11,8 @@ import { TopBar } from "./TopBar";
 import { TabsCrowdfund } from "./TabsCrowdfund";
 import { ProjectInfo } from "./ProjectInfo";
 import { ProjectUpdates } from "./ProjectUpdates";
+import { Header } from "./Header";
+import { CardsContainer } from "./CardsContainer";
 
 
 
@@ -27,4 +29,6 @@ export {
   TabsCrowdfund,
   ProjectInfo,
   ProjectUpdates,
+  Header,
+  CardsContainer
 }
