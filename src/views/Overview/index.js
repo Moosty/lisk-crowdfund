@@ -4,7 +4,7 @@ import { TopBar, Header, CardsContainer } from '../../components' ;
 
 export const Overview = (props) => {
 
-  return <div>
+  return <div className="overflow-hidden">
     <TopBar />
     <Header
     title="Lisk Crowd | A Regulated Crowdfund Platform"

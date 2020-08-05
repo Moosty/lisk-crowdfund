@@ -19,12 +19,15 @@ import Paper from '@material-ui/core/Paper';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Button from '@material-ui/core/Button';
 import Badge from '@material-ui/core/Badge';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     maxWidth: "100%",
-    marginBottom: 10, 
+    marginBottom: 10,
   },
   demo: {
     backgroundColor: theme.palette.background.paper,
@@ -62,8 +65,8 @@ export const SingleItem = (props) => {
   const [secondary, setSecondary] = React.useState(false);
 
   return (
-
-    <Paper className="w-5/12 mb-6 p-4 mx-auto flex flex-col h-full m-4 ">
+    <div className="w-full mb-6 p-4 mx-auto flex flex-row h-full m-4 ">
+    <Paper className="w-9/12 mb-6 p-4 mx-auto flex flex-col h-full m-4 ">
 
                 <div className=" flex h-full items-center flex-row mb-4">
                   <ListItemAvatar>
@@ -76,6 +79,7 @@ export const SingleItem = (props) => {
                     primary={props.title}
                     secondary={props.subtitle}
                   />
+
                     <Button variant="contained" color="secondary">Vote</Button>
                   </div>
                   <BorderLinearProgress variant="determinate" value={50} />
@@ -84,6 +88,30 @@ export const SingleItem = (props) => {
 
 
     </Paper>
+    {(props.type === 'investment') && (
+    <Card className="w-3-12 my-5 bg-gray-100">
+
+    <CardHeader
+      avatar={
+        <Avatar aria-label="recipe" className={classes.avatar}>
+          R
+        </Avatar>
+      }
+      action={
+        <IconButton aria-label="settings">
+          <MoreVertIcon />
+        </IconButton>
+      }
+      title="1.500 LSK / 1.252.889 LSK"
+      subheader="2.6% / 100%"
+    />
+    <div className=" w-2/4 mx-auto flex flex-row justify-between">
+    <Button size="small" variant="contained" color="secondary">Vote</Button>
+    <Button size="small" variant="outlined" color="secondary">Refund</Button>
+    </div>
+    </Card>
+  )}
+    </div>
 
   );
 }

@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-  
+
     float: 'right',
   },
   hide: {
@@ -114,11 +114,11 @@ export const TopBar = (props) => {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar style={{BackgroundColor:"#262b38", display:"flex", justifyContent: "flex-end"}}>
-         
-          
+        <Toolbar style={{BackgroundColor:"#262b38", display:"flex", justifyContent: "space-between"}}>
+
+
            <ModalAddCrowdfund />
-           <ModalSignIn />
+
            <div className="">
             <IconButton
             color="inherit"
@@ -128,16 +128,16 @@ export const TopBar = (props) => {
             className={clsx(classes.menuButton, open && classes.hide)}
           >
             <div className="flex flex-row h-full items-center justify-evenly ">
-		        
-		        <Avatar  alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" className={classes.small} />
+
+
 			        <div className="flex-col flex mx-4 ">
 				        <h1 className="text-sm font-bold ">Raphael</h1>
 				        <h2 className="text-sm">15.420 LSK</h2>
 			        </div>
-			       <MenuIcon
-		        className="justify-center content-center mr-10" />
-			        
-		        
+              <Avatar  alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" className={classes.small} />
+
+
+
 	        </div>
           </IconButton>
           </div>
@@ -189,8 +189,8 @@ export const TopBar = (props) => {
           [classes.contentShift]: open,
         })}
       >
-  
-        
+
+
       </main>
     </div>
   );
