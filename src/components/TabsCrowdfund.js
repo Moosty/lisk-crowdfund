@@ -5,7 +5,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
 
-import { ProjectInfo, ProjectUpdates } from './' ;
+import { ProjectInfo, ProjectUpdates, TimelineVertical } from './' ;
 
 
 const AntTabs = withStyles({
@@ -87,7 +87,7 @@ export const TabsCrowdfund = (props) => {
         <Typography className={classes.padding} />
       </div>
       <div className="mb-8">
-        <ProjectUpdates />
+        <TimelineVertical />
 
       </div>
     </div>
