@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     minWidth: '60%',
     backgroundColor: theme.palette.background.paper,
-    
+
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -36,7 +36,7 @@ export const ModalAddCrowdfund = (props) => {
 
   return (
     <div>
-      <Button variant="contained" color="secondary" onClick={handleOpen}>
+      <Button size="small" variant="contained" color="secondary" onClick={handleOpen}>
         Create Crowdfund
       </Button>
       <Modal
@@ -55,7 +55,7 @@ export const ModalAddCrowdfund = (props) => {
           <div className={classes.paper}>
             <h1>Create your own Crowdfund</h1>
             <Timeline />
-           
+
           </div>
         </Fade>
       </Modal>

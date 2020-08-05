@@ -22,13 +22,14 @@ import Badge from '@material-ui/core/Badge';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    maxWidth: "100%",
-    marginBottom: 10,
-  },
+  root: props => ( {
+    backgroundColor: "#edf2f7",
+
+
+  }),
   demo: {
     backgroundColor: theme.palette.background.paper,
   },
@@ -41,6 +42,7 @@ const BorderLinearProgress = withStyles((theme) => ({
   root: {
     height: 20,
     borderRadius: 5,
+    width: "100%",
   },
   colorPrimary: {
     backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
@@ -60,57 +62,66 @@ function generate(element) {
 }
 
 export const SingleItem = (props) => {
-  const classes = useStyles();
+  const classes = useStyles(props);
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
 
   return (
-    <div className="w-full mb-6 p-4 mx-auto flex flex-row h-full m-4 ">
-    <Paper className="w-9/12 mb-6 p-4 mx-auto flex flex-col h-full m-4 ">
+    <div className={` ${props.menu ? "w-full mx-1" : "w-full lg:w-9/12 p-4 mx-auto flex flex-col lg:flex-col h-full "} `}>
+    <Badge className="w-full" color="secondary" badgeContent={3} showZero>
+    <Paper  className={` ${props.menu ? "w-full m-0 px-4 py-2" : "w-full  p-4 mx-auto flex flex-col lg:flex-row h-full  " } `}>
 
-                <div className=" flex h-full items-center flex-row mb-4">
+                <div className=" flex  flex-col  lg:w-8/12 lg:mr-8 justify-between mb-4 sm:mb-0">
+                <div className=" flex flex-row content-start  w-full items-center">
                   <ListItemAvatar>
                   <Avatar
+                    sizes={props.menu ? "10px" : "100px"}
 
                 src={props.src}
                 />
                   </ListItemAvatar>
+
                   <ListItemText
                     primary={props.title}
                     secondary={props.subtitle}
                   />
 
-                    <Button variant="contained" color="secondary">Vote</Button>
                   </div>
-                  <BorderLinearProgress variant="determinate" value={50} />
+                  <span>
+                  Hier komt nog wat extra informatie over die maanden en uitbetalingen?
+                  </span>
+                    <BorderLinearProgress variant="determinate" value={67} />
+                  </div>
 
+                  {props.type === 'investment' && (
+                  <Card classes={classes} className="lg:w-4/12 bg-gray-100 pb-2 ">
+
+                  <CardHeader
+                    avatar={
+                      <Avatar aria-label="recipe" className={classes.avatar}>
+                        R
+                      </Avatar>
+                    }
+                    action={
+                      <IconButton aria-label="settings">
+                        <MoreVertIcon />
+                      </IconButton>
+                    }
+                    title="1.500 LSK / 1.252.889 LSK"
+                    subheader="2.6% / 100%"
+                  />
+                  <div className=" w-full flex flex-row justify-end px-4">
+                  <Button size="small" variant="contained" color="secondary" style={{marginRight:"0.5rem"}}>Vote</Button>
+                  <Button size="small" variant="outlined" color="secondary">Refund</Button>
+                  </div>
+                  </Card>
+
+                )}
 
 
 
     </Paper>
-    {(props.type === 'investment') && (
-    <Card className="w-3-12 my-5 bg-gray-100">
-
-    <CardHeader
-      avatar={
-        <Avatar aria-label="recipe" className={classes.avatar}>
-          R
-        </Avatar>
-      }
-      action={
-        <IconButton aria-label="settings">
-          <MoreVertIcon />
-        </IconButton>
-      }
-      title="1.500 LSK / 1.252.889 LSK"
-      subheader="2.6% / 100%"
-    />
-    <div className=" w-2/4 mx-auto flex flex-row justify-between">
-    <Button size="small" variant="contained" color="secondary">Vote</Button>
-    <Button size="small" variant="outlined" color="secondary">Refund</Button>
-    </div>
-    </Card>
-  )}
+  </Badge>
     </div>
 
   );
