@@ -19,9 +19,9 @@ import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 300,
+    maxWidth: 350,
     margin: 10,
-    minWidth: 300,
+    minWidth: 350,
   },
   media: {
     height: 0,
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: '#f50057',
   },
 }));
 
