@@ -75,8 +75,8 @@ return <div>
     </Card>
     <div className="flex flex-col w-full">
       <div className="w-full flex flex-row space justify-between">
-        <div>
-        <h1>€307,409 EUR</h1>
+        <div className="flex flex-row">
+        <h1>€307,409 EUR /</h1><h1 className="font-bold">€700,000 EUR</h1>
         </div>
 
         <div>
