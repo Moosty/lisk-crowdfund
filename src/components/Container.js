@@ -2,7 +2,8 @@ import React from 'react';
 
 export const Container = (props) => {
 
-  return <div className="
+  return (
+  <div className="
     container
 
     bg-red-500
@@ -24,5 +25,6 @@ export const Container = (props) => {
 
     ">
     {props.children}
-</div>;
+</div>
+);
 }

@@ -26,7 +26,7 @@ import { Container } from "./Container";
 
 export {
   TopBar,
-  Accordeon,
+
   SingleCard,
   Timeline,
   ButtonBases,

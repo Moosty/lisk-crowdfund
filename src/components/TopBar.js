@@ -21,7 +21,7 @@ import { SingleCard, Timeline, ButtonBases, TimelineVertical, ModalAddCrowdfund,
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 
-const drawerWidth = 240;
+const drawerWidth = 400;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -169,7 +169,7 @@ export const TopBar = (props) => {
         <Divider />
 
         <Divider />
-      
+
       </Drawer>
       <main
         className={clsx(classes.content, {
