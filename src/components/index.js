@@ -20,7 +20,7 @@ import { UpdateVote } from "./UpdateVote";
 import { UpdateEnd } from "./UpdateEnd";
 import { UpdateStart } from "./UpdateStart";
 import { UpdateClaim } from "./UpdateClaim";
-import { Accordeon } from "./Accordeon";
+import { Container } from "./Container";
 
 
 
@@ -46,5 +46,6 @@ export {
   UpdateVote,
   UpdateEnd,
   UpdateStart,
-  UpdateClaim
+  UpdateClaim,
+  Container
 }
