@@ -20,11 +20,13 @@ import { UpdateVote } from "./UpdateVote";
 import { UpdateEnd } from "./UpdateEnd";
 import { UpdateStart } from "./UpdateStart";
 import { UpdateClaim } from "./UpdateClaim";
+import { Accordeon } from "./Accordeon";
 
 
 
 export {
   TopBar,
+  Accordeon,
   SingleCard,
   Timeline,
   ButtonBases,

@@ -23,6 +23,7 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Divider from '@material-ui/core/Divider';
+import { SingleCard, Timeline, ButtonBases, TimelineVertical, ModalAddCrowdfund, ModalSignIn, Accordeon } from '../components' ;
 
 const useStyles = makeStyles((theme) => ({
   root: props => ( {
@@ -90,12 +91,16 @@ export const SingleItem = (props) => {
                   <span>
                   Hier komt nog wat extra informatie over die maanden en uitbetalingen?
                   </span>
+
                     <BorderLinearProgress variant="determinate" value={67} />
                   </div>
 
+
                   {props.type === 'investment' && (
                   <Card classes={classes} className="lg:w-4/12 bg-gray-100 pb-2 ">
-
+                  <h1 className="font-bold text-gray-800 pl-4 pt-2">
+                  My Investment
+                  </h1>
                   <CardHeader
                     avatar={
                       <Avatar aria-label="recipe" className={classes.avatar}>
