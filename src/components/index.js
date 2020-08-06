@@ -21,12 +21,13 @@ import { UpdateEnd } from "./UpdateEnd";
 import { UpdateStart } from "./UpdateStart";
 import { UpdateClaim } from "./UpdateClaim";
 import { Container } from "./Container";
+import { MenuCard } from "./MenuCard";
 
 
 
 export {
   TopBar,
-
+  MenuCard,
   SingleCard,
   Timeline,
   ButtonBases,

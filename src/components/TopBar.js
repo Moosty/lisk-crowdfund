@@ -17,7 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import { SingleCard, Timeline, ButtonBases, TimelineVertical, ModalAddCrowdfund, ModalSignIn, SingleItem } from '../components' ;
+import { SingleCard, Timeline, ButtonBases, TimelineVertical, ModalAddCrowdfund, ModalSignIn, SingleItem, MenuCard } from '../components' ;
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 
@@ -167,8 +167,14 @@ export const TopBar = (props) => {
 	        <Button size="small" variant="contained" color="secondary" className="my-4">My Wallet</Button>
 	        </div>
         <Divider />
+        <MenuCard />
+        <MenuCard />
+        <MenuCard />
+        <MenuCard />
+        <MenuCard />
+        <MenuCard />
+        <MenuCard />
 
-        <Divider />
 
       </Drawer>
       <main
