@@ -41,6 +41,7 @@ export const TimelineVertical = (props) => {
         content="Because this is the life you love!"
         connector={true}
         type={''}
+        color="secondary"
         />
 
         <Update
@@ -49,6 +50,7 @@ export const TimelineVertical = (props) => {
           content="I updated Gihub G's"
           connector={true}
           type={'comment'}
+          color="primary"
           />
 
       <Update
