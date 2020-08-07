@@ -4,7 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
-import { SingleCard, Timeline, ButtonBases, TimelineVertical } from '../components' ;
+import { SingleCard, CrowdfundStepper, ButtonBases, TimelineVertical } from '../components' ;
 import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
@@ -55,7 +55,7 @@ export const ModalAddCrowdfund = (props) => {
         <Fade in={open}>
           <div className={classes.paper}>
             <h1>Create your own Crowdfund</h1>
-            <Timeline />
+            <CrowdfundStepper />
 
           </div>
         </Fade>
