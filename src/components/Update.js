@@ -38,7 +38,7 @@ export const Update = (props) => {
       </Typography>
     </TimelineOppositeContent>
     <TimelineSeparator>
-      <TimelineDot color="secondary">
+      <TimelineDot color={props.type === "comment" ? '' : props.type === 'vote' ? 'primary' : props.type === "claim" ? 'secondary' : "#000"}>
         {props.type === 'comment' && <ChatRoundedIcon />}
         {props.type === 'vote' && <ThumbsUpDownRoundedIcon />}
         {props.type === 'claim' && <AttachMoneyRoundedIcon />}
