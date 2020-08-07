@@ -6,12 +6,14 @@ import {
   Route,
 } from "react-router-dom";
 import './styles/main.css';
+import store from './store';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Crowdfund, Overview, SignIn, SignUp, Wallet } from "./views";
+import { Provider } from "react-redux";
 
 ReactDOM.render(
-  <React.StrictMode>
+    <Provider store={store}>
     <Router>
       <Switch>
         <Route path="/signin">
@@ -34,7 +36,7 @@ ReactDOM.render(
         </Route>
       </Switch>
     </Router>
-  </React.StrictMode>,
+    </Provider>,
   document.getElementById('root')
 );
 

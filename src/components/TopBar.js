@@ -5,21 +5,18 @@ import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import { SingleCard, Timeline, ButtonBases, TimelineVertical, ModalAddCrowdfund, ModalSignIn, SingleItem } from '../components' ;
+import { ModalAddCrowdfund, ModalSignIn } from '../components';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import withReducer from "../store/withReducer";
+import { useDispatch, useSelector } from "react-redux";
+import reducer from "../store/reducers";
+import * as Actions from '../store/actions';
+import { TopAccount } from "./TopAccount";
 
 const drawerWidth = 240;
 
@@ -91,60 +88,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const TopBar = (props) => {
+export const TopBar = withReducer('TopBar', reducer)(props => {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const dispatch = useDispatch();
+  const {wallet} = useSelector(({blockchain}) => blockchain);
+  const {open} = useSelector(({drawer}) => drawer);
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
+      <CssBaseline/>
       <AppBar
-     	style={{backgroundColor:"#262b38"}}
+        style={{backgroundColor: "#262b38"}}
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar style={{BackgroundColor:"#262b38", display:"flex", justifyContent: "space-between"}}>
-
-
-           <ModalAddCrowdfund />
-           <ModalSignIn />
-
-           <div className="">
-            <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <div className="flex flex-row h-full items-center justify-evenly ">
-
-
-			        <div className="flex-col flex mx-4 ">
-				        <h1 className="text-sm font-bold ">Raphael</h1>
-				        <h2 className="text-sm">15.420 LSK</h2>
-			        </div>
-              <Avatar  alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" className={classes.small} />
-
-
-
-	        </div>
-          </IconButton>
-          </div>
+        <Toolbar style={{BackgroundColor: "#262b38", display: "flex", justifyContent: "space-between"}}>
+          <ModalAddCrowdfund/>
+          <ModalSignIn/>
+          <TopAccount />
         </Toolbar>
-
       </AppBar>
+
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -155,30 +122,26 @@ export const TopBar = (props) => {
         }}
       >
         <div className={classes.drawerHeader}>
-          <div onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          <div onClick={() => dispatch(Actions.closeDrawer())}>
+            {theme.direction === 'ltr' ? <ChevronLeftIcon/> : <ChevronRightIcon/>}
           </div>
         </div>
-        <Divider />
-	        <div className="flex flex-col p-2 items-center">
-	        <Avatar  alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" className={classes.large} />
-	        <h1 className="text-lg font-bold ">Raphael</h1>
-	        <h2 className="text-xl mb-4">15.420 LSK</h2>
-	        <Button size="small" variant="contained" color="secondary" className="my-4">My Wallet</Button>
-	        </div>
-        <Divider />
-
-        <Divider />
-      
+        <Divider/>
+        <div className="flex flex-col p-2 items-center">
+          <Avatar alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" className={classes.large}/>
+          <h1 className="text-lg font-bold ">Raphael</h1>
+          <h2 className="text-xl mb-4">15.420 LSK</h2>
+          <Button size="small" variant="contained" color="secondary" className="my-4">My Wallet</Button>
+        </div>
+        <Divider/>
+        <Divider/>
       </Drawer>
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
-
-
       </main>
     </div>
   );
-}
+});
