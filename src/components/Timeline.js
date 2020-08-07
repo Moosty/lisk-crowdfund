@@ -5,6 +5,7 @@ import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,11 +33,11 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return 'Step 1: Create campaign name';
+      return 'Step 1: General information';
     case 1:
-      return 'Step 2: Add description';
+      return 'Step 2: Technical information';
     case 2:
-      return 'Step 3: Choose category';
+      return 'Step 3: Duration';
     case 3:
       return 'Step 4: Add target';
     default:

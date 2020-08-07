@@ -23,6 +23,7 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Divider from '@material-ui/core/Divider';
+import { SingleCard, Timeline, ButtonBases, TimelineVertical, ModalAddCrowdfund, ModalSignIn, Accordeon } from '../components' ;
 
 const useStyles = makeStyles((theme) => ({
   root: props => ( {
@@ -67,11 +68,11 @@ export const SingleItem = (props) => {
   const [secondary, setSecondary] = React.useState(false);
 
   return (
-    <div className={` ${props.menu ? "w-full mx-1" : "w-full lg:w-9/12 p-4 mx-auto flex flex-col lg:flex-col h-full "} `}>
+    <div className="w-full lg:w-4/12 p-4 mx-auto flex flex-col lg:flex-col h-full ">
     <Badge className="w-full" color="secondary" badgeContent={3} showZero>
-    <Paper  className={` ${props.menu ? "w-full m-0 px-4 py-2" : "w-full  p-4 mx-auto flex flex-col lg:flex-row h-full  " } `}>
+    <Paper  className="w-full  p-4 mx-auto flex flex-col lg:flex-col h-full  "  >
 
-                <div className=" flex  flex-col  lg:w-8/12 lg:mr-8 justify-between mb-4 sm:mb-0">
+                <div className=" flex  flex-col   justify-between mb-4 sm:mb-0">
                 <div className=" flex flex-row content-start  w-full items-center">
                   <ListItemAvatar>
                   <Avatar
@@ -87,15 +88,19 @@ export const SingleItem = (props) => {
                   />
 
                   </div>
-                  <span>
+                  <span className="mb-4">
                   Hier komt nog wat extra informatie over die maanden en uitbetalingen?
                   </span>
+
                     <BorderLinearProgress variant="determinate" value={67} />
                   </div>
 
-                  {props.type === 'investment' && (
-                  <Card classes={classes} className="lg:w-4/12 bg-gray-100 pb-2 ">
 
+                  {props.type === 'investment' && (
+                  <Card classes={classes} className="bg-gray-100 pb-2 mt-4 ">
+                  <h1 className="font-bold text-gray-800 pl-4 pt-2">
+                  My Investment
+                  </h1>
                   <CardHeader
                     avatar={
                       <Avatar aria-label="recipe" className={classes.avatar}>

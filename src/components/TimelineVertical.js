@@ -13,7 +13,7 @@ import HotelIcon from '@material-ui/icons/Hotel';
 import RepeatIcon from '@material-ui/icons/Repeat';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { UpdateComment, UpdateVote, UpdateEnd, UpdateStart, UpdateClaim } from './' ;
+import { Update } from './' ;
 
 //* Timeline Components    *//
 //* - UpdateComment:       *//
@@ -35,7 +35,47 @@ export const TimelineVertical = (props) => {
 
   return (
     <Timeline align="alternate">
-      <UpdateStart />
+      <Update
+        time="17:00"
+        title="Go!"
+        content="Because this is the life you love!"
+        connector={true}
+        type={''}
+        color="secondary"
+        />
+
+        <Update
+          time="17:00"
+          title="Comment!"
+          content="I updated Gihub G's"
+          connector={true}
+          type={'comment'}
+          color="primary"
+          />
+
+      <Update
+        time="23:00"
+        title="Vote"
+        content="A moment for Engagement"
+        connector={true}
+        type={'vote'}
+        />
+
+      <Update
+        time="18:00"
+        title="Unlocked Funds"
+        content="Claim your Funds"
+        connector={true}
+        type={'claim'}
+        />
+
+      <Update
+        time="18:00"
+        title="The End"
+        content="Thanks for playing"
+        connector={false}
+        type={''}
+        />
 
       <TimelineItem>
         <TimelineOppositeContent>
@@ -103,15 +143,6 @@ export const TimelineVertical = (props) => {
         </TimelineContent>
       </TimelineItem>
 
-      <UpdateClaim />
-
-      <UpdateComment />
-      <UpdateVote />
-
-      <UpdateComment />
-      <UpdateVote />
-
-      <UpdateEnd />
 
       <TimelineItem>
         <TimelineOppositeContent>
