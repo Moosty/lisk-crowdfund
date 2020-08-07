@@ -10,6 +10,7 @@ import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
 import * as Actions from '../store/actions';
 
+
 const useStyles = makeStyles((theme) => ({
   modal: {
     minWidth: '50rem',
@@ -64,7 +65,6 @@ export const ModalAddCrowdfund = withReducer('ModalAddCrowdfund', reducer)(props
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h1>Create your own Crowdfund</h1>
             <Timeline/>
           </div>
         </Fade>

@@ -1,15 +1,21 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-
 import TimelineItem from '@material-ui/lab/TimelineItem';
 import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
-import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 import Typography from '@material-ui/core/Typography';
 import TimelineDot from '@material-ui/lab/TimelineDot';
-import LaptopMacIcon from '@material-ui/icons/LaptopMac';
-import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
 import Paper from '@material-ui/core/Paper';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
+import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
+import TimelineConnector from '@material-ui/lab/TimelineConnector';
+import ThumbsUpDownRoundedIcon from '@material-ui/icons/ThumbsUpDownRounded';
+import ChatRoundedIcon from '@material-ui/icons/ChatRounded';
+import AttachMoneyRoundedIcon from '@material-ui/icons/AttachMoneyRounded';
+
+//* Update Component *//
+//* start (moment of going live), comment, claim, vote, end (project closing) *//
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -20,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const UpdateVote = (props) => {
+export const Update = (props) => {
 
   const classes = useStyles();
 
@@ -28,21 +34,23 @@ export const UpdateVote = (props) => {
   <TimelineItem>
     <TimelineOppositeContent>
       <Typography variant="body2" color="textSecondary">
-        9:30 am
+        {props.time}
       </Typography>
     </TimelineOppositeContent>
     <TimelineSeparator>
-      <TimelineDot color="primary">
-        <LaptopMacIcon />
+      <TimelineDot color={props.type === "comment" ? '' : props.type === 'vote' ? 'primary' : props.type === "claim" ? 'secondary' : "#000"}>
+        {props.type === 'comment' && <ChatRoundedIcon />}
+        {props.type === 'vote' && <ThumbsUpDownRoundedIcon />}
+        {props.type === 'claim' && <AttachMoneyRoundedIcon />}
       </TimelineDot>
-      <TimelineConnector />
+      {props.connector && ( <TimelineConnector /> )}
     </TimelineSeparator>
     <TimelineContent>
       <Paper elevation={3} className={classes.paper}>
         <Typography variant="h6" component="h1">
-          Vote
+          {props.title}
         </Typography>
-        <Typography>A moment for Engagement</Typography>
+        <Typography>{props.content}</Typography>
       </Paper>
     </TimelineContent>
   </TimelineItem>

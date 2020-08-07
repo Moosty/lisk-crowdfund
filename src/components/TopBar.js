@@ -67,7 +67,6 @@ export const TopBar = withReducer('TopBar', reducer)(props => {
           <TopAccount />
         </Toolbar>
       </AppBar>
-
       <TopDrawer />
       <main
         className={clsx(classes.content, {
