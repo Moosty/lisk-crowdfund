@@ -15,11 +15,7 @@ import { ProjectUpdates } from "./ProjectUpdates";
 import { Header } from "./Header";
 import { Header2 } from "./Header2";
 import { CardsContainer } from "./CardsContainer";
-import { UpdateComment } from "./UpdateComment";
-import { UpdateVote } from "./UpdateVote";
-import { UpdateEnd } from "./UpdateEnd";
-import { UpdateStart } from "./UpdateStart";
-import { UpdateClaim } from "./UpdateClaim";
+import { Update } from "./Update";
 import { Container } from "./Container";
 import { MenuCard } from "./MenuCard";
 
@@ -43,10 +39,6 @@ export {
   Header,
   CardsContainer,
   Header2,
-  UpdateComment,
-  UpdateVote,
-  UpdateEnd,
-  UpdateStart,
-  UpdateClaim,
+  Update,
   Container
 }
