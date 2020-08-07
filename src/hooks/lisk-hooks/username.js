@@ -3,6 +3,7 @@ import { config } from '../../config';
 
 export const useUsername = () => {
   const [username, setUsername] = useState("");
+  const [usernameAccount, setAccount] = useState(null);
   const [exist, setExist] = useState(false);
 
   useEffect(() => {
@@ -19,6 +20,7 @@ export const useUsername = () => {
         json.map(account => {
           if (account.username === username) {
             setExist(true);
+            setAccount(account);
           }
         });
       }
@@ -27,5 +29,5 @@ export const useUsername = () => {
     }
   };
 
-  return [{ exist, username }, setUsername];
+  return [{ exist, username, usernameAccount }, setUsername];
 };

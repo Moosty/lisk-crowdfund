@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import { client } from '@moosty/lisk-sprinkler';
+
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -19,6 +21,7 @@ import * as Actions from '../store/actions';
 import { getPrivateAndPublicKeyFromPassphrase } from "@liskhq/lisk-cryptography";
 import { useUsername } from "../hooks/lisk-hooks/username";
 import { getAddressFromPublicKey } from "@liskhq/lisk-cryptography/dist-node";
+import AppContext from '../AppContext';
 
 function Copyright() {
   return (
@@ -66,19 +69,26 @@ const useStyles = makeStyles((theme) => ({
 
 export const SignInForm = withReducer('SignInForm', reducer)(props => {
   const classes = useStyles();
+  const { api, networkIdentifier } = useContext(AppContext);
   const dispatch = useDispatch();
-  const [ password, setPassword ] = useState("");
-  const [ password1, setPassword1 ] = useState("");
-  const [ passphrase, setPassphrase ] = useState("");
-  const [ error, setError ] = useState("");
-  const [ accountKeys, setKeys ] = useState(null);
-  const [ address, setAddress ] = useState("");
-  const { type } = useSelector(({modal}) => modal);
-  const [{ exist, username }, setUsername] = useUsername();
+  const [password, setPassword] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [passphrase, setPassphrase] = useState("");
+  const [error, setError] = useState("");
+  const [loginDisabled, setLoginDisabled] = useState(true);
+  const [accountKeys, setKeys] = useState(null);
+  const [address, setAddress] = useState("");
+  const {type} = useSelector(({modal}) => modal);
+  const [{exist, username, usernameAccount}, setUsername] = useUsername();
 
   useEffect(() => {
     if (type === 'login' && accountKeys && accountKeys.publicKey) {
       setAddress(getAddressFromPublicKey(accountKeys.publicKey));
+      if (!exist) {
+        setError(`Username not found`);
+      } else {
+        setError('');
+      }
     } else if (type === 'signup') {
       if (exist) {
         setError(`Username already in use please login or choose a different name`);
@@ -86,33 +96,50 @@ export const SignInForm = withReducer('SignInForm', reducer)(props => {
         setError('');
       }
     }
-  }, [exist]);
+  }, [exist, type, accountKeys]);
 
   useEffect(() => {
     setPassphrase(`${username}${password}${username}`);
   }, [username, password, type]);
 
   useEffect(() => {
-      if (passphrase) {
-        setKeys(getPrivateAndPublicKeyFromPassphrase(passphrase));
-      }
+    if (passphrase) {
+      setKeys(getPrivateAndPublicKeyFromPassphrase(passphrase));
+    }
   }, [passphrase]);
 
   useEffect(() => {
-    // todo check if account exists
-    // todo check if username exists with same publickey
-    console.log(accountKeys)
-  }, [accountKeys]);
+    setLoginDisabled(usernameAccount && usernameAccount.publicKey && accountKeys && accountKeys.publicKey && !(accountKeys.publicKey === usernameAccount.publicKey));
+  }, [accountKeys, usernameAccount]);
+
+  const handleLogin = () => {
+    dispatch(Actions.setPassphrase(passphrase));
+    dispatch(Actions.loadAccount(address, Actions.setAccount))
+    dispatch(Actions.closeModal());
+  }
+
+  const handleSignUp = () => {
+    if (!loginDisabled && username) {
+      const tx = client.sprinkler({
+        username: username.toLowerCase(),
+        publicKey: accountKeys.publicKey,
+        networkIdentifier,
+        nonce: '0',
+        fee: '1000000',
+        passphrase
+      });
+      dispatch(Actions.signUp(tx, api));
+    }
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={false} md={6} className={classes.image} />
+      <CssBaseline/>
+      <Grid item xs={false} sm={false} md={6} className={classes.image}/>
       <Grid item xs={12} sm={12} md={6} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <b>{error}</b>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+            <LockOutlinedIcon/>
           </Avatar>
           <Typography component="h1" variant="h5">
             {type === 'login' && `Sign In`}
@@ -130,7 +157,9 @@ export const SignInForm = withReducer('SignInForm', reducer)(props => {
               autoComplete="username"
               autoFocus
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value ? e.target.value.toLowerCase() : "")}
+              helperText={error}
+              error={!!error}
             />
             <TextField
               variant="outlined"
@@ -156,41 +185,47 @@ export const SignInForm = withReducer('SignInForm', reducer)(props => {
               id="password2"
               value={password1}
               onChange={(e) => setPassword1(e.target.value)}
+              error={password !== password1 && !!password1}
+              helperText={!!password1 && password !== password1 ? `Passwords are not the same` : ``}
             />}
             {type === 'login' && <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={<Checkbox value="remember" color="primary"/>}
               label="Remember me"
             />}
             {type === 'login' && <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled={loginDisabled || !exist || !username || !password}
+              onClick={handleLogin}
             >
               Sign In
             </Button>}
             {type === 'signup' && <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled={!password || !password1 || password !== password1 || exist || !username}
+              onClick={handleSignUp}
             >
               Sign Up
             </Button>}
             <Grid container>
               <Grid item>
-                {type === 'login' && <Link href="#" onClick={() => dispatch(Actions.openModal('signup'))} variant="body2">
+                {type === 'login' &&
+                <Link href="#" onClick={() => dispatch(Actions.openModal('signup'))} variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>}
-                {type === 'signup' && <Link href="#" onClick={() => dispatch(Actions.openModal('login'))} variant="body2">
+                {type === 'signup' &&
+                <Link href="#" onClick={() => dispatch(Actions.openModal('login'))} variant="body2">
                   {"Already have an account? Sign In"}
                 </Link>}
               </Grid>
             </Grid>
             <Box mt={5}>
-              <Copyright />
+              <Copyright/>
             </Box>
           </form>
         </div>

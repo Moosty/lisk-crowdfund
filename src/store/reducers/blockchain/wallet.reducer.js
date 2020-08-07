@@ -4,6 +4,11 @@ const defaultState = {
   passphrase: null,
   account: {},
   wallet: [],
+  sprinkler: {
+    running: false,
+    success: null,
+    error: null,
+  }
 }
 
 export default (state = defaultState, action) => {
@@ -21,6 +26,33 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         account: action.account,
+      }
+    case Actions.SIGNUP:
+      return {
+        ...state,
+        sprinkler: {
+          loading: true,
+          success: null,
+          error: null,
+        },
+      }
+    case Actions.SPRINKLER_SUCCESS:
+      return {
+        ...state,
+        sprinkler: {
+          loading: false,
+          success: true,
+          error: null,
+        },
+      }
+    case Actions.SPRINKLER_ERROR:
+      return {
+        ...state,
+        sprinkler: {
+          loading: false,
+          success: false,
+          error: action.error,
+        },
       }
     case Actions.UPDATE_ACCOUNT:
       return {

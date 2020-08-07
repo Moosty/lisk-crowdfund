@@ -4,9 +4,12 @@ import withReducer from '../store/withReducer';
 import reducer from '../store/reducers';
 import * as Actions from '../store/actions';
 import IconButton from "@material-ui/core/IconButton";
+import { utils } from '@liskhq/lisk-transactions';
 import clsx from "clsx";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
+
+const { convertBeddowsToLSK } = utils;
 const useStyles = makeStyles((theme) => ({
   menuButton: {
 
@@ -32,10 +35,10 @@ export const TopAccount = withReducer('TopAccount', reducer)(props => {
     >
       <div className="flex flex-row h-full items-center justify-evenly ">
         <div className="flex-col flex mx-4 ">
-          <h1 className="text-sm font-bold ">Raphael</h1>
-          <h2 className="text-sm">15.420 LSK</h2>
+          <h1 className="text-sm font-bold ">{wallet.account.username}</h1>
+          <h2 className="text-sm">{convertBeddowsToLSK(wallet.account.balance)} LSK</h2>
         </div>
-        <Avatar alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" className={classes.small}/>
+        <Avatar alt={`${wallet.account.username} avatar`} src="/images/pexels-photo-3951901.jpeg" className={classes.small}/>
       </div>
     </IconButton>}
   </div>;
