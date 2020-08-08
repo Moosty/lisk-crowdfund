@@ -63,17 +63,24 @@ export const StepGeneral = (props) => {
   return (
     <form className="flex flex-row w-full flex-wrap" noValidate autoComplete="off">
 
-      <TextField id="outlined-basic" label="Title" variant="outlined" fullWidth style={{ marginBottom: 12 }} />
+      <TextField
+        id="outlined-basic"
+        label="Title"
+        variant="outlined"
+        helperText="Max 255 Characters (1/255)"
+        fullWidth style={{ marginBottom: 12 }} />
       <TextField
        id="outlined-multiline-static"
        label="Description"
        multiline
        rows={4}
-       
+       helperText="(1/255)"
+
        variant="outlined"
        fullWidth
        style={{ marginBottom: 12 }}
      />
+
      <TextField
        id="outlined-select-currency"
        select
@@ -91,6 +98,15 @@ export const StepGeneral = (props) => {
          </MenuItem>
        ))}
     </TextField>
+
+    <TextField
+     id="outlined-multiline-static"
+     label="Project URL"
+     helperText="(1/255)"
+     variant="outlined"
+     fullWidth
+     style={{ marginBottom: 12 }}
+   />
     </form>
   );
 }

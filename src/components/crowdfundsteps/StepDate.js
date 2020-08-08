@@ -1,74 +1,55 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
-
-
-
-
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    margin: 'auto',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
   },
 }));
 
-export const  StepDate = (props) => {
-  // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+export const StepDate = (props) => {
+  const classes = useStyles();
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
   return (
-    <form className="flex flex-row w-full flex-wrap" noValidate autoComplete="off">
-
-    <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="MM/dd/yyyy"
-          margin="normal"
-          id="date-picker-inline"
-          label="Date picker inline"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
+      <form className={classes.container} noValidate>
+        <div className="flex flex-col mx-6">
+        <TextField
+          id="datetime-local"
+          label="Start Date"
+          type="datetime-local"
+          defaultValue="2017-05-24T10:30"
+          className={classes.textField}
+          InputLabelProps={{
+            shrink: true,
           }}
         />
-      <TextField
-       id="outlined-multiline-static"
-       label="Duration of project"
-
-
-       variant="outlined"
-       fullWidth
-       style={{ marginBottom: 12 }}
-     />
-     <TextField
-      id="outlined-multiline-static"
-      label="Amount of votings"
-
-
-      variant="outlined"
-      fullWidth
-      style={{ marginBottom: 12 }}
-    />
-
-
-
-
-
-    </form>
+        <TextField
+          id="datetime-local"
+          label="End Date"
+          type="datetime-local"
+          defaultValue="2017-05-24T10:30"
+          className={classes.textField}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        </div>
+        <div className="flex flex-col">
+        <h1>Upload Image</h1>
+        <Button variant="contained" color="primary" style={{marginRight: 10}}>
+            UPLOAD
+          </Button>
+        </div>
+      </form>
   );
 }

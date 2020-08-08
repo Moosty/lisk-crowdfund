@@ -6,7 +6,6 @@ import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import { StepGeneral, Container, StepTechnical, StepDate } from '../components' ;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,23 +27,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Project Information', 'Finance & Accountability', 'Date & Time'];
+  return ['Create campaign name', 'Add description', 'Choose category', 'Add target'];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <Container> <StepGeneral /> </Container>;
+      return 'Step 1: General information';
     case 1:
-      return <Container> <StepTechnical /> </Container>;
+      return 'Step 2: Technical information';
     case 2:
-      return <Container> <StepDate /> </Container>;
+      return 'Step 3: Duration';
+    case 3:
+      return 'Step 4: Add target';
     default:
       return 'Unknown step';
   }
 }
 
-export const CrowdfundStepper = (props) => {
+export const Timeline = (props) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState(new Set());
@@ -140,51 +141,74 @@ export const CrowdfundStepper = (props) => {
 
   return (
     <div className={classes.root}>
-    <Stepper alternativeLabel nonLinear activeStep={activeStep}>
-      {steps.map((label, index) => {
-        const stepProps = {};
-        const buttonProps = {};
-        if (isStepSkipped(index)) {
-          stepProps.completed = false;
-        }
-        return (
-          <Step key={label} {...stepProps}>
-            <StepButton
-              onClick={handleStep(index)}
-              completed={isStepComplete(index)}
-              {...buttonProps}
-            >
-              {label}
-            </StepButton>
-          </Step>
-        );
-      })}
-    </Stepper>
+      <Stepper alternativeLabel nonLinear activeStep={activeStep}>
+        {steps.map((label, index) => {
+          const stepProps = {};
+          const buttonProps = {};
+          if (isStepOptional(index)) {
+            buttonProps.optional = <Typography variant="caption">Optional</Typography>;
+          }
+          if (isStepSkipped(index)) {
+            stepProps.completed = false;
+          }
+          return (
+            <Step key={label} {...stepProps}>
+              <StepButton
+                onClick={handleStep(index)}
+                completed={isStepComplete(index)}
+                {...buttonProps}
+              >
+                {label}
+              </StepButton>
+            </Step>
+          );
+        })}
+      </Stepper>
       <div>
         {allStepsCompleted() ? (
           <div>
             <Typography className={classes.instructions}>
               All steps completed - you&apos;re finished
             </Typography>
-            <div className="float-right">
             <Button onClick={handleReset}>Reset</Button>
-            </div>
           </div>
         ) : (
           <div>
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-            <div className="flex justify-center">
+            <div>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleNext}
+                className={classes.button}
+              >
+                Next
+              </Button>
+              {isStepOptional(activeStep) && !completed.has(activeStep) && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSkip}
+                  className={classes.button}
+                >
+                  Skip
+                </Button>
+              )}
 
-        
-                  <Button variant="contained" color="secondary" onClick={handleComplete}>
-                    {completedSteps() === totalSteps() - 1 ? 'Finish' : 'Next'}
+              {activeStep !== steps.length &&
+                (completed.has(activeStep) ? (
+                  <Typography variant="caption" className={classes.completed}>
+                    Step {activeStep + 1} already completed
+                  </Typography>
+                ) : (
+                  <Button variant="contained" color="primary" onClick={handleComplete}>
+                    {completedSteps() === totalSteps() - 1 ? 'Finish' : 'Complete Step'}
                   </Button>
-
+                ))}
             </div>
-
           </div>
         )}
       </div>
