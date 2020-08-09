@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -16,12 +16,15 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Chip from '@material-ui/core/Chip';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 350,
+    maxWidth: 380,
     margin: 10,
-    minWidth: 350,
+    minWidth: 380,
+    flexGrow: 1,
   },
   media: {
     height: 0,
@@ -40,7 +43,24 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: '#f50057',
   },
+  title: {
+    color: '#f50057',
+  }
 }));
+
+const BorderLinearProgress = withStyles((theme) => ({
+  root: {
+    height: 20,
+    borderRadius: 5,
+  },
+  colorPrimary: {
+    backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
+  },
+  bar: {
+    borderRadius: 5,
+    backgroundColor: '#1a90ff',
+  },
+}))(LinearProgress);
 
 export const SingleCard = (props) => {
   const classes = useStyles();
@@ -72,57 +92,37 @@ export const SingleCard = (props) => {
         title="Paella dish"
       />
       <CardContent>
-      <Chip className="mb-2"variant="outlined" size="small" style={{letterSpacing: 2}} color="primary" label={props.category} />
+      <Chip className="mb-4"variant="outlined" size="small" style={{letterSpacing: 2}} color="primary" label={props.category} />
       	<h1 className="font-medium">{props.title}</h1>
         <Typography variant="body2" color="textSecondary" component="p">
           {props.text}
         </Typography>
+        <div className="flex flex-col w-full mt-4 content-end">
+          <div className="w-full flex flex-row space justify-between">
+            <div className="flex flex-row">
+            <h1>€307,409 EUR /</h1><h1 className="font-bold">€700,000 EUR</h1>
+            </div>
+
+            <div>
+            755 Backers
+            </div>
+          </div>
+          <div className="mt-2">
+            <BorderLinearProgress variant="determinate" value={50} />
+           </div>
+        </div>
+          <div className="flex lg:flex-row mt-4">
+            <Button className=" " size="small" variant="contained" color="primary" style={{marginRight: 10}}>
+                Back it
+              </Button>
+              <Button className="" size="small" variant="contained" color="secondary">
+                Follow
+              </Button>
+          </div>
+
+
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-            minutes.
-          </Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-            heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-            browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving chicken
-            and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion, salt and
-            pepper, and cook, stirring often until thickened and fragrant, about 10 minutes. Add
-            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook
-            without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat to
-            medium-low, add reserved shrimp and mussels, tucking them down into the rice, and cook
-            again without stirring, until mussels have opened and rice is just tender, 5 to 7
-            minutes more. (Discard any mussels that don’t open.)
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
-          </Typography>
-        </CardContent>
-      </Collapse>
+
     </Card>
   );
 }

@@ -1,11 +1,14 @@
 import React from 'react';
-import { SingleCard } from './' ;
+import { SingleCard, Filter } from './' ;
 
 export const CardsContainer = (props) => {
 
   return <div>
-    <div className="mt-5 w-12/12 lg:w-12/12">
-      <div className="p-2 container w-11/12 mx-auto flex flex-col mx-auto flex-wrap sm:flex-start	lg:max-w-full  sm:flex-row lg:flex-row">
+    <div className="mt-5 w-12/12 lg:w-12/12 mx-auto">
+      <div className="mt-5 w-full mx-auto container">
+      <Filter />
+      </div>
+      <div className="p-2 container w-full mx-auto flex flex-col mx-auto flex-wrap 	  sm:flex-row lg:flex-row">
         <SingleCard
         text="A new kind of mask. Zero compromise between breathing & looking great"
         title="The Face Mask - Premium look & Air Filtration"
