@@ -65,11 +65,12 @@ const classes = useStyles(props);
 
 <div className="px-4 py-2">
 <div className="flex flex-row w-full  items-center">
+
         <div className="w-full flex flex-row h-full items-center	">
           <Avatar className="mr-4" alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" />
           <div className="flex flex-col">
-            <span style={{color:"#f50057", fontWeight:"bold"}}>Project Title</span>
-            <span style={{color:"#9a9a9a", fontSize:"12px"}}> 8000 LSK</span>
+            <span style={{color:"#f50057", fontWeight:"bold"}}>{props.title}</span>
+            <span style={{color:"#9a9a9a", fontSize:"12px"}}>{props.investment}</span>
           </div>
         </div>
 <div className=" w-1/4 flex flex-col justify-end px-4">

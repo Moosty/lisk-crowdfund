@@ -33,11 +33,9 @@ export const Accordeon =  (props) => {
         </AccordionSummary>
         <AccordionDetails>
         <div className="flex flex-col w-full">
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
+          <MenuCard title="The Best sunglasses" investment="10.000lsk" />
+          <MenuCard title="The Best sunglasses" investment="10.000lsk" />
+          <MenuCard title="The Best sunglasses" investment="10.000lsk" />     
           </div>
         </AccordionDetails>
       </Accordion>
@@ -50,11 +48,13 @@ export const Accordeon =  (props) => {
           <Typography className={classes.heading}>My Crowdfunds</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
-          <MenuCard />
+            <div className="flex flex-col w-full">
+                <MenuCard />
+                <MenuCard />
+                <MenuCard />
+                <MenuCard />
+                <MenuCard />
+              </div>
         </AccordionDetails>
       </Accordion>
       <Accordion disabled>
