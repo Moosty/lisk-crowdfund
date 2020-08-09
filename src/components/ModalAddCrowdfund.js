@@ -17,13 +17,18 @@ import * as Actions from '../store/actions';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    minWidth: '50rem',
+    width: '80%',
+    minHeight: '80%',
+    minWidth: '80%',
+    height: '80%',
+    margin: 'auto',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
   paper: {
-    minWidth: '60%',
+    minHeight: '80%',
+    minWidth: '80%',
     backgroundColor: theme.palette.background.paper,
 
     boxShadow: theme.shadows[5],
