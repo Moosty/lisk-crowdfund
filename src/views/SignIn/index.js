@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, SingleCard } from '../../components';
+import withReducer from "../../store/withReducer";
+import reducer from '../../store/reducers';
+import * as Actions from '../../store/actions';
+import { useDispatch, useSelector } from "react-redux";
 
-export const SignIn = (props) => {
+export const SignIn = withReducer('signIn', reducer)((props) => {
+  const dispatch = useDispatch();
+
+  const account = useSelector(({blockchain}) => blockchain.wallet);
+
+  useEffect(() => {
+    console.log(account);
+  }, [account]);
+
+  useEffect(() => {
+    dispatch(Actions.loadAccount('8531579280410192796L', Actions.setAccount));
+  }, []);
 
   return <div>
   <Container>
@@ -28,4 +43,4 @@ export const SignIn = (props) => {
 
   </div>
 </div>;
-}
+});
