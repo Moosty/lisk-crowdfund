@@ -1,7 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
+import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -21,7 +20,12 @@ import { SingleCard, Timeline, ButtonBases, TimelineVertical, ModalAddCrowdfund,
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 
-const drawerWidth = 400;
+import { ModalAddCrowdfund, ModalSignIn } from '../components';
+import withReducer from "../store/withReducer";
+import { useSelector } from "react-redux";
+import reducer from "../store/reducers";
+import { TopAccount } from "./TopAccount";
+import { TopDrawer, drawerWidth } from "./TopDrawer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,28 +45,6 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: {
-
-    float: 'right',
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -79,71 +61,27 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginRight: 0,
   },
-  small: {
-    width: theme.spacing(3),
-    height: theme.spacing(3),
-  },
-  large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
-    marginTop: 4,
-    marginBottom: 4,
-  },
 }));
 
-export const TopBar = (props) => {
+export const TopBar = withReducer('TopBar', reducer)(props => {
   const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const {open} = useSelector(({drawer}) => drawer);
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
+      <CssBaseline/>
       <AppBar
-     	style={{backgroundColor:"#262b38"}}
+        style={{backgroundColor: "#262b38"}}
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar style={{BackgroundColor:"#262b38", display:"flex", justifyContent: "space-between"}}>
-
-
-           <ModalAddCrowdfund />
-           <ModalSignIn />
-
-           <div className="">
-            <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <div className="flex flex-row h-full items-center justify-evenly ">
-
-
-			        <div className="flex-col flex mx-4 ">
-				        <h1 className="text-sm font-bold ">Raphael</h1>
-				        <h2 className="text-sm">15.420 LSK</h2>
-			        </div>
-              <Avatar  alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" className={classes.small} />
-
-
-
-	        </div>
-          </IconButton>
-          </div>
+        <Toolbar style={{BackgroundColor: "#262b38", display: "flex", justifyContent: "space-between"}}>
+          <ModalAddCrowdfund/>
+          <ModalSignIn/>
+          <TopAccount />
         </Toolbar>
-
       </AppBar>
       <Drawer
         className={classes.drawer}
@@ -155,32 +93,21 @@ export const TopBar = (props) => {
         }}
       >
         <div className={classes.drawerHeader}>
-          <div onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </div>
+//           <div onClick={handleDrawerClose}>
+//             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+//           </div>
         </div>
         <Divider />
-	        <div className="flex flex-col p-2 items-center pb-4">
-	        <Avatar  alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" className={classes.large} />
-	        <h1 className="text-lg font-bold ">Raphael</h1>
-	        <h2 className="text-xl mb-4">15.420 LSK</h2>
-	        <Button size="small" variant="contained" color="secondary" className="my-4">My Wallet</Button>
-	        </div>
+        <TopDrawer />                             
         <Divider />
-        
         <Accordeon />
-
-
-
       </Drawer>
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
-
-
       </main>
     </div>
   );
-}
+});
