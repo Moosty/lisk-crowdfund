@@ -15,7 +15,7 @@ import { Accordeon } from "./Accordeon";
 
 const {convertBeddowsToLSK} = utils;
 
-export const drawerWidth = 240;
+export const drawerWidth = 350;
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
