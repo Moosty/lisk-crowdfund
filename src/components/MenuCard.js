@@ -64,6 +64,8 @@ const classes = useStyles(props);
     return (
 
 <div className="px-4 py-2">
+{props.type === 'investment' && (
+  <div>
 <div className="flex flex-row w-full  items-center">
 
         <div className="w-full flex flex-row h-full items-center	">
@@ -80,6 +82,51 @@ const classes = useStyles(props);
 </div>
   <BorderLinearProgress my-variant="determinate" value={50} />
 <Divider/>
+</div>
+)}
+
+{props.type === 'crowdfund' && (
+  <div>
+<div className="flex flex-row w-full  items-center">
+
+        <div className="w-full flex flex-row h-full items-center	">
+          <Avatar className="mr-4" alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" />
+          <div className="flex flex-col">
+            <span style={{color:"#f50057", fontWeight:"bold"}}>{props.title}</span>
+            <span style={{color:"#9a9a9a", fontSize:"12px"}}>{props.amount}</span>
+          </div>
+        </div>
+<div className=" w-1/4 flex flex-col justify-end px-4">
+<Button size="small" variant="contained" color="secondary">Vote</Button>
+
+</div>
+</div>
+  <span>Amount raised: 10.000 / 25.000 LSK</span>
+  <BorderLinearProgress my-variant="determinate" value={50} />
+<Divider/>
+</div>
+)}
+
+{props.type === 'project' && (
+  <div>
+<div className="flex flex-row w-full  items-center">
+
+        <div className="w-full flex flex-row h-full items-center	">
+          <Avatar className="mr-4" alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" />
+          <div className="flex flex-col">
+            <span style={{color:"#f50057", fontWeight:"bold"}}>{props.title}</span>
+            <span style={{color:"#9a9a9a", fontSize:"12px"}}>{props.month}</span>
+          </div>
+        </div>
+<div className=" w-1/4 flex flex-col justify-end px-4">
+<Button size="small" variant="contained" color="secondary">Vote</Button>
+
+</div>
+</div>
+  <BorderLinearProgress my-variant="determinate" value={50} />
+<Divider/>
+</div>
+)}
 </div>
 
 
