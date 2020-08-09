@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import Drawer from "@material-ui/core/Drawer";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { utils } from '@liskhq/lisk-transactions';
+import { Accordeon } from "./Accordeon";
 
 const {convertBeddowsToLSK} = utils;
 
@@ -69,6 +70,7 @@ export const TopDrawer = withReducer('TopDrawer', reducer)(props => {
               onClick={() => console.log("todo goto wallet")}>My Wallet</Button>
     </div>}
     <Divider/>
+    <Accordeon />
     <Divider/>
   </Drawer>;
 });
