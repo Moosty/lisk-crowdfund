@@ -21,11 +21,15 @@ import { MenuCard } from "./MenuCard";
 import { StepGeneral} from "./crowdfundsteps/StepGeneral";
 import { StepTechnical} from "./crowdfundsteps/StepTechnical"
 import { StepDate} from "./crowdfundsteps/StepDate"
+import { Filter } from "./Filter";
+import { Accordeon} from "./Accordeon";
 
 
 
 export {
   TopBar,
+  Accordeon,
+  Filter,
   StepDate,
   StepGeneral,
   StepTechnical,

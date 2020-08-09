@@ -5,6 +5,8 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {MenuCard} from '../components' ;
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Accordeon = (props) => {
+export const Accordeon =  (props) => {
   const classes = useStyles();
 
   return (
@@ -27,13 +29,14 @@ export const Accordeon = (props) => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}>Accordion 1</Typography>
+          <Typography className={classes.heading}>My Investements</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
+        <div className="flex flex-col w-full">
+          <MenuCard type="investment" title="The Best sunglasses" investment="10.000lsk" />
+          <MenuCard type="investment" title="The Best sunglasses" investment="10.000lsk" />
+          <MenuCard type="investment" title="The Best sunglasses" investment="10.000lsk" />
+          </div>
         </AccordionDetails>
       </Accordion>
       <Accordion>
@@ -42,13 +45,16 @@ export const Accordeon = (props) => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className={classes.heading}>Accordion 2</Typography>
+          <Typography className={classes.heading}>My Crowdfunds</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
-          </Typography>
+            <div className="flex flex-col w-full">
+                <MenuCard type="crowdfund" />
+                <MenuCard type="crowdfund" />
+                <MenuCard type="crowdfund" />
+                <MenuCard type="crowdfund" />
+                <MenuCard type="crowdfund" />
+              </div>
         </AccordionDetails>
       </Accordion>
       <Accordion disabled>
@@ -57,7 +63,7 @@ export const Accordeon = (props) => {
           aria-controls="panel3a-content"
           id="panel3a-header"
         >
-          <Typography className={classes.heading}>Disabled Accordion</Typography>
+          <Typography className={classes.heading}>My Projects</Typography>
         </AccordionSummary>
       </Accordion>
     </div>

@@ -52,7 +52,7 @@ return <div>
   <div>
     <Chip className="mb-2"variant="outlined" size="medium" style={{letterSpacing: 2}} color="primary" label="DEFI" />
     <h1 className="text-xl sm:text-3xl lg:text-5l lg:leading-8 text-grey font-bold mb-2">Lisk Crowdfund - Project info</h1>
-    <span className="text-lg text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec porta metus.
+    <span className="text-lg text-grey text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec porta metus.
     Quisque mollis tortor sit amet metus tempus lacinia. Aliquam maximus odio auctor malesuada maximus. Etiam ac eros magna.
     Morbi ut tortor porttitor, elementum tellus vel, imperdiet enim. Morbi tincidunt consectetur nibh, eget viverra nulla aliquam finibus.
     Cras malesuada, augue ut sollicitudin mattis, erat libero pulvinar ante, ac accumsan massa est eu lectus.</span>
