@@ -1,6 +1,6 @@
 
 import { SingleCard } from "./card/SingleCard";
-import { Timeline } from "./Timeline";
+import { CrowdfundStepper } from "./CrowdfundStepper";
 import { ButtonBases } from "./ButtonBases";
 import { TimelineVertical } from "./TimelineVertical";
 import { ModalAddCrowdfund } from "./ModalAddCrowdfund";
@@ -18,14 +18,20 @@ import { CardsContainer } from "./CardsContainer";
 import { Update } from "./Update";
 import { Container } from "./Container";
 import { MenuCard } from "./MenuCard";
+import { StepGeneral} from "./crowdfundsteps/StepGeneral";
+import { StepTechnical} from "./crowdfundsteps/StepTechnical"
+import { StepDate} from "./crowdfundsteps/StepDate"
 
 
 
 export {
   TopBar,
+  StepDate,
+  StepGeneral,
+  StepTechnical,
   MenuCard,
   SingleCard,
-  Timeline,
+  CrowdfundStepper,
   ButtonBases,
   TimelineVertical,
   ModalAddCrowdfund,
