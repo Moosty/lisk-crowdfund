@@ -12,6 +12,7 @@ import Drawer from "@material-ui/core/Drawer";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { utils } from '@liskhq/lisk-transactions';
 import { Accordeon } from "./Accordeon";
+import IconButton from '@material-ui/core/IconButton';
 
 const {convertBeddowsToLSK} = utils;
 
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
   },
   large: {
     width: theme.spacing(7),
@@ -57,9 +58,9 @@ export const TopDrawer = withReducer('TopDrawer', reducer)(props => {
     }}
   >
     <div className={classes.drawerHeader}>
-      <div onClick={() => dispatch(Actions.closeDrawer())}>
-        {theme.direction === 'ltr' ? <ChevronLeftIcon/> : <ChevronRightIcon/>}
-      </div>
+      <IconButton onClick={() => dispatch(Actions.closeDrawer())}>
+        {theme.direction === 'ltr' ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
+      </IconButton>
     </div>
     <Divider/>
     {wallet && wallet.account && wallet.account.balance && <div className="flex flex-col p-2 items-center">
