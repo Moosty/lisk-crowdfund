@@ -2,6 +2,7 @@ import * as reduxModule from 'redux';
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import createReducer from './reducers';
+import persistState from 'redux-localstorage'
 
 /*
 Fix for Firefox redux dev tools extension
@@ -16,7 +17,7 @@ const composeEnhancers =
     })
     : compose;
 
-const enhancer = composeEnhancers(applyMiddleware(thunk));
+const enhancer = composeEnhancers(applyMiddleware(thunk), persistState());
 
 const store = createStore(createReducer(), enhancer);
 
