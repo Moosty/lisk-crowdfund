@@ -4,10 +4,8 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
-import { SingleCard, CrowdfundStepper, ButtonBases, TimelineVertical, ProjectInfo } from '../components' ;
-import TextField from '@material-ui/core/TextField';
+import { CrowdfundStepper, ProjectInfo } from '../components';
 import { useDispatch, useSelector } from "react-redux";
-import { Timeline, } from '.';
 import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
 import * as Actions from '../store/actions';
@@ -76,11 +74,13 @@ export const ModalAddCrowdfund = withReducer('ModalAddCrowdfund', reducer)(props
           <div className={classes.paper}>
             <div className="flex flex-row">
               <div className="flex flex-col">
-                <h1 className="text-xl text-center sm:text-3xl lg:text-5l lg:leading-8 text-grey font-bold my-4"> Create your own Crowdfund</h1>
-                <CrowdfundStepper />
+                <h1 className="text-xl text-center sm:text-3xl lg:text-5l lg:leading-8 text-grey font-bold my-4"> Create
+                  your own Crowdfund</h1>
+                <CrowdfundStepper/>
               </div>
-            <div className="max-w-md bg-gray-200 p-4 rounded-t-lg">
-            <ProjectInfo /></div>
+              <div className="max-w-md bg-gray-200 p-4 rounded-t-lg">
+                <ProjectInfo create />
+              </div>
             </div>
           </div>
         </Fade>
