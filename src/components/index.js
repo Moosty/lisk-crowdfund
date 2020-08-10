@@ -24,6 +24,7 @@ import { StepTechnical} from "./crowdfundsteps/StepTechnical"
 import { StepDate} from "./crowdfundsteps/StepDate"
 import { Filter } from "./Filter";
 import { Accordeon} from "./Accordeon";
+import { InputSelect } from "./InputSelect";
 
 
 
@@ -52,5 +53,6 @@ export {
   CardsContainer,
   Header2,
   Update,
-  Container
+  Container,
+  InputSelect,
 }
