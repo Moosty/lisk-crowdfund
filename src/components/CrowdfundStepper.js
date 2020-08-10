@@ -5,8 +5,7 @@ import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import { StepGeneral, Container, StepTechnical, StepDate } from '../components' ;
+import { Container, StepDate, StepGeneral, StepTechnical } from '../components';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,11 +33,11 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <Container> <StepGeneral /> </Container>;
+      return <Container> <StepGeneral/> </Container>;
     case 1:
-      return <Container> <StepTechnical /> </Container>;
+      return <Container> <StepTechnical/> </Container>;
     case 2:
-      return <Container> <StepDate /> </Container>;
+      return <Container> <StepDate/> </Container>;
     default:
       return 'Unknown step';
   }
@@ -95,7 +94,7 @@ export const CrowdfundStepper = (props) => {
       isLastStep() && !allStepsCompleted()
         ? // It's the last step, but not all steps have been completed
           // find the first step that has been completed
-          steps.findIndex((step, i) => !completed.has(i))
+        steps.findIndex((step, i) => !completed.has(i))
         : activeStep + 1;
 
     setActiveStep(newActiveStep);
@@ -140,26 +139,26 @@ export const CrowdfundStepper = (props) => {
 
   return (
     <div className={classes.root}>
-    <Stepper alternativeLabel nonLinear activeStep={activeStep}>
-      {steps.map((label, index) => {
-        const stepProps = {};
-        const buttonProps = {};
-        if (isStepSkipped(index)) {
-          stepProps.completed = false;
-        }
-        return (
-          <Step key={label} {...stepProps}>
-            <StepButton
-              onClick={handleStep(index)}
-              completed={isStepComplete(index)}
-              {...buttonProps}
-            >
-              {label}
-            </StepButton>
-          </Step>
-        );
-      })}
-    </Stepper>
+      <Stepper alternativeLabel nonLinear activeStep={activeStep}>
+        {steps.map((label, index) => {
+          const stepProps = {};
+          const buttonProps = {};
+          if (isStepSkipped(index)) {
+            stepProps.completed = false;
+          }
+          return (
+            <Step key={label} {...stepProps}>
+              <StepButton
+                onClick={handleStep(index)}
+                completed={isStepComplete(index)}
+                {...buttonProps}
+              >
+                {label}
+              </StepButton>
+            </Step>
+          );
+        })}
+      </Stepper>
       <div>
         {allStepsCompleted() ? (
           <div>
@@ -167,7 +166,7 @@ export const CrowdfundStepper = (props) => {
               All steps completed - you&apos;re finished
             </Typography>
             <div className="float-right">
-            <Button onClick={handleReset}>Reset</Button>
+              <Button onClick={handleReset}>Reset</Button>
             </div>
           </div>
         ) : (
@@ -177,14 +176,10 @@ export const CrowdfundStepper = (props) => {
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>
-
-        
-                  <Button variant="contained" color="secondary" onClick={handleComplete}>
-                    {completedSteps() === totalSteps() - 1 ? 'Finish' : 'Next'}
-                  </Button>
-
+              <Button variant="contained" color="secondary" onClick={handleComplete}>
+                {completedSteps() === totalSteps() - 1 ? 'Finish' : 'Next'}
+              </Button>
             </div>
-
           </div>
         )}
       </div>
