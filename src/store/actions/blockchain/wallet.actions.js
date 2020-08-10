@@ -83,11 +83,9 @@ export const doSprinkler = (tx, api) => {
     try {
       const result = await api.transactions.broadcast(tx);
       if (result) {
-        console.log(result)
         dispatch(Actions.sprinklerSuccess());
       }
     } catch (err) {
-      console.error(err)
       dispatch(Actions.sprinklerError(err));
     }
   }

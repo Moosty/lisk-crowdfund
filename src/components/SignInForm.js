@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import { client } from '@moosty/lisk-sprinkler';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -74,12 +75,18 @@ export const SignInForm = withReducer('SignInForm', reducer)(props => {
   const [password, setPassword] = useState("");
   const [password1, setPassword1] = useState("");
   const [passphrase, setPassphrase] = useState("");
+  const [remember, setRemember] = useState(false);
   const [error, setError] = useState("");
   const [loginDisabled, setLoginDisabled] = useState(true);
   const [accountKeys, setKeys] = useState(null);
   const [address, setAddress] = useState("");
+  const [loading, setLoading] = useState(false);
   const {type} = useSelector(({modal}) => modal);
   const [{exist, username, usernameAccount}, setUsername] = useUsername();
+
+  useEffect(() => {
+    setLoading(false);
+  }, [type]);
 
   useEffect(() => {
     if (type === 'login' && accountKeys && accountKeys.publicKey) {
@@ -113,13 +120,16 @@ export const SignInForm = withReducer('SignInForm', reducer)(props => {
   }, [accountKeys, usernameAccount]);
 
   const handleLogin = () => {
-    dispatch(Actions.setPassphrase(passphrase));
+    if (remember) {
+      dispatch(Actions.setPassphrase(passphrase));
+    }
     dispatch(Actions.loadAccount(address, Actions.setAccount))
     dispatch(Actions.closeModal());
   }
 
   const handleSignUp = () => {
-    if (!loginDisabled && username) {
+    if (password && password1 && password === password1 && !exist && username && passphrase) {
+      setLoading(true);
       const tx = client.sprinkler({
         username: username.toLowerCase(),
         publicKey: accountKeys.publicKey,
@@ -129,6 +139,7 @@ export const SignInForm = withReducer('SignInForm', reducer)(props => {
         passphrase
       });
       dispatch(Actions.signUp(tx, api));
+      setTimeout(() => dispatch(Actions.openModal('login')), 12000);
     }
   }
 
@@ -189,7 +200,7 @@ export const SignInForm = withReducer('SignInForm', reducer)(props => {
               helperText={!!password1 && password !== password1 ? `Passwords are not the same` : ``}
             />}
             {type === 'login' && <FormControlLabel
-              control={<Checkbox value="remember" color="primary"/>}
+              control={<Checkbox onChange={(_, value) => setRemember(value)} value={remember} color="primary"/>}
               label="Remember me"
             />}
             {type === 'login' && <Button
@@ -207,10 +218,11 @@ export const SignInForm = withReducer('SignInForm', reducer)(props => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              disabled={!password || !password1 || password !== password1 || exist || !username}
+              disabled={loading || !password || !password1 || password !== password1 || exist || !username}
               onClick={handleSignUp}
+              endIcon={loading && <CircularProgress color="secondary"/>}
             >
-              Sign Up
+              {!loading && "Sign Up"}
             </Button>}
             <Grid container>
               <Grid item>
