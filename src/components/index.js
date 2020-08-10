@@ -1,5 +1,6 @@
 
 import { SingleCard } from "./card/SingleCard";
+import { ProgressSection } from "./card/ProgressSection";
 import { CrowdfundStepper } from "./CrowdfundStepper";
 import { ButtonBases } from "./ButtonBases";
 import { TimelineVertical } from "./TimelineVertical";
@@ -28,6 +29,7 @@ import { Accordeon} from "./Accordeon";
 
 export {
   TopBar,
+  ProgressSection,
   Accordeon,
   Filter,
   StepDate,

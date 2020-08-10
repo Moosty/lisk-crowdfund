@@ -10,11 +10,13 @@ export const CardsContainer = (props) => {
       </div>
       <div className="p-2 container w-full mx-auto flex flex-col mx-auto flex-wrap 	  sm:flex-row lg:flex-row">
         <SingleCard
+        type="crowdfund"
         text="A new kind of mask. Zero compromise between breathing & looking great"
         title="The Face Mask - Premium look & Air Filtration"
         category="DEFI"
         image="/images/pexels-photo-3951901.jpeg" />
         <SingleCard
+        type="upcoming"
         text="A new kind of mask. Zero compromise between team & looking great"
         title="The Best Team - Premium Team & AWESOME"
         category="DEFI"
