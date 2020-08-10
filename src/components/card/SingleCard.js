@@ -18,6 +18,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Chip from '@material-ui/core/Chip';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Button from '@material-ui/core/Button';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -112,12 +113,18 @@ export const SingleCard = (props) => {
            </div>
         </div>
           <div className="flex lg:flex-row mt-4">
-            <Button className=" " size="small" variant="contained" color="primary" style={{marginRight: 10}}>
+            <div className="flex flex-row w-full">
+              <Button className=" " size="small" variant="contained" color="primary" style={{marginRight: 10}}>
                 Back it
               </Button>
               <Button className="" size="small" variant="contained" color="secondary">
                 Follow
               </Button>
+              </div>
+              <div className="flex flex-row w-full">
+
+              <span className="font-bold p-2 text-right w-full ">  <AccessTimeIcon style={{fontSize:"18px"}} /> 40 days left</span>
+              </div>
           </div>
 
 
