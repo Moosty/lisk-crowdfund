@@ -6,7 +6,10 @@ import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Container, StepDate, StepGeneral, StepTechnical } from '../components';
-
+import reducer from '../store/reducers';
+import withReducer from "../store/withReducer";
+import { useDispatch, useSelector } from "react-redux";
+import * as Actions from "../store/actions";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -43,8 +46,9 @@ function getStepContent(step) {
   }
 }
 
-export const CrowdfundStepper = (props) => {
+export const CrowdfundStepper = withReducer('crowdfundStepper', reducer)((props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState(new Set());
   const [skipped, setSkipped] = React.useState(new Set());
@@ -165,14 +169,14 @@ export const CrowdfundStepper = (props) => {
             <Typography className={classes.instructions}>
               All steps completed - you&apos;re finished
             </Typography>
-            <div className="float-right">
-              <Button onClick={handleReset}>Reset</Button>
-            </div>
           </div>
         ) : (
           <div>
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
             <div className="flex justify-center">
+              <div className="float-right">
+                <Button onClick={() => dispatch(Actions.clearCrowdfundForm())}>Reset</Button>
+              </div>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>
@@ -185,4 +189,4 @@ export const CrowdfundStepper = (props) => {
       </div>
     </div>
   );
-}
+})

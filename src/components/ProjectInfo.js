@@ -68,7 +68,7 @@ export const ProjectInfo = withReducer('projectInfo', reducer)((props) => {
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}>
               {!props.create && `R`}
-              {props.create && form.title[0].toUpperCase()}
+              {props.create && form.title && form.title[0] && form.title[0].toUpperCase()}
             </Avatar>
           }
           title={!props.create ? 'Lisk Crowdfund - Project info' : form.title}

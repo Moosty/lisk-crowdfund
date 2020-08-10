@@ -6,7 +6,6 @@ import withReducer from "../../store/withReducer";
 import * as Actions from '../../store/actions';
 import { useDispatch, useSelector } from "react-redux";
 
-
 const categories = [
   {
     value: 'identity',
