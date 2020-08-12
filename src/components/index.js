@@ -10,6 +10,7 @@ import { MenuCard } from "./MenuCard";
 import { MobileMenu } from "./MobileMenu";
 import { ModalAddCrowdfund } from "./ModalAddCrowdfund";
 import { ModalSignIn } from "./ModalSignIn";
+import { NewsletterSignUp } from "./NewsletterSignUp";
 import { ProgressSection } from "./card/ProgressSection";
 import { ProjectInfo } from "./ProjectInfo";
 import { ProjectUpdates } from "./ProjectUpdates";
@@ -50,4 +51,5 @@ export {
   Header2,
   Update,
   Container,
+  NewsletterSignUp,
 };
