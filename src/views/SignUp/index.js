@@ -1,9 +1,11 @@
-import React from 'react';
-import { Container } from '../../components' ;
+import React from "react";
+
+import { Footer } from "../../components";
 
 export const SignUp = (props) => {
-
-  return <div>
-    <Container />
-  </div>;
-}
+  return (
+    <div>
+      <Footer hidden="hidden" />
+    </div>
+  );
+};

@@ -23,6 +23,7 @@ import { StepTechnical } from "./crowdfundsteps/StepTechnical";
 import { StepDate } from "./crowdfundsteps/StepDate";
 import { Filter } from "./Filter";
 import { Accordeon } from "./Accordeon";
+import { Footer } from "./Footer";
 
 export {
   TopBar,
@@ -50,4 +51,5 @@ export {
   Header2,
   Update,
   Container,
+  Footer,
 };
