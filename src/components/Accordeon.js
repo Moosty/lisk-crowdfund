@@ -49,11 +49,11 @@ export const Accordeon =  (props) => {
         </AccordionSummary>
         <AccordionDetails>
             <div className="flex flex-col w-full">
-                <MenuCard type="crowdfund" />
-                <MenuCard type="crowdfund" />
-                <MenuCard type="crowdfund" />
-                <MenuCard type="crowdfund" />
-                <MenuCard type="crowdfund" />
+                <MenuCard type="crowdfund" title="The Best metal golden sunglasses" timeLeft="24" />
+                <MenuCard type="crowdfund" title="Project 453" timeLeft="2"  />
+                <MenuCard type="crowdfund" title="Flying boat" timeLeft="4"  />
+                <MenuCard type="crowdfund" title="Golden fluffy tiger" timeLeft="74" />
+                <MenuCard type="crowdfund" title="Boring stuff" timeLeft="11" />
               </div>
         </AccordionDetails>
       </Accordion>

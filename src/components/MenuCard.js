@@ -93,15 +93,15 @@ const classes = useStyles(props);
           <Avatar className="mr-4" alt="Remy Sharp" src="/images/pexels-photo-3951901.jpeg" />
           <div className="flex flex-col">
             <span style={{color:"#f50057", fontWeight:"bold"}}>{props.title}</span>
-            <span style={{color:"#9a9a9a", fontSize:"12px"}}>{props.amount}</span>
+            <span style={{color:"#9a9a9a", fontSize:"12px"}}>{props.timeLeft} days left</span>
           </div>
         </div>
 <div className=" w-1/4 flex flex-col justify-end px-4">
-<Button size="small" variant="contained" color="secondary">Vote</Button>
+<Button size="small" variant="contained" color="secondary">Start</Button>
 
 </div>
 </div>
-  <span>Amount raised: 10.000 / 25.000 LSK</span>
+  <span className="text-center" style={{color:"#9a9a9a", fontSize:"12px"}}>Raised: 10.000 / 25.000 LSK</span>
   <BorderLinearProgress my-variant="determinate" value={50} />
 <Divider/>
 </div>
