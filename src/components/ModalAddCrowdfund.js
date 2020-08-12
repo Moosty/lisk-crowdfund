@@ -1,14 +1,15 @@
-import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import Button from "@material-ui/core/Button";
-import { CrowdfundStepper, ProjectInfo } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import withReducer from "../store/withReducer";
-import reducer from "../store/reducers";
+import Backdrop from "@material-ui/core/Backdrop";
+import Button from "@material-ui/core/Button";
+import Fade from "@material-ui/core/Fade";
+import Modal from "@material-ui/core/Modal";
+import React from "react";
+
+import { CrowdfundStepper, ProjectInfo } from "../components";
 import * as Actions from "../store/actions";
+import reducer from "../store/reducers";
+import withReducer from "../store/withReducer";
 
 //* Modal met Stepper *//
 //* Modaladdcrowdfund -> contains Crowdfundstepper -> contains content-steps  *//
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   paper: {
-    minHeight: "80%",
+    minHeight: "100%",
     minWidth: "80%",
     backgroundColor: theme.palette.background.paper,
 
@@ -82,7 +83,7 @@ export const ModalAddCrowdfund = withReducer(
         <Fade in={open}>
           <div className={classes.paper}>
             <div className="flex flex-row">
-              <div className="flex flex-col">
+              <div className="flex flex-col w-3/4 max-w-2xl">
                 <h1 className="text-xl text-center sm:text-3xl lg:text-5l lg:leading-8 text-grey font-bold my-4">
                   {" "}
                   Create your own Crowdfund
