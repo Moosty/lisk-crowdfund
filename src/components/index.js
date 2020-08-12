@@ -23,7 +23,9 @@ import { StepTechnical } from "./crowdfundsteps/StepTechnical";
 import { StepDate } from "./crowdfundsteps/StepDate";
 import { Filter } from "./Filter";
 import { Accordeon } from "./Accordeon";
-import { CommentModal } from "./CommentModal";
+import { ModalComment } from "./ModalComment";
+import { CommentSection } from "./CommentSection";
+import { Comment } from "./Comment";
 
 export {
   TopBar,
@@ -51,5 +53,7 @@ export {
   Header2,
   Update,
   Container,
-  CommentModal,
+  ModalComment,
+  CommentSection,
+  Comment,
 };

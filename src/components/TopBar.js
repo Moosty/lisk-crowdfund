@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import { ModalAddCrowdfund, ModalSignIn} from '.' ;
+import { ModalAddCrowdfund, ModalSignIn, ModalComment} from '.' ;
 
 import withReducer from "../store/withReducer";
 import { useSelector } from "react-redux";
@@ -65,6 +65,7 @@ export const TopBar = withReducer('TopBar', reducer)(props => {
         <Toolbar style={{BackgroundColor: "#262b38", display: "flex", justifyContent: "space-between"}}>
           <ModalAddCrowdfund/>
           <ModalSignIn/>
+          <ModalComment />
           <TopAccount />
         </Toolbar>
       </AppBar>
