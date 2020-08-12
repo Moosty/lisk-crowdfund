@@ -9,6 +9,7 @@ export const Comment = (props) => {
           avatar={<Avatar aria-label="recipe">R</Avatar>}
           title="Henkie Botsie"
           subheader="September 14, 2016"
+          style={{ paddingTop: "0" }}
         />
         <span className="ml-4">
           Hallo , wat een verdomd lekkere comment is dit dan !

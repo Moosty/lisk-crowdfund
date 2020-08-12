@@ -18,17 +18,20 @@ export const CommentSection = (props) => {
   const classes = useStyles();
 
   return (
-    <div>
-      <div className="">
+    <div className="">
+      <div className="fixed top-0 w-full sm:w-9/12 xl:w-2/4 h-40"></div>
+      <div className="overflow-auto	flex flex-col justify-end h-screen pb-64 pt-40 noscrollbar">
         <Update
           time="23:00"
           title="Vote"
           content="A moment for Engagement"
           type={"comment"}
         />
+        <Comment />
+        <Comment />
+        <Comment />
       </div>
-      <Comment />
-      <div className="rounded-lg bg-white w-full p-4 fex flex-col">
+      <div className="h-48 rounded-lg bg-white p-4 fex flex-col fixed bottom-0 w-full sm:w-9/12 xl:w-2/4 mb-6">
         <div>
           <form>
             <TextField
