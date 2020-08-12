@@ -2,9 +2,14 @@ import { IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
 
+//* Newsletter popup              *//
+//*   Elements:                   *//
+//*     - ModalNewsletterSignUp   *//
+//*     - NewsletterSignUp        *//
+
 export const NewsletterSignUp = (props) => {
   return (
-    <div className="shadow bg-white rounded w-full md:w-full border-solid border-t-4 border-purple-700 p-6 my-2">
+    <div className="bg-white rounded border-solid border-t-4 border-red-600 p-6 my-2">
       <div className="flex justify-between items-center">
         <h4 className="uppercase text-grey text-xs text-wide tracking-wide font-thin ">
           {props.tag}
@@ -26,7 +31,7 @@ export const NewsletterSignUp = (props) => {
         placeholder="Email"
       ></input>
 
-      <button className="bg-purple-600 text-white px-3 py-2 rounded w-full mt-4">
+      <button className="bg-red-600 text-white px-3 py-2 rounded w-full mt-4">
         Subscribe now!
       </button>
     </div>
