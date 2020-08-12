@@ -1,4 +1,3 @@
-
 import { SingleCard } from "./card/SingleCard";
 import { ProgressSection } from "./card/ProgressSection";
 import { CrowdfundStepper } from "./CrowdfundStepper";
@@ -19,13 +18,12 @@ import { CardsContainer } from "./CardsContainer";
 import { Update } from "./Update";
 import { Container } from "./Container";
 import { MenuCard } from "./MenuCard";
-import { StepGeneral} from "./crowdfundsteps/StepGeneral";
-import { StepTechnical} from "./crowdfundsteps/StepTechnical"
-import { StepDate} from "./crowdfundsteps/StepDate"
+import { StepGeneral } from "./crowdfundsteps/StepGeneral";
+import { StepTechnical } from "./crowdfundsteps/StepTechnical";
+import { StepDate } from "./crowdfundsteps/StepDate";
 import { Filter } from "./Filter";
-import { Accordeon} from "./Accordeon";
-
-
+import { Accordeon } from "./Accordeon";
+import { CommentModal } from "./CommentModal";
 
 export {
   TopBar,
@@ -52,5 +50,6 @@ export {
   CardsContainer,
   Header2,
   Update,
-  Container
-}
+  Container,
+  CommentModal,
+};
