@@ -1,16 +1,17 @@
-import { Button, TextField } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
 
 export const NewsletterSignUp = (props) => {
   return (
-    <div className="shadow rounded w-full md:w-1/4 border-solid border-t-4 border-purple-700 p-6 my-2">
+    <div className="shadow bg-white rounded w-full md:w-full border-solid border-t-4 border-purple-700 p-6 my-2">
       <div className="flex justify-between items-center">
         <h4 className="uppercase text-grey text-xs text-wide tracking-wide font-thin ">
           {props.tag}
         </h4>
-        <span className="text-grey" aria-hidden="true">
-          ×
-        </span>
+        <IconButton onClick={() => props.close()}>
+          <CloseIcon />
+        </IconButton>
       </div>
       <h3 className="text-grey-dark text-sm font-medium font-sans leading-normal">
         {props.title}

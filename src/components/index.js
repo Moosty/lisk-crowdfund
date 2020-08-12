@@ -9,6 +9,7 @@ import { Header2 } from "./Header2";
 import { MenuCard } from "./MenuCard";
 import { MobileMenu } from "./MobileMenu";
 import { ModalAddCrowdfund } from "./ModalAddCrowdfund";
+import { ModalNewsletterSignUp } from "./ModalNewsletterSignUp";
 import { ModalSignIn } from "./ModalSignIn";
 import { NewsletterSignUp } from "./NewsletterSignUp";
 import { ProgressSection } from "./card/ProgressSection";
@@ -52,4 +53,5 @@ export {
   Update,
   Container,
   NewsletterSignUp,
+  ModalNewsletterSignUp,
 };
