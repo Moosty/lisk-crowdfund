@@ -58,6 +58,7 @@ export const ModalNewsletterSignUp = withReducer(
         <Fade in={open}>
           <div className="w-full sm:w-9/12 xl:w-2/4 ">
             <NewsletterSignUp
+              thankYou="Thank you for subscribing our newsletter!"
               title="Stay updated with the Community & the latest PoCs!"
               tag="UPDATE"
               description="Subscribe to our irregular newslettter about everything you need to know"
