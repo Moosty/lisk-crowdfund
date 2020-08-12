@@ -3,6 +3,10 @@ import { IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import jsonp from 'jsonp';
 import queryString from 'query-string';
+import withReducer from "../store/withReducer";
+import reducer from "../store/reducers";
+import * as Actions from "../store/actions";
+import { useDispatch } from "react-redux";
 //* Newsletter popup              *//
 //*   Elements:                   *//
 //*     - ModalNewsletterSignUp   *//
@@ -14,7 +18,8 @@ const settings = {
   url: "https://liskcenter.us3.list-manage.com/subscribe/post-json?u=3f58c59455fea960d93dd9a9d&id=e8376cfa97"
 }
 
-export const NewsletterSignUp = (props) => {
+export const NewsletterSignUp = withReducer('NewsLetterSignUp', reducer)((props) => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [thankYou, setThankYou] = useState(false);
   const submitForm = () => {
@@ -24,6 +29,7 @@ export const NewsletterSignUp = (props) => {
       } else {
         setThankYou(true);
       }
+      dispatch(Actions.setSubmittedNewsletter());
     });
   }
 
@@ -58,4 +64,4 @@ export const NewsletterSignUp = (props) => {
       </button>}
     </div>
   );
-};
+});

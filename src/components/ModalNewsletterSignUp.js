@@ -4,7 +4,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Button from "@material-ui/core/Button";
 import Fade from "@material-ui/core/Fade";
 import Modal from "@material-ui/core/Modal";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { NewsletterSignUp } from "./";
 import * as Actions from "../store/actions";
@@ -31,17 +31,39 @@ export const ModalNewsletterSignUp = withReducer(
 )((props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { wallet } = useSelector(({ blockchain }) => blockchain);
-  const { open, type } = useSelector(({ modal }) => modal);
+  const { open, type, newsletter } = useSelector(({ modal }) => modal);
+
+  useEffect(() => {
+    if (newsletter && !newsletter.submitted && (!newsletter.shown || newsletter.shown + 9999999 <= new Date().getTime())) {
+      setTimeout(() => {
+        openModal();
+      }, newsletter.timeout);
+    }
+    if (!newsletter) {
+      dispatch(Actions.initNewsletter());
+    }
+  }, [newsletter]);
+
+  const openModal = () => {
+    if (!open) {
+      dispatch(Actions.openModal('ModalNewsletterSignUp'));
+      dispatch(Actions.setShownNewsletter(new Date().getTime()));
+    } else {
+      setTimeout(() => {
+        openModal();
+      }, newsletter.timeout);
+    }
+  }
+
   return (
     <div>
-      <Button
-        variant="outlined"
-        color="secondary"
-        onClick={() => dispatch(Actions.openModal("ModalNewsletterSignUp"))}
-      >
-        Modal TEst
-      </Button>
+      {/*<Button*/}
+      {/*  variant="outlined"*/}
+      {/*  color="secondary"*/}
+      {/*  onClick={() => dispatch(Actions.openModal("ModalNewsletterSignUp"))}*/}
+      {/*>*/}
+      {/*  Modal TEst*/}
+      {/*</Button>*/}
 
       <Modal
         aria-labelledby="transition-modal-title"
