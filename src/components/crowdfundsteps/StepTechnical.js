@@ -1,13 +1,13 @@
+import { useDispatch, useSelector } from "react-redux";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import MenuItem from "@material-ui/core/MenuItem";
 import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import Tooltip from "@material-ui/core/Tooltip";
+
+import * as Actions from "../../store/actions";
 import reducer from "../../store/reducers";
 import withReducer from "../../store/withReducer";
-import { useDispatch, useSelector } from "react-redux";
-import * as Actions from "../../store/actions";
-import Tooltip from "@material-ui/core/Tooltip";
-import InfoIcon from "@material-ui/icons/Info";
-import MenuItem from "@material-ui/core/MenuItem";
 
 export const StepTechnical = withReducer(
   "stepTechnical",
@@ -42,6 +42,12 @@ export const StepTechnical = withReducer(
       noValidate
       autoComplete="off"
     >
+      <div className="w-full flex mb-4 justify-center">
+        <span className="flex text-center text-lg text-grey text-sm w-3/4">
+          Specify the amount the would like to raise, how many months you need
+          to build it and how many times a donator can vote.
+        </span>
+      </div>
       <TextField
         variant="outlined"
         InputProps={{

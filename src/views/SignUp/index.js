@@ -1,9 +1,11 @@
-import React from 'react';
-import { Container } from '../../components' ;
+import React from "react";
+
+import { ModalNewsletterSignUp } from "../../components";
 
 export const SignUp = (props) => {
-
-  return <div>
-    <Container />
-  </div>;
-}
+  return (
+    <div className="h-screen justify-center items-center flex ">
+      <ModalNewsletterSignUp />
+    </div>
+  );
+};
