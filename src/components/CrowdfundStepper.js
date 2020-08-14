@@ -1,18 +1,20 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepButton from '@material-ui/core/StepButton';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { Container, StepDate, StepGeneral, StepTechnical } from '../components';
-import reducer from '../store/reducers';
-import withReducer from "../store/withReducer";
-import { useDispatch, useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch } from "react-redux";
+import Button from "@material-ui/core/Button";
+import React from "react";
+import Step from "@material-ui/core/Step";
+import StepButton from "@material-ui/core/StepButton";
+import Stepper from "@material-ui/core/Stepper";
+import Typography from "@material-ui/core/Typography";
+
+import { Container, StepDate, StepGeneral, StepTechnical } from "../components";
 import * as Actions from "../store/actions";
+import reducer from "../store/reducers";
+import withReducer from "../store/withReducer";
+
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
   },
   button: {
     marginRight: theme.spacing(1),
@@ -21,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   completed: {
-    display: 'inline-block',
+    display: "inline-block",
   },
   instructions: {
     marginTop: theme.spacing(1),
@@ -30,23 +32,41 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Project Information', 'Finance & Accountability', 'Date & Time'];
+  return ["Project Information", "Finance & Accountability", "Date & Time"];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <Container> <StepGeneral/> </Container>;
+      return (
+        <Container>
+          {" "}
+          <StepGeneral />{" "}
+        </Container>
+      );
     case 1:
-      return <Container> <StepTechnical/> </Container>;
+      return (
+        <Container>
+          {" "}
+          <StepTechnical />{" "}
+        </Container>
+      );
     case 2:
-      return <Container> <StepDate/> </Container>;
+      return (
+        <Container>
+          {" "}
+          <StepDate />{" "}
+        </Container>
+      );
     default:
-      return 'Unknown step';
+      return "Unknown step";
   }
 }
 
-export const CrowdfundStepper = withReducer('crowdfundStepper', reducer)((props) => {
+export const CrowdfundStepper = withReducer(
+  "crowdfundStepper",
+  reducer
+)((props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -98,7 +118,7 @@ export const CrowdfundStepper = withReducer('crowdfundStepper', reducer)((props)
       isLastStep() && !allStepsCompleted()
         ? // It's the last step, but not all steps have been completed
           // find the first step that has been completed
-        steps.findIndex((step, i) => !completed.has(i))
+          steps.findIndex((step, i) => !completed.has(i))
         : activeStep + 1;
 
     setActiveStep(newActiveStep);
@@ -172,16 +192,28 @@ export const CrowdfundStepper = withReducer('crowdfundStepper', reducer)((props)
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+            <Typography className={classes.instructions}>
+              {getStepContent(activeStep)}
+            </Typography>
             <div className="flex justify-center">
               <div className="float-right">
-                <Button onClick={() => dispatch(Actions.clearCrowdfundForm())}>Reset</Button>
+                <Button onClick={() => dispatch(Actions.clearCrowdfundForm())}>
+                  Reset
+                </Button>
               </div>
-              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+              <Button
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                className={classes.button}
+              >
                 Back
               </Button>
-              <Button variant="contained" color="secondary" onClick={handleComplete}>
-                {completedSteps() === totalSteps() - 1 ? 'Finish' : 'Next'}
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={handleComplete}
+              >
+                {completedSteps() === totalSteps() - 1 ? "Finish" : "Next"}
               </Button>
             </div>
           </div>
@@ -189,4 +221,4 @@ export const CrowdfundStepper = withReducer('crowdfundStepper', reducer)((props)
       </div>
     </div>
   );
-})
+});

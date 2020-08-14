@@ -1,18 +1,18 @@
-import * as Actions from '../../actions';
+import * as Actions from "../../actions";
 
 const defaultState = {
   createForm: {
-    title: "",
-    description: "",
-    category: "",
-    site: "",
+    title: "My Crowdfund",
+    description: "My first crowdfund",
+    category: "identity",
+    site: "https://moosty.com",
     image: "",
     goal: 0,
     periods: 12,
     voting: 1,
     startDate: "",
-  }
-}
+  },
+};
 
 export default (state = defaultState, action) => {
   switch (action.type) {
@@ -21,19 +21,19 @@ export default (state = defaultState, action) => {
         ...state,
         createForm: {
           ...state.createForm,
-          ...action.update
+          ...action.update,
         },
-      }
+      };
     case Actions.CLEAR_CROWDFUND_FORM:
       return {
         ...state,
         createForm: {
           ...defaultState.createForm,
         },
-      }
+      };
     default:
       return {
-        ...state
-      }
+        ...state,
+      };
   }
-}
+};

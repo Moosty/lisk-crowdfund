@@ -1,20 +1,33 @@
 import { SingleCard } from "./card/SingleCard";
 import { ProgressSection } from "./card/ProgressSection";
 import { CrowdfundStepper } from "./CrowdfundStepper";
+import { Accordeon } from "./Accordeon";
 import { ButtonBases } from "./ButtonBases";
-import { TimelineVertical } from "./TimelineVertical";
-import { ModalAddCrowdfund } from "./ModalAddCrowdfund";
-import { SignInForm } from "./SignInForm";
-import { ModalSignIn } from "./ModalSignIn";
-import { MobileMenu } from "./MobileMenu";
-import { TopBar } from "./TopBar";
-import { SingleItem } from "./SingleItem";
-import { TabsCrowdfund } from "./TabsCrowdfund";
-import { ProjectInfo } from "./ProjectInfo";
-import { ProjectUpdates } from "./ProjectUpdates";
+import { CardsContainer } from "./CardsContainer";
+import { Container } from "./Container";
+import { CrowdfundStepper } from "./CrowdfundStepper";
+import { Filter } from "./Filter";
 import { Header } from "./Header";
 import { Header2 } from "./Header2";
-import { CardsContainer } from "./CardsContainer";
+import { MenuCard } from "./MenuCard";
+import { MobileMenu } from "./MobileMenu";
+import { ModalAddCrowdfund } from "./ModalAddCrowdfund";
+import { ModalNewsletterSignUp } from "./ModalNewsletterSignUp";
+import { ModalSignIn } from "./ModalSignIn";
+import { NewsletterSignUp } from "./NewsletterSignUp";
+import { ProgressSection } from "./card/ProgressSection";
+import { ProjectInfo } from "./ProjectInfo";
+import { ProjectUpdates } from "./ProjectUpdates";
+import { SignInForm } from "./SignInForm";
+import { SingleCard } from "./card/SingleCard";
+import { SingleItem } from "./SingleItem";
+import { StepDate } from "./crowdfundsteps/StepDate";
+import { StepGeneral } from "./crowdfundsteps/StepGeneral";
+import { StepTechnical } from "./crowdfundsteps/StepTechnical";
+import { Footer } from "./Footer";
+import { TabsCrowdfund } from "./TabsCrowdfund";
+import { TimelineVertical } from "./TimelineVertical";
+import { TopBar } from "./TopBar";
 import { Update } from "./Update";
 import { Container } from "./Container";
 import { MenuCard } from "./MenuCard";
@@ -26,6 +39,9 @@ import { Accordeon } from "./Accordeon";
 import { ModalComment } from "./ModalComment";
 import { CommentSection } from "./CommentSection";
 import { Comment } from "./Comment";
+import { AccordeonWallet } from "./AccordeonWallet";
+import { TransactionModal } from "./TransactionModal";
+import { VoteModal } from "./VoteModal";
 
 export {
   TopBar,
@@ -56,4 +72,10 @@ export {
   ModalComment,
   CommentSection,
   Comment,
+  Footer,
+  NewsletterSignUp,
+  ModalNewsletterSignUp,
+  TransactionModal,
+  VoteModal,
+  AccordeonWallet,
 };

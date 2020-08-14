@@ -113,13 +113,13 @@ export const SingleCard = (props) => {
           <div className="flex flex-col w-full text-center align-middle items-center mt-4">
             <StarBorderIcon style={{ fontSize: "30px" }} />
             <span
-              className="font-bold text-2xl text-teal-800 mt-4"
+              className="font-bold text-2xl text-teal-800 mt-2"
               style={{ color: "#f50057" }}
             >
               180.000LSK
             </span>
 
-            <span className="font-bold p-2 w-full ">
+            <span className="font-bold w-full ">
               <AccessTimeIcon style={{ fontSize: "18px" }} /> Starts in 7 days
             </span>
           </div>
@@ -160,7 +160,7 @@ export const SingleCard = (props) => {
               <div className="mt-2">
                 <BorderLinearProgress variant="determinate" value={50} />
               </div>
-              <div className="flex lg:flex-row mt-2">
+              <div className="flex lg:flex-row mt-4">
                 <div className="flex flex-row w-full">
                   <div className="font-bold text-right w-full ">
                     {" "}
