@@ -1,11 +1,11 @@
 import React from "react";
-import { CommentModal } from "../../components";
+import { ModalComment } from "../../components";
 import { Footer } from "../../components";
 
 export const SignUp = (props) => {
   return (
     <div>
-      <CommentModal />
+      <ModalComment />
       <Footer />
     </div>
   );

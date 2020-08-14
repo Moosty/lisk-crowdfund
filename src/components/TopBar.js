@@ -6,7 +6,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { ModalAddCrowdfund, ModalSignIn, ModalComment} from '.' ;
 import withReducer from "../store/withReducer";
-import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { ModalNewsletterSignUp, TransactionModal } from "./";
 import { TopAccount } from "./TopAccount";
