@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  TopBar,
-  SingleCard,
-  Timeline,
-  ButtonBases,
-  TimelineVertical,
-  TabsCrowdfund,
-  SimpleContainer,
-  ProjectInfo,
-} from "../../components";
+
+import { TopBar, TimelineVertical, ProjectInfo } from "../../components";
 
 export const Crowdfund = (props) => {
   return (
@@ -30,12 +22,13 @@ export const Crowdfund = (props) => {
             className="w-full lg:w-3/4 lg:pt-0 lg:px-12 lg:p-10"
             style={{ backgroundColor: "white" }}
           >
+            <h1 className="my-8"> Project Timeline </h1>
             <ProjectInfo />
           </div>
         </div>
 
         <div className=" w-full px-5 lg:px-0 lg:w-4/6 mx-auto h-full flex flex-col lg:flex-row">
-          <TabsCrowdfund />
+          <TimelineVertical />
         </div>
       </div>
     </div>
