@@ -27,6 +27,9 @@ import { TimelineVertical } from "./TimelineVertical";
 import { TopBar } from "./TopBar";
 import { Update } from "./Update";
 
+import { TransactionModal } from "./TransactionModal";
+import { VoteModal } from "./VoteModal";
+
 export {
   TopBar,
   ProgressSection,
@@ -56,4 +59,6 @@ export {
   Footer,
   NewsletterSignUp,
   ModalNewsletterSignUp,
+  TransactionModal,
+  VoteModal,
 };
