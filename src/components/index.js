@@ -26,6 +26,7 @@ import { TabsCrowdfund } from "./TabsCrowdfund";
 import { TimelineVertical } from "./TimelineVertical";
 import { TopBar } from "./TopBar";
 import { Update } from "./Update";
+import { AccordeonWallet } from "./AccordeonWallet";
 
 import { TransactionModal } from "./TransactionModal";
 import { VoteModal } from "./VoteModal";
@@ -61,4 +62,5 @@ export {
   ModalNewsletterSignUp,
   TransactionModal,
   VoteModal,
+  AccordeonWallet,
 };
