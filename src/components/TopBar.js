@@ -1,18 +1,17 @@
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import { ModalAddCrowdfund, ModalSignIn, ModalComment} from '.' ;
+import withReducer from "../store/withReducer";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import React from "react";
-import Toolbar from "@material-ui/core/Toolbar";
-
-import clsx from "clsx";
-
-import { ModalAddCrowdfund, ModalSignIn } from ".";
 import { ModalNewsletterSignUp, TransactionModal } from "./";
 import { TopAccount } from "./TopAccount";
 import { TopDrawer, drawerWidth } from "./TopDrawer";
 import reducer from "../store/reducers";
-import withReducer from "../store/withReducer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
