@@ -1,10 +1,9 @@
 import React from 'react';
-import { TopBar, Header, CardsContainer } from '../../components' ;
+import { TopBar, Header, CardsContainer, Footer } from '../../components' ;
 import { useDispatch } from "react-redux";
 import * as Actions from "../../store/actions";
 import reducer from "../../store/reducers";
 import withReducer from "../../store/withReducer";
-
 
 export const Overview = withReducer('Overview', reducer)(props => {
   const dispatch = useDispatch();
@@ -18,5 +17,6 @@ export const Overview = withReducer('Overview', reducer)(props => {
     onClick2={() => dispatch(Actions.openModal('createCrowdfund'))}
     />
     <CardsContainer />
+    <Footer />
   </div>;
 });

@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  TopBar,
-  SingleCard,
-  Timeline,
-  ButtonBases,
-  TimelineVertical,
-  TabsCrowdfund,
-  SimpleContainer,
-  ProjectInfo,
-} from "../../components";
+
+import { TopBar, TimelineVertical, ProjectInfo } from "../../components";
 
 export const Crowdfund = (props) => {
   return (
@@ -34,8 +26,11 @@ export const Crowdfund = (props) => {
           </div>
         </div>
 
-        <div className=" w-full px-5 lg:px-0 lg:w-4/6 mx-auto h-full flex flex-col lg:flex-row">
-          <TabsCrowdfund />
+        <div className=" w-full px-5 lg:px-0 lg:w-4/6 mx-auto h-full flex flex-col ">
+          <h1 className="my-8 font-bold text-lg text-center">
+            Project Timeline{" "}
+          </h1>
+          <TimelineVertical />
         </div>
       </div>
     </div>

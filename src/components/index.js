@@ -22,10 +22,15 @@ import { SingleItem } from "./SingleItem";
 import { StepDate } from "./crowdfundsteps/StepDate";
 import { StepGeneral } from "./crowdfundsteps/StepGeneral";
 import { StepTechnical } from "./crowdfundsteps/StepTechnical";
+import { Footer } from "./Footer";
 import { TabsCrowdfund } from "./TabsCrowdfund";
 import { TimelineVertical } from "./TimelineVertical";
 import { TopBar } from "./TopBar";
 import { Update } from "./Update";
+import { AccordeonWallet } from "./AccordeonWallet";
+
+import { TransactionModal } from "./TransactionModal";
+import { VoteModal } from "./VoteModal";
 
 export {
   TopBar,
@@ -54,6 +59,10 @@ export {
   Header2,
   Update,
   Container,
+  Footer,
   NewsletterSignUp,
   ModalNewsletterSignUp,
+  TransactionModal,
+  VoteModal,
+  AccordeonWallet,
 };
