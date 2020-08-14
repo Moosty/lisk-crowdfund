@@ -8,7 +8,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import clsx from "clsx";
 
 import { ModalAddCrowdfund, ModalSignIn } from ".";
-import { ModalNewsletterSignUp } from "./";
+import { ModalNewsletterSignUp, TransactionModal } from "./";
 import { TopAccount } from "./TopAccount";
 import { TopDrawer, drawerWidth } from "./TopDrawer";
 import reducer from "../store/reducers";
@@ -75,6 +75,7 @@ export const TopBar = withReducer(
           }}
         >
           <ModalAddCrowdfund />
+          <TransactionModal description="Sign your transaction to add a new project." />
           <ModalNewsletterSignUp />
           <ModalSignIn />
           <TopAccount />
