@@ -85,7 +85,6 @@ export const ModalAddCrowdfund = withReducer(
             <div className="flex flex-row">
               <div className="flex flex-col w-3/4 max-w-2xl">
                 <h1 className="text-xl text-center sm:text-3xl lg:text-5l lg:leading-8 text-grey font-bold my-4">
-                  {" "}
                   Create your own Crowdfund
                 </h1>
                 <CrowdfundStepper />

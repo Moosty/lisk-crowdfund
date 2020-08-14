@@ -8,10 +8,15 @@ export const SET_ACCOUNT = "SET_ACCOUNT";
 export const LOAD_ACCOUNT = "LOAD_ACCOUNT";
 export const GET_ACCOUNT = "GET_ACCOUNT";
 export const UPDATE_ACCOUNT = "UPDATE_ACCOUNT";
+export const UPDATE_NONCE = "UPDATE_NONCE";
 export const LOGOUT_ACCOUNT = "LOGOUT_ACCOUNT";
 export const SIGNUP = "SIGNUP";
 export const SPRINKLER_SUCCESS = "SPRINKLER_SUCCESS";
 export const SPRINKLER_ERROR = "SPRINKLER_ERROR";
+
+export const updateNonce = () => ({
+  type: UPDATE_NONCE,
+});
 
 export const logoutAccount = () => ({
   type: LOGOUT_ACCOUNT,
@@ -60,7 +65,7 @@ export const loadAccount = (address, action) => {
 
 export const signUpAction = () => ({
   type: SIGNUP,
-})
+});
 
 export const signUp = (tx, api) => {
   return async (dispatch) => {

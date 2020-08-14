@@ -10,19 +10,22 @@ import { Provider } from "react-redux";
 import AppContext from './AppContext';
 import { config } from "./config";
 import { APIClient } from "@liskhq/lisk-api-client";
-import { ModalNewsletterSignUp } from "./components";
+import { ModalNewsletterSignUp, Notifier } from "./components";
 
 const api = new APIClient([config.apiUrlClient]);
 const networkIdentifier = '93d00fe5be70d90e7ae247936a2e7d83b50809c79b73fa14285f02c842348b3e';
+export const epoch = new Date('2020-08-01T00:00:00.000Z').getTime() / 1000;
 
 ReactDOM.render(
   <AppContext.Provider
     value={{
       api,
-      networkIdentifier
+      networkIdentifier,
+      epoch,
     }}
   >
     <Provider store={store}>
+      <Notifier />
       <ModalNewsletterSignUp/>
       <Router>
         <Switch>
@@ -46,6 +49,7 @@ ReactDOM.render(
           </Route>
         </Switch>
       </Router>
+
     </Provider>
   </AppContext.Provider>,
   document.getElementById('root')

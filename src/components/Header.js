@@ -11,10 +11,25 @@ export const Header = (props) => {
  	 		<span className="text-xl text-center text-white">{props.subtitle}</span>
  		 		<div className="mt-10 mx-auto w-1/4">
          <div className="mx-auto flex  content-center items-center">
- 			 		<Button variant="contained" color="primary" style={{marginRight: 10}}>
+ 			 		<Button
+						onClick={() => {
+							if (props.onClick1) {
+								props.onClick1()
+							}
+						}}
+						variant="contained"
+						color="primary"
+						style={{marginRight: 10}}>
  			        {props.button1}
  			      </Button>
- 			      <Button  variant="contained" color="secondary">
+ 			      <Button
+							onClick={() => {
+								if (props.onClick2) {
+									props.onClick2()
+								}
+							}}
+							variant="contained"
+							color="secondary">
  			        {props.button2}
  			      </Button>
  	      		</div>

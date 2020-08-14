@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import reducer from '../../store/reducers';
 import withReducer from "../../store/withReducer";
 import { useDispatch, useSelector } from "react-redux";
 import * as Actions from "../../store/actions";
-import Button from "@material-ui/core/Button";
-
+import { ProjectImage } from "../ProjectImage";
+import { ImageSelect } from "./ImageSelect";
+import { GithubPicker } from 'react-color';
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 export const StepDate = withReducer('stepDate', reducer)((props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [color, setColor] = useState("#4070f4")
   const form = useSelector(({blockchain}) => blockchain.crowdfund.createForm);
 
   useEffect(() => {
@@ -59,31 +61,33 @@ export const StepDate = withReducer('stepDate', reducer)((props) => {
           shrink: true,
         }}
       />
-      {/*<TextField*/}
-      {/*  id="datetime-local"*/}
-      {/*  label="End Date"*/}
-      {/*  type="datetime-local"*/}
-      {/*  defaultValue="2017-05-24T10:30"*/}
-      {/*  className={classes.textField}*/}
-      {/*  InputLabelProps={{*/}
-      {/*    shrink: true,*/}
+      <ImageSelect selected={form.image} />
+      <ProjectImage
+        height='300px'
+        image={form.image}
+        className="w-4/5" style={{ backgroundColor: form.color}}/>
+        <GithubPicker
+          color={form.color}
+          onChange={(c) => dispatch(Actions.updateCrowdfundForm({color: c.hex}))}
+          colors={[
+            "#4070f4", "#20c997", "#17a2b8", "#ffc107", "#F36A34", "#6c757d", "#ee4b4b",
+          ]}
+        />
+      {/*<img src={form && form.image && form.image} className="w-4/5" />*/}
+      {/*<input*/}
+      {/*  accept="image/*"*/}
+      {/*  className="hidden"*/}
+      {/*  id="contained-button-file"*/}
+      {/*  type="file"*/}
+      {/*  onChange={(e) => {*/}
+      {/*    getBase64(e.target.files[0], (result) => dispatch(Actions.updateCrowdfundForm({image: result})))*/}
       {/*  }}*/}
       {/*/>*/}
-      <img src={form && form.image && form.image} className="w-4/5" />
-      <input
-        accept="image/*"
-        className="hidden"
-        id="contained-button-file"
-        type="file"
-        onChange={(e) => {
-          getBase64(e.target.files[0], (result) => dispatch(Actions.updateCrowdfundForm({image: result})))
-        }}
-      />
-      <label className="m-5" htmlFor="contained-button-file">
-        <Button variant="contained" color="primary" component="span">
-          Upload Image
-        </Button>
-      </label>
+      {/*<label className="m-5" htmlFor="contained-button-file">*/}
+      {/*  <Button variant="contained" color="primary" component="span">*/}
+      {/*    Upload Image*/}
+      {/*  </Button>*/}
+      {/*</label>*/}
 
     </form>
   );
