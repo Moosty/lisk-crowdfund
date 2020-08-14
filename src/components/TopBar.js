@@ -75,7 +75,6 @@ export const TopBar = withReducer(
           }}
         >
           <ModalAddCrowdfund />
-          <TransactionModal description="Sign your transaction to add a new project." />
           <ModalNewsletterSignUp />
           <ModalSignIn />
           <TopAccount />
