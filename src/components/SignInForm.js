@@ -68,9 +68,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const f = ['🌑', '🌒', '🌓', '🌔', '🌝', '🌖', '🌗', '🌘'];
+
 export const SignInForm = withReducer('SignInForm', reducer)(props => {
   const classes = useStyles();
-  const { api, networkIdentifier } = useContext(AppContext);
+  const {api, networkIdentifier} = useContext(AppContext);
   const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   const [password1, setPassword1] = useState("");
@@ -79,10 +81,28 @@ export const SignInForm = withReducer('SignInForm', reducer)(props => {
   const [error, setError] = useState("");
   const [loginDisabled, setLoginDisabled] = useState(true);
   const [accountKeys, setKeys] = useState(null);
+  const [loadingUrl, setLoadingUrl] = useState(null);
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const {type} = useSelector(({modal}) => modal);
   const [{exist, username, usernameAccount}, setUsername] = useUsername();
+
+  useEffect(() => {
+      if (loading) {
+        const loop = () => {
+          location.hash = f[Math.floor((Date.now() / 100) % f.length)];
+          setLoadingUrl(setTimeout(loop, 50));
+        }
+
+        loop();
+      } else {
+        if (loadingUrl) {
+          location.hash = "";
+          clearTimeout(loadingUrl);
+          setLoadingUrl(null);
+        }
+      }
+    }, [loading]);
 
   useEffect(() => {
     setLoading(false);

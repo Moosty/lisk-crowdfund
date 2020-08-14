@@ -12,6 +12,7 @@ import { ModalAddCrowdfund } from "./ModalAddCrowdfund";
 import { ModalNewsletterSignUp } from "./ModalNewsletterSignUp";
 import { ModalSignIn } from "./ModalSignIn";
 import { NewsletterSignUp } from "./NewsletterSignUp";
+import { Notifier } from "./Notifier";
 import { ProgressSection } from "./card/ProgressSection";
 import { ProjectInfo } from "./ProjectInfo";
 import { ProjectUpdates } from "./ProjectUpdates";
@@ -43,6 +44,7 @@ export {
   SignInForm,
   ModalSignIn,
   MobileMenu,
+  Notifier,
   SingleItem,
   TabsCrowdfund,
   ProjectInfo,

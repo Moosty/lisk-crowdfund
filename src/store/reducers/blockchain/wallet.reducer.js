@@ -18,6 +18,14 @@ export default (state = defaultState, action) => {
         ...state,
         passphrase: action.passphrase,
       }
+    case Actions.UPDATE_NONCE:
+      return {
+        ...state,
+        account: {
+          ...state.account,
+          nonce: (Number(state.account.nonce) + 1).toString(),
+        }
+      }
     case Actions.LOGOUT_ACCOUNT:
       return {
         ...defaultState,

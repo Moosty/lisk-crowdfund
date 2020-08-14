@@ -11,6 +11,7 @@ const defaultState = {
     periods: 12,
     voting: 1,
     startDate: "",
+    color: "#ffc107"
   },
 };
 
