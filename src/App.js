@@ -3,7 +3,7 @@ import "./App.css";
 import { Link } from "react-router-dom";
 import React from "react";
 
-import { TransactionModal } from "./components";
+import { TransactionModal, VoteModal } from "./components";
 
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
         </ul>
       </header>
       <TransactionModal description="Sign your transaction to add a new project." />
+      <VoteModal description="Vote to decide if this project is allowed to continue its journey" />
     </div>
   );
 }
