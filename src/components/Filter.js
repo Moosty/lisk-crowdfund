@@ -2,11 +2,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import reducer from "app/store/reducers";
-import * as Actions from "app/store/actions";
 import withReducer from "app/store/withReducer";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from 'react-router-dom';
@@ -101,10 +99,10 @@ export const Filter = withReducer('Filter', reducer)((props) => {
           label="Type"
         >
           <MenuItem value="all">
-            <em>..</em>
+            <em>all</em>
           </MenuItem>
-          <MenuItem value={"new"}>Upcoming </MenuItem>
-          <MenuItem value={"funded"}>Funded Projects </MenuItem>
+          <MenuItem value={"new"}>Upcoming</MenuItem>
+          <MenuItem value={"funded"}>Funded Projects</MenuItem>
           <MenuItem value={"open"}>Open Crowdfunds</MenuItem>
           <MenuItem value={"closed"}>Closed Projects</MenuItem>
         </Select>
