@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch, } from "react-router-dom";
 import './styles/main.css';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
-import { Crowdfund, Overview, SignIn, SignUp, Wallet } from "./views";
+import { Crowdfund, Overview, Wallet } from "./views";
 import { Provider } from "react-redux";
 import AppContext from './AppContext';
 import { config } from "./config";
@@ -30,28 +30,22 @@ ReactDOM.render(
           <LiskComponent/>
           <Notifier/>
           <ModalNewsletterSignUp/>
-          <TopBar/>
 
           <Switch>
-            <Route path="/signin">
-              <SignIn/>
-            </Route>
-            <Route path="/signup">
-              <SignUp/>
-            </Route>
             <Route path="/wallet">
+              <TopBar/>
               <Wallet/>
             </Route>
             <Route path="/crowdfund/:publicKey">
+              <TopBar/>
               <Crowdfund/>
             </Route>
             <Route path="/overview/:filter">
-              <Overview/>
-            </Route>
-            <Route path="/overview">
+              <TopBar/>
               <Overview/>
             </Route>
             <Route path="/">
+              <TopBar/>
               <Overview/>
             </Route>
           </Switch>

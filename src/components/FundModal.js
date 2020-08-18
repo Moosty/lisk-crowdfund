@@ -31,20 +31,24 @@ export const FundModal = withReducer('fundModal', reducer)((props) => {
 
   useEffect(() => {
     if (password) {
-      setPassphrase(password + wallet.username + password);
+      setPassphrase(wallet.account.username + password + wallet.account.username);
     }
-  }, [password]);
+  }, [password, wallet]);
 
   useEffect(() => {
-    signFundTx();
-  }, [password, passphrase, amount, message])
+    if (wallet && wallet.account && wallet.account.nonce) {
+      try {
+        signFundTx();
+      } catch(e) { }
+    }
+  }, [password, passphrase, amount, message, wallet])
 
   const signFundTx = () => {
     const tx = {
       senderPublicKey: wallet.account.publicKey,
       networkIdentifier,
       nonce: wallet.account.nonce.toString(),
-      passphrase: wallet.passphrase || passphrase,
+      passphrase: passphrase || wallet.passphrase,
       asset: {
         fundraiser: fundraiser,
         amount: amount.toString(),
@@ -53,7 +57,7 @@ export const FundModal = withReducer('fundModal', reducer)((props) => {
     };
     const transaction = new FundTransaction(tx);
     transaction.nonce = transaction.nonce.toString();
-    transaction.sign(networkIdentifier, wallet.passphrase);
+    transaction.sign(networkIdentifier, wallet.passphrase || passphrase);
     transaction.fee = transaction.minFee.toString();
     setFee(transaction.minFee.toString())
     return transaction;
@@ -62,7 +66,7 @@ export const FundModal = withReducer('fundModal', reducer)((props) => {
   const handleConfirm = () => {
     const transaction = signFundTx();
     try {
-      transaction.sign(networkIdentifier, wallet.passphrase);
+      transaction.sign(networkIdentifier, wallet.passphrase || passphrase);
       dispatch(Actions.doTransaction(transaction, api));
       dispatch(Actions.closeModal(true))
     } catch (e) {

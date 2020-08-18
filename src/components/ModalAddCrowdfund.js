@@ -48,14 +48,13 @@ export const ModalAddCrowdfund = withReducer(
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  const {publicKey} = useParams();
+  const params = useParams();
 
   const {wallet} = useSelector(({blockchain}) => blockchain);
   const {open, type} = useSelector(({modal}) => modal);
-
   return (
     <div>
-      {!publicKey && wallet.account && wallet.account.address && (
+      {!params.publicKey && wallet.account && wallet.account.address && (
         <Button
           size="small"
           variant="contained"
@@ -65,7 +64,7 @@ export const ModalAddCrowdfund = withReducer(
           Create Crowdfund
         </Button>
       )}
-      {!publicKey && !wallet.account.address && (
+      {!params.publicKey && !wallet.account.address && (
         <Button
           size="small"
           variant="contained"
@@ -75,7 +74,7 @@ export const ModalAddCrowdfund = withReducer(
           Create Crowdfund
         </Button>
       )}
-      {publicKey && (
+      {params.publicKey && (
         <IconButton onClick={() => history.push('/')}>
           <ChevronLeftIcon/>
         </IconButton>

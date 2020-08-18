@@ -64,7 +64,7 @@ export const VoteModal = withReducer('VoteModal', reducer)((props) => {
 
   useEffect(() => {
     if (password) {
-      setPassphrase(password + wallet.username + password);
+      setPassphrase(wallet.username + password + wallet.username);
     }
   }, [password]);
 

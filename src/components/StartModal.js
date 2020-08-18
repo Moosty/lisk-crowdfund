@@ -31,7 +31,7 @@ export const StartModal = withReducer('StartModal', reducer)((props) => {
 
   useEffect(() => {
     if (password) {
-      setPassphrase(password + wallet.username + password);
+      setPassphrase(wallet.username + password + wallet.username);
     }
   }, [password]);
 

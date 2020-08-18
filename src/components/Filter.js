@@ -5,6 +5,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import reducer from "app/store/reducers";
+import * as Actions from "app/store/actions";
+import withReducer from "app/store/withReducer";
+import { useDispatch } from "react-redux";
+import { useHistory, useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -17,7 +22,48 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Filter = (props) => {
+const categories = [
+  {
+    value: "identity",
+    label: "Identity",
+  },
+  {
+    value: "gaming",
+    label: "Gaming",
+  },
+  {
+    value: "realestate",
+    label: "Real Estate",
+  },
+  {
+    value: "energy",
+    label: "Energy & Sustainability",
+  },
+  {
+    value: "government",
+    label: "Government & Public Sector",
+  },
+  {
+    value: "healthcare",
+    label: "Healthcare",
+  },
+  {
+    value: "finance",
+    label: "Finance",
+  },
+  {
+    value: "law",
+    label: "Law",
+  },
+  {
+    value: "entertainment",
+    label: "Media & Entertainment",
+  },
+];
+
+export const Filter = withReducer('Filter', reducer)((props) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const classes = useStyles();
   const [age, setAge] = React.useState("");
 
@@ -61,18 +107,18 @@ export const Filter = (props) => {
             labelId="demo-simple-select-label"
             id="demo-simple-select-label"
             value={category}
-            onChange={handleChange2}
+            onChange={(e) => history.push(`/overview/${e.target.value}`)}
             label="Filter"
           >
             <MenuItem value="">
-              <em>..</em>
+              <em>all</em>
             </MenuItem>
-            <MenuItem value={10}>Identity</MenuItem>
-            <MenuItem value={10}>Real Estate</MenuItem>
-            <MenuItem value={20}>Healthcare</MenuItem>
+            {categories.map(c => (
+              <MenuItem value={c.value}>{c.label}</MenuItem>
+            ))}
           </Select>
         </FormControl>
       </div>
     </div>
   );
-};
+});

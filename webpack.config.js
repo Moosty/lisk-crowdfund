@@ -65,10 +65,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      app: path.resolve(__dirname, 'src/app/'),
-      '@fuse': path.resolve(__dirname, 'src/@fuse/'),
-      '@history': path.resolve(__dirname, 'src/@history/'),
-      '@lodash': path.resolve(__dirname, 'src/@lodash/'),
+      app: path.resolve(__dirname, 'src/'),
       styles: path.resolve(__dirname, 'src/styles/')
     }
   },

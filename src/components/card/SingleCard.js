@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 380,
     flexGrow: 1,
   },
+  fullpage: {
+    flexGrow: 1,
+  },
   media: {
     height: 0,
     paddingTop: "56.25%", // 16:9
@@ -71,22 +74,22 @@ export const SingleCard = withRouter((props) => {
   const isInvestor = props.investments.filter(i => i.address === props.wallet.account.address).length > 0;
   const didVote = props.votes.find(v => v.address === props.wallet.account.address && v.period === props.currentPeriod);
   return (
-    <Card className={classes.root}>
-      <CardHeader
+    <Card className={props.fullpage ? classes.fullpage : classes.root}>
+      {!props.fullpage && <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            <img src="https://avatar.lisk.ws/1234567890L"/>
+            <img src={`https://avatar.lisk.ws/${props.owner}`}/>
           </Avatar>
         }
         title={props.username ? props.username : ""}
         subheader={moment(fromTimeStamp(epoch, props.start)).fromNow()}
-      />
-      <ProjectImage
+      />}
+      {!props.fullpage && <ProjectImage
         onClick={() => props.history.push(`/crowdfund/${props.publicKey}`)}
         height='300px'
         width='100%'
         image={props.image.type}
-        className="" style={{backgroundColor: props.image.color}}/>
+        className="" style={{backgroundColor: props.image.color}}/>}
       <CardContent>
         <Chip
           className="mb-4"
@@ -100,6 +103,15 @@ export const SingleCard = withRouter((props) => {
         <Typography variant="body2" color="textSecondary" component="p">
           {props.text && props.text.length > 100 ? `${props.text.substr(0, 100)}...` : props.text}
         </Typography>
+        {props.fullpage && <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" className={classes.avatar}>
+              <img src={`https://avatar.lisk.ws/${props.owner}`}/>
+            </Avatar>
+          }
+          title={props.username ? props.username : ""}
+          subheader={moment(fromTimeStamp(epoch, props.start)).fromNow()}
+        />}
         {props.state !== 'funded' && props.state !== "failed" && props.start <= getNow(epoch) && props.start + config.periodLength > getNow(epoch) && (
           <div>
             <ProgressSection crowdfund={props.publicKey}/>

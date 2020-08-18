@@ -7,9 +7,11 @@ import { getNow } from "../utils";
 import { config } from "../config";
 import AppContext from "../AppContext";
 import { fromTimeStamp } from "../utils/time";
+import { useParams } from "react-router-dom";
 
 export const CardsContainer = withReducer('CardsContainer', reducer)(props => {
   const dispatch = useDispatch();
+  const {filter} = useParams();
   const {epoch} = useContext(AppContext);
   const {wallet} = useSelector(({blockchain}) => blockchain);
   const {projects} = useSelector(({blockchain}) => blockchain.crowdfunds);
@@ -22,7 +24,10 @@ export const CardsContainer = withReducer('CardsContainer', reducer)(props => {
           <Filter/>
         </div>
         <div className="p-2 container w-full mx-auto flex flex-col mx-auto flex-wrap 	  sm:flex-row lg:flex-row">
-          {projects && projects.sort((a,b) => a.asset.startFunding < b.asset.startFunding ? 1 : a.asset.startFunding > b.asset.startFunding ? -1 : 0).map(p => {
+          {projects && projects
+            .filter(p => filter ? p.asset.category === filter : true)
+            .sort((a,b) => a.asset.startFunding < b.asset.startFunding ? 1 : a.asset.startFunding > b.asset.startFunding ? -1 : 0)
+            .map(p => {
             const image = p.asset.image.split("#");
             let state = null;
             let currentPeriod = 0;
