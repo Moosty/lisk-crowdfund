@@ -20,15 +20,14 @@ const { convertBeddowsToLSK } = utils;
 export const FundModal = withReducer('fundModal', reducer)((props) => {
   const dispatch = useDispatch();
   const {api, networkIdentifier, epoch} = useContext(AppContext);
-  const { open, type } = useSelector(({ modal }) => modal);
-  const crowdfund = useSelector(({ blockchain }) => blockchain.crowdfunds.projects.find(c => c.publicKey === props.publicKey));
+  const { open, type, fundraiser } = useSelector(({ modal }) => modal);
+  const crowdfund = useSelector(({ blockchain }) => blockchain.crowdfunds.projects.find(c => c.publicKey === props.publicKey || c.publicKey === fundraiser));
   const { wallet } = useSelector(({ blockchain }) => blockchain);
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [passphrase, setPassphrase] = useState("");
   const [amount, setAmount] = useState(10);
   const [fee, setFee] = useState("0");
-
 
   useEffect(() => {
     if (password) {
@@ -47,7 +46,7 @@ export const FundModal = withReducer('fundModal', reducer)((props) => {
       nonce: wallet.account.nonce.toString(),
       passphrase: wallet.passphrase || passphrase,
       asset: {
-        fundraiser: props.publicKey,
+        fundraiser: fundraiser,
         amount: amount.toString(),
         message
       }
@@ -64,7 +63,6 @@ export const FundModal = withReducer('fundModal', reducer)((props) => {
     const transaction = signFundTx();
     try {
       transaction.sign(networkIdentifier, wallet.passphrase);
-      console.log(transaction)
 
       dispatch(Actions.doTransaction(transaction, api));
       console.log("modal")
@@ -83,7 +81,7 @@ export const FundModal = withReducer('fundModal', reducer)((props) => {
         style={{marginRight: 10}}
         onClick={() => {
           if (wallet && wallet.account && wallet.account.address) {
-            dispatch(Actions.openModal('fundModal'))
+            dispatch(Actions.openModal('fundModal', props.publicKey))
           } else {
             dispatch(Actions.openModal('signup'))
           }

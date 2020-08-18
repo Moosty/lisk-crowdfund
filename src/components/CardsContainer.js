@@ -27,14 +27,18 @@ export const CardsContainer = withReducer('CardsContainer', reducer)(props => {
             let currentPeriod = 0;
             let nextVote = null;
             let endVote = null;
+            let funds = 0;
+            p.asset.investments.map(i => {
+              funds += Number(i.amount);
+            });
             if (p.asset.startFunding <= getNow(epoch) && p.asset.startFunding + config.periodLength < getNow(epoch)) {
-              let funds = 0;
-              p.asset.investments.map(i => {
-                funds += Number(i.amount);
-              });
+
               if (funds < p.asset.goal) {
                 state = "failed";
               }
+            }
+            if (Number(funds) === Number(p.asset.goal)) {
+              state = "funded";
             }
             if (p.asset.startProject > -1) {
               currentPeriod = Math.floor((getNow(epoch) - props.projectStart)/config.periodLength);

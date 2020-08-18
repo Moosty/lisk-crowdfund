@@ -98,7 +98,7 @@ export const SingleCard = withRouter((props) => {
         <Typography variant="body2" color="textSecondary" component="p">
           {props.text && props.text.length > 100 ? `${props.text.substr(0, 100)}...` : props.text}
         </Typography>
-        {props.state !== "failed" && props.start <= getNow(epoch) && props.start + config.periodLength > getNow(epoch) && (
+        {props.state !== 'funded' && props.state !== "failed" && props.start <= getNow(epoch) && props.start + config.periodLength > getNow(epoch) && (
           <div>
             <ProgressSection crowdfund={props.publicKey}/>
           </div>
@@ -127,6 +127,17 @@ export const SingleCard = withRouter((props) => {
               style={{color: "#f50057"}}
             >
               CLOSED
+            </span>
+          </div>
+        )}
+
+        {props.state === 'funded' && (
+          <div className="flex flex-col w-full text-center align-middle items-center mt-4">
+            <span
+              className="font-bold text-2xl text-teal-800 mt-4"
+              style={{color: "#f50057"}}
+            >
+              Project funded await start project
             </span>
           </div>
         )}

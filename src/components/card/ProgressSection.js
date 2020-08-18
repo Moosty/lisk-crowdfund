@@ -75,7 +75,7 @@ export const ProgressSection = withReducer('ProgressSection', reducer)(props => 
         <div className="flex flex-row w-full">
           <span className="font-bold p-2 text-right w-full ">
             <AccessTimeIcon
-              style={{fontSize: "18px"}}/>Ends {moment(fromTimeStamp(epoch,crowdfund && crowdfund.asset && crowdfund.asset.startFunding + config.periodLength)).fromNow()}
+              style={{fontSize: "18px"}}/> Ends {moment(fromTimeStamp(epoch,crowdfund && crowdfund.asset && crowdfund.asset.startFunding + config.periodLength)).fromNow()}
           </span>
         </div>
       </div>

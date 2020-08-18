@@ -4,9 +4,10 @@ export const SET_NEWSLETTER_SHOWN = 'SET_NEWSLETTER_SHOWN';
 export const SET_NEWSLETTER_SUBMITTED = 'SET_NEWSLETTER_SUBMITTED';
 export const INIT_NEWSLETTER = 'INIT_NEWSLETTER';
 
-export const openModal = modalType => ({
+export const openModal = (modalType, fundraiser=null) => ({
   type: OPEN_MODAL,
   modalType,
+  fundraiser
 });
 
 export const closeModal = () => ({
