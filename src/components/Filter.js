@@ -65,6 +65,8 @@ export const Filter = withReducer('Filter', reducer)((props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
+  const {filter, status} = useParams();
+
   const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
@@ -77,48 +79,69 @@ export const Filter = withReducer('Filter', reducer)((props) => {
     setCategory(event.target.value);
   };
 
-  return (
-    <div className="flex flex-row">
-      <div>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-outlined-label">Type</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select-label"
-            value={age}
-            onChange={handleChange}
-            label="Type"
-          >
-            <MenuItem value="">
-              <em>..</em>
-            </MenuItem>
-            <MenuItem value={10}>Upcoming </MenuItem>
-            <MenuItem value={10}>Only Projects </MenuItem>
-            <MenuItem value={20}>Only Crowdfunds</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
-      <div>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-outlined-label">
-            Category
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select-label"
-            value={category}
-            onChange={(e) => history.push(`/overview/${e.target.value}`)}
-            label="Filter"
-          >
-            <MenuItem value="">
-              <em>all</em>
-            </MenuItem>
-            {categories.map(c => (
-              <MenuItem value={c.value}>{c.label}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
+  return <div className="flex flex-row">
+    <div>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">Type</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select-label"
+          value={status}
+          onChange={(e) => {
+            if (e.target.value === "all") {
+              if (!filter) {
+                history.push(`/`);
+              } else {
+                history.push(`/overview/${filter}`);
+              }
+            } else {
+              history.push(`/overview/${filter || 'all'}/${e.target.value}`)
+            }
+          }}
+          label="Type"
+        >
+          <MenuItem value="all">
+            <em>..</em>
+          </MenuItem>
+          <MenuItem value={"new"}>Upcoming </MenuItem>
+          <MenuItem value={"funded"}>Funded Projects </MenuItem>
+          <MenuItem value={"open"}>Open Crowdfunds</MenuItem>
+          <MenuItem value={"closed"}>Closed Projects</MenuItem>
+        </Select>
+      </FormControl>
     </div>
-  );
+    <div>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">
+          Category
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select-label"
+          value={filter || "all"}
+          onChange={(e) => {
+            if (e.target.value === "all") {
+              if (!status) {
+                history.push(`/`)
+              } else {
+                history.push(`/overview/all/${status}`)
+              }
+            } else {
+              if (!status) {
+                history.push(`/overview/${e.target.value}`)
+              } else {
+                history.push(`/overview/${e.target.value}/${status}`)
+              }
+            }
+          }}
+          label="Filter"
+        >
+          <MenuItem value="all">
+            <em>all</em>
+          </MenuItem>
+          {categories.map(c => <MenuItem value={c.value}>{c.label}</MenuItem>)}
+        </Select>
+      </FormControl>
+    </div>
+  </div>;
 });

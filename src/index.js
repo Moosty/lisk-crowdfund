@@ -40,6 +40,10 @@ ReactDOM.render(
               <TopBar/>
               <Crowdfund/>
             </Route>
+            <Route path="/overview/:filter/:status">
+              <TopBar/>
+              <Overview/>
+            </Route>
             <Route path="/overview/:filter">
               <TopBar/>
               <Overview/>
