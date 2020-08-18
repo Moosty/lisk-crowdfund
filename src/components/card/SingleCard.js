@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import { ProgressSection, StartModal } from "..";
+import { ProgressSection, StartModal, VoteModal } from "..";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { ProjectImage } from "../ProjectImage";
 import AppContext from "../../AppContext";
@@ -68,6 +68,8 @@ export const SingleCard = withRouter((props) => {
 
   const {epoch} = useContext(AppContext);
 
+  const isInvestor = props.investments.filter(i => i.address === props.wallet.account.address).length > 0;
+  const didVote = props.votes.find(v => v.address === props.wallet.account.address && v.period === props.currentPeriod);
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -184,7 +186,7 @@ export const SingleCard = withRouter((props) => {
                 </div>
               </div>
               <div className="mt-2">
-                <BorderLinearProgress variant="determinate" value={50}/>
+                <BorderLinearProgress variant="determinate" value={props.periods && (props.currentPeriod / props.periods )* 100}/>
               </div>
               <div className="flex lg:flex-row mt-4">
                 <div className="flex flex-row w-full">
@@ -199,7 +201,13 @@ export const SingleCard = withRouter((props) => {
                     </div>}
                     {props.nextVote <= new Date() && props.endVote >= new Date() && <div className="flex flex-row w-full text-center align-middle justify-between items-center">
                       <span className="text-sm text-gray-700">
-                        Voting active
+                        {isInvestor && !didVote && (
+                          <VoteModal  publicKey={props.publicKey} period={props.currentPeriod} />
+                        )}
+                        {isInvestor && didVote && (
+                          "You already voted this period"
+                        )}
+                        {!isInvestor && "Voting active"}
                       </span>
                     </div>}
                   </div>

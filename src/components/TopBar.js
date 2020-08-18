@@ -4,12 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import { ModalAddCrowdfund, ModalSignIn, ModalComment} from '.' ;
+import { ModalAddCrowdfund, ModalSignIn } from '.';
 import withReducer from "../store/withReducer";
 import { useSelector } from "react-redux";
-import { ModalNewsletterSignUp, TransactionModal } from "./";
+import { ModalNewsletterSignUp } from "./";
 import { TopAccount } from "./TopAccount";
-import { TopDrawer, drawerWidth } from "./TopDrawer";
+import { drawerWidth, TopDrawer } from "./TopDrawer";
 import reducer from "../store/reducers";
 
 const useStyles = makeStyles((theme) => ({
@@ -53,13 +53,13 @@ export const TopBar = withReducer(
   reducer
 )((props) => {
   const classes = useStyles();
-  const { open } = useSelector(({ drawer }) => drawer);
+  const {open} = useSelector(({drawer}) => drawer);
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
+      <CssBaseline/>
       <AppBar
-        style={{ backgroundColor: "#262b38" }}
+        style={{backgroundColor: "#262b38"}}
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
@@ -72,14 +72,13 @@ export const TopBar = withReducer(
             justifyContent: "space-between",
           }}
         >
-          <ModalAddCrowdfund />
-          <ModalNewsletterSignUp />
-          <ModalSignIn />
-          <TopAccount />
+          <ModalAddCrowdfund/>
+          <ModalNewsletterSignUp/>
+          <ModalSignIn/>
+          <TopAccount/>
         </Toolbar>
       </AppBar>
-
-      <TopDrawer />
+      <TopDrawer/>
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,

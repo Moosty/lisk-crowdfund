@@ -5,11 +5,14 @@ import Button from "@material-ui/core/Button";
 import Fade from "@material-ui/core/Fade";
 import Modal from "@material-ui/core/Modal";
 import React from "react";
+import { useHistory, useParams } from 'react-router-dom';
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
 import { CrowdfundStepper, ProjectInfo } from "../components";
 import * as Actions from "../store/actions";
 import reducer from "../store/reducers";
 import withReducer from "../store/withReducer";
+import IconButton from "@material-ui/core/IconButton";
 
 //* Modal met Stepper *//
 //* Modaladdcrowdfund -> contains Crowdfundstepper -> contains content-steps  *//
@@ -44,11 +47,15 @@ export const ModalAddCrowdfund = withReducer(
 )((props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { wallet } = useSelector(({ blockchain }) => blockchain);
-  const { open, type } = useSelector(({ modal }) => modal);
+  const history = useHistory();
+  const {publicKey} = useParams();
+
+  const {wallet} = useSelector(({blockchain}) => blockchain);
+  const {open, type} = useSelector(({modal}) => modal);
+
   return (
     <div>
-      {wallet.account && wallet.account.address && (
+      {!publicKey && wallet.account && wallet.account.address && (
         <Button
           size="small"
           variant="contained"
@@ -58,7 +65,7 @@ export const ModalAddCrowdfund = withReducer(
           Create Crowdfund
         </Button>
       )}
-      {!wallet.account.address && (
+      {!publicKey && !wallet.account.address && (
         <Button
           size="small"
           variant="contained"
@@ -67,6 +74,12 @@ export const ModalAddCrowdfund = withReducer(
         >
           Create Crowdfund
         </Button>
+      )}
+      {publicKey && (
+        <IconButton onClick={() => history.push('/')}>
+          <ChevronLeftIcon/>
+        </IconButton>
+
       )}
       <Modal
         aria-labelledby="transition-modal-title"
@@ -87,10 +100,10 @@ export const ModalAddCrowdfund = withReducer(
                 <h1 className="text-xl text-center sm:text-3xl lg:text-5l lg:leading-8 text-grey font-bold my-4">
                   Create your own Crowdfund
                 </h1>
-                <CrowdfundStepper />
+                <CrowdfundStepper/>
               </div>
               <div className="max-w-md w-5/12 bg-gray-200 p-4 rounded-t-lg">
-                <ProjectInfo create />
+                <ProjectInfo create/>
               </div>
             </div>
           </div>

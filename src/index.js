@@ -3,14 +3,13 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch, } from "react-router-dom";
 import './styles/main.css';
 import store from './store';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Crowdfund, Overview, SignIn, SignUp, Wallet } from "./views";
 import { Provider } from "react-redux";
 import AppContext from './AppContext';
 import { config } from "./config";
 import { APIClient } from "@liskhq/lisk-api-client";
-import { LiskComponent, ModalNewsletterSignUp, Notifier } from "./components";
+import { Footer, LiskComponent, ModalNewsletterSignUp, Notifier, TopBar } from "./components";
 
 const api = new APIClient([config.apiUrlClient]);
 const networkIdentifier = '93d00fe5be70d90e7ae247936a2e7d83b50809c79b73fa14285f02c842348b3e';
@@ -25,38 +24,40 @@ ReactDOM.render(
     }}
   >
     <Provider store={store}>
-      <LiskComponent />
-      <Notifier />
-      <ModalNewsletterSignUp/>
-      <Router>
-        <Switch>
-          <Route path="/signin">
-            <SignIn/>
-          </Route>
-          <Route path="/signup">
-            <SignUp/>
-          </Route>
-          <Route path="/wallet">
-            <Wallet/>
-          </Route>
-          <Route path="/crowdfund/:publicKey">
-            <Crowdfund/>
-          </Route>
-          <Route path="/crowdfund">
-            <Crowdfund/>
-          </Route>
-          <Route path="/overview/:filter">
-            <Overview/>
-          </Route>
-          <Route path="/overview">
-            <Overview/>
-          </Route>
-          <Route path="/">
-            <App/>
-          </Route>
-        </Switch>
-      </Router>
 
+      <div className="overflow-hidden">
+        <Router>
+          <LiskComponent/>
+          <Notifier/>
+          <ModalNewsletterSignUp/>
+          <TopBar/>
+
+          <Switch>
+            <Route path="/signin">
+              <SignIn/>
+            </Route>
+            <Route path="/signup">
+              <SignUp/>
+            </Route>
+            <Route path="/wallet">
+              <Wallet/>
+            </Route>
+            <Route path="/crowdfund/:publicKey">
+              <Crowdfund/>
+            </Route>
+            <Route path="/overview/:filter">
+              <Overview/>
+            </Route>
+            <Route path="/overview">
+              <Overview/>
+            </Route>
+            <Route path="/">
+              <Overview/>
+            </Route>
+          </Switch>
+        </Router>
+        <Footer />
+      </div>
     </Provider>
   </AppContext.Provider>,
   document.getElementById('root')

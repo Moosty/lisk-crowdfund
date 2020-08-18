@@ -48,7 +48,6 @@ export const CardsContainer = withReducer('CardsContainer', reducer)(props => {
               }
               nextVote = fromTimeStamp(epoch, p.asset.startProject + (config.periodLength * currentPeriod) - config.votePeriod);
               endVote = fromTimeStamp(epoch,p.asset.startProject + (config.periodLength * currentPeriod));
-              console.log(nextVote, endVote)
             }
             return (
               <SingleCard

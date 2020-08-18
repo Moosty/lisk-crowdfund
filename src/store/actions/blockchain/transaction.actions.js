@@ -49,7 +49,11 @@ export const doTransaction = (tx, api) => (async (dispatch) => {
     if (result) {
       const jsonResult = await result.json();
       if (jsonResult && jsonResult.errors) {
-        dispatch(Actions.transactionError(tx.id, jsonResult.errors));
+        if (jsonResult.errors.length > 0) {
+          dispatch(Actions.transactionError(tx.id, jsonResult.errors));
+        } else {
+          dispatch(Actions.transactionError(tx.id, [{message: jsonResult.message}]));
+        }
       } else {
         dispatch(Actions.updateNonce());
         dispatch(Actions.transactionSuccess(tx.id));

@@ -45,12 +45,11 @@ export const ProgressSection = withReducer('ProgressSection', reducer)(props => 
       setInvestments(funds);
     }
   }, [crowdfund])
-
   return (
     <div className="flex flex-col w-full mt-4 content-end">
       <div className="w-full flex flex-row space justify-between">
         <div className="flex flex-row">
-          <h1>{investments}/</h1>
+          <h1>{investments && investments.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}/</h1>
           <h1
             className="font-bold">{crowdfund && crowdfund.asset && crowdfund.asset.goal && crowdfund.asset.goal.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} CFT</h1>
         </div>
@@ -58,7 +57,7 @@ export const ProgressSection = withReducer('ProgressSection', reducer)(props => 
         <div>{crowdfund && crowdfund.asset.investments.length} Backers</div>
       </div>
       <div className="mt-2">
-        <BorderLinearProgress variant="determinate" value={50}/>
+        <BorderLinearProgress variant="determinate" value={investments && (investments / Number(crowdfund.asset.goal) )* 100}/>
       </div>
       <div className="flex lg:flex-row mt-4">
         <div className="flex flex-row w-full">
