@@ -10,12 +10,14 @@ export const ProjectImage = withReducer('ProjectImage', reducer)(props => {
   const [Image, setImage] = useState(Illustrations.UndrawAcceptTerms({
     primaryColor: "#4070f4",
     height: props.heigth,
+    width: props.width,
   }));
   useEffect(() => {
     if (props.image) {
       setImage(Illustrations[props.image]({
         primaryColor: "#4070f4",
         height: props.height,
+        width: props.width,
       }))
     }
   }, [props.image])

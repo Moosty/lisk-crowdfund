@@ -33,8 +33,10 @@ import { Comment } from "./Comment";
 import { AccordeonWallet } from "./AccordeonWallet";
 import { TransactionModal } from "./TransactionModal";
 import { VoteModal } from "./VoteModal";
+import { LiskComponent } from "./Lisk";
 
 export {
+  LiskComponent,
   TopBar,
   ProgressSection,
   Accordeon,

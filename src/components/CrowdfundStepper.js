@@ -177,7 +177,6 @@ export const CrowdfundStepper = withReducer(
   readonly category: string;
      */
     if (wallet.passphrase && wallet.account && wallet.account.nonce) {
-      console.log(wallet.account)
       const tx = {
         senderPublicKey: wallet.account.publicKey,
         networkIdentifier,

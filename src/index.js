@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 import AppContext from './AppContext';
 import { config } from "./config";
 import { APIClient } from "@liskhq/lisk-api-client";
-import { ModalNewsletterSignUp, Notifier } from "./components";
+import { LiskComponent, ModalNewsletterSignUp, Notifier } from "./components";
 
 const api = new APIClient([config.apiUrlClient]);
 const networkIdentifier = '93d00fe5be70d90e7ae247936a2e7d83b50809c79b73fa14285f02c842348b3e';
@@ -25,6 +25,7 @@ ReactDOM.render(
     }}
   >
     <Provider store={store}>
+      <LiskComponent />
       <Notifier />
       <ModalNewsletterSignUp/>
       <Router>
@@ -38,8 +39,14 @@ ReactDOM.render(
           <Route path="/wallet">
             <Wallet/>
           </Route>
+          <Route path="/crowdfund/:publicKey">
+            <Crowdfund/>
+          </Route>
           <Route path="/crowdfund">
             <Crowdfund/>
+          </Route>
+          <Route path="/overview/:filter">
+            <Overview/>
           </Route>
           <Route path="/overview">
             <Overview/>

@@ -37,7 +37,6 @@ export const transactionError = (id, error) => ({
 export const doTransaction = (tx, api) => (async (dispatch) => {
   try {
     dispatch(Actions.doTransactionAction(tx.id));
-    console.log(tx)
     const options = {
       headers: {
         "content-type": "application/json; charset=UTF-8",
@@ -47,10 +46,8 @@ export const doTransaction = (tx, api) => (async (dispatch) => {
       method: "POST"
     }
     const result = await fetch(`${config.apiUrl}transactions`, options);
-    // const result = await api.transactions.broadcast(tx);
     if (result) {
       const jsonResult = await result.json();
-      console.log(jsonResult)
       if (jsonResult && jsonResult.errors) {
         dispatch(Actions.transactionError(tx.id, jsonResult.errors));
       } else {
