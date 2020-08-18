@@ -13,7 +13,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { utils } from "@liskhq/lisk-transactions";
 import { Accordeon } from "./Accordeon";
 import IconButton from "@material-ui/core/IconButton";
-
+import { useHistory } from 'react-router-dom';
 const { convertBeddowsToLSK } = utils;
 
 export const drawerWidth = 350;
@@ -47,6 +47,7 @@ export const TopDrawer = withReducer(
 )((props) => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const history = useHistory();
   const theme = useTheme();
   const { open } = useSelector(({ drawer }) => drawer);
   const { wallet } = useSelector(({ blockchain }) => blockchain);
@@ -80,14 +81,14 @@ export const TopDrawer = withReducer(
           />
           <h1 className="text-lg font-bold ">{wallet.account.username}</h1>
           <h2 className="text-xl mb-4">
-            {convertBeddowsToLSK(wallet.account.balance)} LSK
+            {convertBeddowsToLSK(wallet.account.balance)} CFT
           </h2>
           <Button
             size="small"
             variant="contained"
             color="secondary"
             className="my-4"
-            onClick={() => console.log("todo goto wallet")}
+            onClick={() => history.push('/wallet')}
           >
             My Wallet
           </Button>

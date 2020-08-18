@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -6,6 +6,10 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { MenuCard } from "../components";
+import withReducer from "app/store/withReducer";
+import reducer from "app/store/reducers";
+import * as Actions from "app/store/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,8 +21,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Accordeon = (props) => {
+export const Accordeon = withReducer('Accordeon', reducer)((props) => {
+  const dispatch = useDispatch();
   const classes = useStyles();
+  const { wallet, crowdfunds } = useSelector(({blockchain}) => blockchain);
+  const [investments, setInvestments] = useState([]);
+
+  useEffect(() => {
+    if (wallet.account && wallet.account.address && crowdfunds.projects.length > 0) {
+      let listInvestments = [];
+      crowdfunds.projects.map(p => {
+        const invests = p.asset.investments.filter(i => i.address === wallet.account.address);
+        let amount = 0;
+        invests.map(i => {
+          amount += Number(i.amount);
+        });
+        listInvestments.push({publicKey: p.publicKey, title: p.asset.title, amount, crowdfund: p});
+      })
+      setInvestments(listInvestments);
+    }
+  },[crowdfunds.projects, wallet])
 
   return (
     <div className={classes.root}>
@@ -32,21 +54,15 @@ export const Accordeon = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <div className="flex flex-col w-full">
-            <MenuCard
-              type="investment"
-              title="The Best sunglasses"
-              investment="10.000lsk"
-            />
-            <MenuCard
-              type="investment"
-              title="The Best sunglasses"
-              investment="10.000lsk"
-            />
-            <MenuCard
-              type="investment"
-              title="The Best sunglasses"
-              investment="10.000lsk"
-            />
+            {investments && investments.map(i => (
+              <MenuCard
+                type="investment"
+                title={i.title}
+                investment={i.amount}
+                publicKey={i.publicKey}
+                crowdfund={i.crowdfund.asset}
+              />
+            ))}
           </div>
         </AccordionDetails>
       </Accordion>
@@ -60,11 +76,9 @@ export const Accordeon = (props) => {
         </AccordionSummary>
         <AccordionDetails>
           <div className="flex flex-col w-full">
-              <MenuCard type="crowdfund" title="The Best metal golden sunglasses" timeLeft="24" />
-              <MenuCard type="crowdfund" title="Project 453" timeLeft="2"  />
-              <MenuCard type="crowdfund" title="Flying boat" timeLeft="4"  />
-              <MenuCard type="crowdfund" title="Golden fluffy tiger" timeLeft="74" />
-              <MenuCard type="crowdfund" title="Boring stuff" timeLeft="11" />
+            {crowdfunds && wallet && wallet.account && wallet.account.publicKey && crowdfunds.projects.filter(p => p.asset.owner === wallet.account.publicKey).map(p => (
+              <MenuCard type="crowdfund" title={p.asset.title} timeLeft="24" crowdfund={p.asset}/>
+            ))}
             </div>
         </AccordionDetails>
       </Accordion>
@@ -79,4 +93,4 @@ export const Accordeon = (props) => {
       </Accordion>
     </div>
   );
-};
+});
