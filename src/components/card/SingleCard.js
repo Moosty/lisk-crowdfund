@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
-import { ProgressSection } from "..";
+import { ProgressSection, StartModal } from "..";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { ProjectImage } from "../ProjectImage";
 import AppContext from "../../AppContext";
@@ -131,7 +131,7 @@ export const SingleCard = withRouter((props) => {
           </div>
         )}
 
-        {props.state === 'funded' && (
+        {props.state === 'funded' && props.startProject === -1 && props.owner !== props.wallet.account.publicKey && (
           <div className="flex flex-col w-full text-center align-middle items-center mt-4">
             <span
               className="font-bold text-2xl text-teal-800 mt-4"
@@ -142,7 +142,27 @@ export const SingleCard = withRouter((props) => {
           </div>
         )}
 
-        {props.startProject > -1 && (
+        {props.state === 'funded' && props.startProject === -1 && props.owner === props.wallet.account.publicKey && (
+          <div className="flex flex-col w-full text-center align-middle items-center mt-4">
+            <span
+              className="font-bold text-2xl text-teal-800 mt-4"
+              style={{color: "#f50057"}}
+            >
+              <StartModal publicKey={props.publicKey} />
+            </span>
+          </div>
+        )}
+        {props.startProject > getNow(epoch) && (
+          <div className="flex flex-col w-full text-center align-middle items-center mt-4">
+            <span
+              className="font-bold text-2xl text-teal-800 mt-4"
+              style={{color: "#f50057"}}
+            >
+              Project funded and starts {moment(fromTimeStamp(epoch, props.startProject)).fromNow()}
+            </span>
+          </div>
+        )}
+        {props.startProject < getNow(epoch) && props.startProject > -1 && (
           <div>
             <div className="flex flex-col w-full mt-4 content-end">
               <div className="w-full flex flex-row space justify-between">
@@ -153,7 +173,7 @@ export const SingleCard = withRouter((props) => {
                     </div>
                   </div>
                   <div className="flex flex-row">
-                    <h1>{props.currentPeriod}/</h1>
+                    <h1>{props.currentPeriod ? props.currentPeriod : 0}/</h1>
                     <h1 className="font-bold">{props.periods} months</h1>
                   </div>
                 </div>

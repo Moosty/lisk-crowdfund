@@ -11,22 +11,22 @@ import withReducer from "../store/withReducer";
 import reducer from "../store/reducers";
 import * as Actions from "../store/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { FundTransaction, RegisterTransaction } from "@moosty/lisk-crowdfund-transactions";
+import { FundTransaction, RegisterTransaction, StartTransaction } from "@moosty/lisk-crowdfund-transactions";
 import AppContext from "../AppContext";
 import { utils } from '@liskhq/lisk-transactions';
+import { toTimeStamp } from "../utils";
 
 const { convertBeddowsToLSK } = utils;
 
-export const FundModal = withReducer('fundModal', reducer)((props) => {
+export const StartModal = withReducer('StartModal', reducer)((props) => {
   const dispatch = useDispatch();
   const {api, networkIdentifier, epoch} = useContext(AppContext);
   const { open, type, fundraiser } = useSelector(({ modal }) => modal);
   const crowdfund = useSelector(({ blockchain }) => blockchain.crowdfunds.projects.find(c => c.publicKey === props.publicKey || c.publicKey === fundraiser));
   const { wallet } = useSelector(({ blockchain }) => blockchain);
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [startDate, setStartDate] = useState("");
   const [passphrase, setPassphrase] = useState("");
-  const [amount, setAmount] = useState(10);
   const [fee, setFee] = useState("0");
 
   useEffect(() => {
@@ -36,10 +36,10 @@ export const FundModal = withReducer('fundModal', reducer)((props) => {
   }, [password]);
 
   useEffect(() => {
-    signFundTx();
-  }, [password, passphrase, amount, message])
+    signStartTx();
+  }, [password, passphrase, startDate])
 
-  const signFundTx = () => {
+  const signStartTx = () => {
     const tx = {
       senderPublicKey: wallet.account.publicKey,
       networkIdentifier,
@@ -47,11 +47,10 @@ export const FundModal = withReducer('fundModal', reducer)((props) => {
       passphrase: wallet.passphrase || passphrase,
       asset: {
         fundraiser: fundraiser,
-        amount: amount.toString(),
-        message
+        timestamp: toTimeStamp(epoch, startDate),
       }
     };
-    const transaction = new FundTransaction(tx);
+    const transaction = new StartTransaction(tx);
     transaction.nonce = transaction.nonce.toString();
     transaction.sign(networkIdentifier, wallet.passphrase);
     transaction.fee = transaction.minFee.toString();
@@ -60,7 +59,7 @@ export const FundModal = withReducer('fundModal', reducer)((props) => {
   }
 
   const handleConfirm = () => {
-    const transaction = signFundTx();
+    const transaction = signStartTx();
     try {
       transaction.sign(networkIdentifier, wallet.passphrase);
       dispatch(Actions.doTransaction(transaction, api));
@@ -80,23 +79,23 @@ export const FundModal = withReducer('fundModal', reducer)((props) => {
         style={{marginRight: 10}}
         onClick={() => {
           if (wallet && wallet.account && wallet.account.address) {
-            dispatch(Actions.openModal('fundModal', props.publicKey))
+            dispatch(Actions.openModal('startModal', props.publicKey))
           } else {
             dispatch(Actions.openModal('signup'))
           }
         }}
       >
-        Back it
+        Start Project
       </Button>
       <Dialog
         fullWidth
-        open={open && type === "fundModal"}
+        open={open && type === "startModal"}
         onClose={() => dispatch(Actions.closeModal())}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          Fund {crowdfund.asset.title}
+          Start Project: `{crowdfund.asset.title}`
         </DialogTitle>
         {/*<MenuCard type="voteItem" title="The Best sunglasses" />*/}
         <DialogContent>
@@ -104,21 +103,17 @@ export const FundModal = withReducer('fundModal', reducer)((props) => {
             {props.description}
           </DialogContentText>
           <TextField
-            label="Amount"
-            variant="outlined"
             fullWidth
-            value={amount}
-            type="number"
-            onChange={(e) => setAmount(e.target.value)}
-            autoFocus
-          />
-          <TextField
-            label="Message"
+            label="Start Date"
+            type="datetime-local"
             variant="outlined"
-            fullWidth
-            value={message}
-            type="text"
-            onChange={(e) => setMessage(e.target.value)}
+
+            // defaultValue="2017-05-24T10:30"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
           {wallet && !wallet.passphrase && <TextField
             id="outlined-password-input"
@@ -145,7 +140,7 @@ export const FundModal = withReducer('fundModal', reducer)((props) => {
           <Button onClick={() => dispatch(Actions.closeModal())} color="primary">
             Cancel
           </Button>
-          <Button disabled={(!wallet.passphrase && !passphrase) || !message || Number(amount) <= 0} onClick={handleConfirm} color="secondary" >
+          <Button disabled={(!wallet.passphrase && !passphrase) || !startDate} onClick={handleConfirm} color="secondary" >
             Confirm
           </Button>
         </DialogActions>

@@ -11,6 +11,7 @@ import { fromTimeStamp } from "../utils/time";
 export const CardsContainer = withReducer('CardsContainer', reducer)(props => {
   const dispatch = useDispatch();
   const {epoch} = useContext(AppContext);
+  const {wallet} = useSelector(({blockchain}) => blockchain);
   const {projects} = useSelector(({blockchain}) => blockchain.crowdfunds);
   const {users} = useSelector(({blockchain}) => blockchain.users);
 
@@ -32,18 +33,22 @@ export const CardsContainer = withReducer('CardsContainer', reducer)(props => {
               funds += Number(i.amount);
             });
             if (p.asset.startFunding <= getNow(epoch) && p.asset.startFunding + config.periodLength < getNow(epoch)) {
-
               if (funds < p.asset.goal) {
                 state = "failed";
               }
             }
+
             if (Number(funds) === Number(p.asset.goal)) {
               state = "funded";
             }
             if (p.asset.startProject > -1) {
-              currentPeriod = Math.floor((getNow(epoch) - props.projectStart)/config.periodLength);
-              nextVote = fromTimeStamp(props.projectStart + (config.periodLength * currentPeriod) - config.votePeriod);
-              endVote = fromTimeStamp(props.projectStart + (config.periodLength * currentPeriod));
+              currentPeriod = Math.floor((getNow(epoch) - p.asset.startProject)/config.periodLength);
+              if (currentPeriod === 0) {
+                currentPeriod++;
+              }
+              nextVote = fromTimeStamp(epoch, p.asset.startProject + (config.periodLength * currentPeriod) - config.votePeriod);
+              endVote = fromTimeStamp(epoch,p.asset.startProject + (config.periodLength * currentPeriod));
+              console.log(nextVote, endVote)
             }
             return (
               <SingleCard
@@ -62,6 +67,7 @@ export const CardsContainer = withReducer('CardsContainer', reducer)(props => {
                 currentPeriod={currentPeriod}
                 nextVote={nextVote}
                 endVote={endVote}
+                wallet={wallet}
                 // image="/images/pexels-photo-3951901.jpeg"
               />
             )

@@ -34,6 +34,7 @@ import { AccordeonWallet } from "./AccordeonWallet";
 import { TransactionModal } from "./TransactionModal";
 import { VoteModal } from "./VoteModal";
 import { LiskComponent } from "./Lisk";
+import { StartModal } from './StartModal';
 
 export {
   LiskComponent,
@@ -72,4 +73,5 @@ export {
   TransactionModal,
   VoteModal,
   AccordeonWallet,
+  StartModal,
 };

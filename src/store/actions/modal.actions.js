@@ -10,8 +10,9 @@ export const openModal = (modalType, fundraiser=null) => ({
   fundraiser
 });
 
-export const closeModal = () => ({
+export const closeModal = (clear=false) => ({
   type: CLOSE_MODAL,
+  clear,
 });
 export const setShownNewsletter = (timestamp) => ({
   type: SET_NEWSLETTER_SHOWN,
