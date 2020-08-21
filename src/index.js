@@ -32,7 +32,7 @@ ReactDOM.render(
           <ModalNewsletterSignUp/>
           <Switch>
             <Route path="/wallet">
-              <TopBar/>
+              <TopBar wallet />
               <Wallet/>
             </Route>
             <Route path="/crowdfund/:publicKey">

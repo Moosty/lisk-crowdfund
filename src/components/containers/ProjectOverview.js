@@ -7,11 +7,10 @@ import { isEqual } from "lodash";
 import { projectStatusFilter } from "app/utils/projects";
 import { CrowdfundCard } from "app/components/card/CrowdfundCard";
 
-export const ProjectOverview = memo(withReducer('ProjectOverview', reducer)(() => {
+export const ProjectOverview = memo(withReducer('ProjectOverview', reducer)(({wallet}) => {
   const {filter, status, type} = useParams();
   const projects = useSelector(({blockchain}) => blockchain.crowdfunds.projects, isEqual);
   const account = useSelector(({blockchain}) => blockchain.wallet.account, isEqual);
-  console.log(status, filter, type)
   const isType = (crowdfund) => {
     if (account && account.address) {
       if (type === 'my') {
@@ -39,6 +38,7 @@ export const ProjectOverview = memo(withReducer('ProjectOverview', reducer)(() =
 
     {filter && projects
       .filter(p => projectStatusFilter(p, status))
+      .filter(p => type ? type === 'all' || isType(p) : true)
       .filter(p => filter === 'all' || p.asset.category === filter).length === 0 && (
       <h1>No projects in this category</h1>
     )}

@@ -54,7 +54,7 @@ export const ModalAddCrowdfund = withReducer(
   const {open, type} = useSelector(({modal}) => modal);
   return (
     <div>
-      {!params.publicKey && wallet.account && wallet.account.address && (
+      {!props.wallet && !params.publicKey && wallet.account && wallet.account.address && (
         <Button
           size="small"
           variant="contained"
@@ -64,7 +64,7 @@ export const ModalAddCrowdfund = withReducer(
           Create Crowdfund
         </Button>
       )}
-      {!params.publicKey && !wallet.account.address && (
+      {!props.wallet && !params.publicKey && !wallet.account.address && (
         <Button
           size="small"
           variant="contained"
@@ -74,7 +74,7 @@ export const ModalAddCrowdfund = withReducer(
           Create Crowdfund
         </Button>
       )}
-      {params.publicKey && (
+      {(props.wallet || params.publicKey) && (
         <IconButton onClick={() => history.push('/')}>
           <ChevronLeftIcon/>
         </IconButton>
