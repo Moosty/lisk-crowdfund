@@ -72,7 +72,7 @@ export const TopBar = withReducer(
             justifyContent: "space-between",
           }}
         >
-          <ModalAddCrowdfund/>
+          <ModalAddCrowdfund wallet={props.wallet}/>
           <ModalNewsletterSignUp/>
           <ModalSignIn/>
           <TopAccount/>
