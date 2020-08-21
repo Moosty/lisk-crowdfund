@@ -1,3 +1,4 @@
+/* global BigInt */
 import { ButtonGroup, TextField, Tooltip } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -6,59 +7,26 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InfoIcon from "@material-ui/icons/Info";
-import React, { useContext, useEffect, useState } from "react";
-import withReducer from "../store/withReducer";
-import reducer from "../store/reducers";
-import * as Actions from "../store/actions";
+import React, { memo, useContext, useEffect, useState } from "react";
+import withReducer from "../../store/withReducer";
+import reducer from "../../store/reducers";
+import * as Actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  VoteTransaction
-} from "@moosty/lisk-crowdfund-transactions";
-import AppContext from "../AppContext";
+import { RefundTransaction } from "@moosty/lisk-crowdfund-transactions";
+import AppContext from "../../AppContext";
 import { utils } from '@liskhq/lisk-transactions';
-import {  withStyles } from '@material-ui/core/styles';
-import { green, red, grey } from '@material-ui/core/colors';
+import { toTimeStamp } from "../../utils";
 
 const { convertBeddowsToLSK } = utils;
 
-const RedButton = withStyles((theme) => ({
-  root: {
-    color: theme.palette.getContrastText(red[500]),
-    backgroundColor: red[500],
-    '&:hover': {
-      backgroundColor: red[700],
-    },
-  },
-}))(Button);
-
-const GreenButton = withStyles((theme) => ({
-  root: {
-    color: theme.palette.getContrastText(green[500]),
-    backgroundColor: green[500],
-    '&:hover': {
-      backgroundColor: green[700],
-    },
-  },
-}))(Button);
-
-const GrayButton = withStyles((theme) => ({
-  root: {
-    color: theme.palette.getContrastText(grey[500]),
-    backgroundColor: grey[500],
-    '&:hover': {
-      backgroundColor: grey[700],
-    },
-  },
-}))(Button);
-
-export const VoteModal = withReducer('VoteModal', reducer)((props) => {
+export const RefundModal = memo(withReducer('RefundModal', reducer)((props) => {
   const dispatch = useDispatch();
   const {api, networkIdentifier, epoch} = useContext(AppContext);
   const { open, type, fundraiser } = useSelector(({ modal }) => modal);
-  const crowdfund = useSelector(({ blockchain }) => blockchain.crowdfunds.projects.find(c => c.publicKey === props.publicKey || c.publicKey === fundraiser));
+  const crowdfund = useSelector(({ blockchain }) => blockchain.crowdfunds.projects.find(c => c.publicKey === fundraiser));
   const { wallet } = useSelector(({ blockchain }) => blockchain);
   const [password, setPassword] = useState("");
-  const [vote, setVote] = useState(1);
+  const [startDate, setStartDate] = useState("");
   const [passphrase, setPassphrase] = useState("");
   const [fee, setFee] = useState("0");
 
@@ -69,10 +37,47 @@ export const VoteModal = withReducer('VoteModal', reducer)((props) => {
   }, [password]);
 
   useEffect(() => {
-    signVoteTx();
-  }, [password, passphrase, vote])
+    if (crowdfund) {
+      signRefundTx();
+    }
+  }, [password, passphrase, startDate, crowdfund])
 
-  const signVoteTx = () => {
+  useEffect(() => {
+          console.log(fundraiser, props.publicKey, crowdfund);
+  }, [fundraiser, props.publicKey, crowdfund]);
+
+  const calculateInvestments = investments => {
+    let totalInvestments = BigInt(0);
+    investments.map(investment => {
+      totalInvestments += BigInt(investment.amount);
+    });
+    return totalInvestments;
+  }
+
+  const calculateVoteStake = (investments) => {
+    let voteStake = BigInt(0);
+    investments.map(investment => {
+      if (investment.address === wallet.account.address) {
+        voteStake += BigInt(investment.amount);
+      }
+    });
+    const totalInvestments = calculateInvestments(investments);
+    return totalInvestments ? voteStake / totalInvestments : BigInt(0);
+  }
+
+  const allowedToRefund = (fundraiser) => {
+    const payedFiltered = fundraiser.asset.payments
+      .filter(p => p.type === 0)
+      .map(p => BigInt(p.amount))
+
+    const payedAmount = payedFiltered.length > 0 ? payedFiltered.reduce((accumulator, currentValue) => accumulator + currentValue) : BigInt(0);
+
+    const amountLeft = calculateInvestments(fundraiser.asset.investments) - payedAmount;
+    console.log(amountLeft, calculateVoteStake(fundraiser.asset.investments))
+    return amountLeft * calculateVoteStake(fundraiser.asset.investments);
+  }
+
+  const signRefundTx = () => {
     const tx = {
       senderPublicKey: wallet.account.publicKey,
       networkIdentifier,
@@ -80,11 +85,10 @@ export const VoteModal = withReducer('VoteModal', reducer)((props) => {
       passphrase: wallet.passphrase || passphrase,
       asset: {
         fundraiser: fundraiser,
-        period: props.period,
-        vote,
+        amount: allowedToRefund(crowdfund).toString(),
       }
     };
-    const transaction = new VoteTransaction(tx);
+    const transaction = new RefundTransaction(tx);
     transaction.nonce = transaction.nonce.toString();
     transaction.sign(networkIdentifier, wallet.passphrase);
     transaction.fee = transaction.minFee.toString();
@@ -93,7 +97,7 @@ export const VoteModal = withReducer('VoteModal', reducer)((props) => {
   }
 
   const handleConfirm = () => {
-    const transaction = signVoteTx();
+    const transaction = signRefundTx();
     try {
       transaction.sign(networkIdentifier, wallet.passphrase);
       dispatch(Actions.doTransaction(transaction, api));
@@ -113,37 +117,29 @@ export const VoteModal = withReducer('VoteModal', reducer)((props) => {
         style={{marginRight: 10}}
         onClick={() => {
           if (wallet && wallet.account && wallet.account.address) {
-            dispatch(Actions.openModal('startModal', props.publicKey))
+            dispatch(Actions.openModal('refundModal', props.publicKey))
           } else {
-            dispatch(Actions.openModal('signup'))
+            dispatch(Actions.openModal('signin'))
           }
         }}
       >
-        Vote
+        Refund investment
       </Button>
-      <Dialog
+      {crowdfund && <Dialog
         fullWidth
-        open={open && type === "startModal"}
+        open={open && type === "refundModal"}
         onClose={() => dispatch(Actions.closeModal())}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          Vote Project: `{crowdfund.asset.title}`
+          Refund investment: `{crowdfund.asset.title}`
         </DialogTitle>
         {/*<MenuCard type="voteItem" title="The Best sunglasses" />*/}
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {props.description}
           </DialogContentText>
-          Do you want a refund?
-          <br />
-            {vote !== 0 ? <GrayButton variant="contained" color="primary"
-              onClick={() => setVote(0)}>Yes</GrayButton> :
-              <GreenButton variant="contained" color="primary" disabled>Yes</GreenButton>}
-            {vote !== 1 ? <GrayButton variant="contained" color="primary"
-                onClick={() => setVote(1)}>No</GrayButton> :
-              <RedButton variant="contained" color="primary" disabled >No</RedButton>}
           {wallet && !wallet.passphrase && <TextField
             id="outlined-password-input"
             label="Password"
@@ -154,7 +150,6 @@ export const VoteModal = withReducer('VoteModal', reducer)((props) => {
             variant="outlined"
             fullWidth
           />}
-
           <div className="flex flex-col mt-2">
             <span className="text-gray-600 text-sm ">
               Transaction Fee:{" "}
@@ -170,10 +165,10 @@ export const VoteModal = withReducer('VoteModal', reducer)((props) => {
             Cancel
           </Button>
           <Button disabled={!wallet.passphrase && !passphrase} onClick={handleConfirm} color="secondary" >
-            Confirm vote
+            Confirm
           </Button>
         </DialogActions>
-      </Dialog>
+      </Dialog>}
     </div>
   );
-});
+}));

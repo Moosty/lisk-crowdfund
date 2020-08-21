@@ -1,4 +1,4 @@
-import { config } from "../../../config";
+import { config } from "app/config";
 
 export const LOAD_CROWDFUNDS = '[crowdfunds] load crowdfunds';
 export const DONE_CROWDFUNDS = '[crowdfunds] done crowdfunds';

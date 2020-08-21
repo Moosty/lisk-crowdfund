@@ -1,14 +1,14 @@
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch, useSelector } from "react-redux";
+import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import Modal from "@material-ui/core/Modal";
-import React, { useEffect } from "react";
-
-import { DemoInfo } from "./";
-import * as Actions from "../store/actions";
-import reducer from "../store/reducers";
-import withReducer from "../store/withReducer";
+import Button from "@material-ui/core/Button";
+import { SignInForm, CommentSection } from "../index";
+import withReducer from "../../store/withReducer";
+import reducer from "../../store/reducers";
+import * as Actions from "../../store/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -24,21 +24,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const DemoInfoModal = withReducer(
-  "DemoInfoModal",
+export const ModalComment = withReducer(
+  "ModalComment",
   reducer
 )((props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { wallet } = useSelector(({ blockchain }) => blockchain);
   const { open, type } = useSelector(({ modal }) => modal);
-
   return (
     <div>
+      {wallet.account && wallet.account.address && (
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={() => dispatch(Actions.openModal("comment"))}
+        >
+          Add Comment
+        </Button>
+      )}
+      {(!wallet.account || (wallet.account && !wallet.account.address)) && (
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={() => dispatch(Actions.openModal("login"))}
+        >
+          Log in
+        </Button>
+      )}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
-        open={open && type === "DemoInfoModal"}
+        open={open && type === "comment"}
         onClose={() => dispatch(Actions.closeModal())}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -48,11 +66,7 @@ export const DemoInfoModal = withReducer(
       >
         <Fade in={open}>
           <div className="w-full sm:w-9/12 xl:w-2/4 ">
-            <DemoInfo
-              title="The Lisk Crowd Project - Built with the Lisk SDK!"
-              tag="LISK BLOCKCHAIN APPLICATIONS"
-              description="Read more about Lisk, the LiskCrowd project, the technology, the community and other applications:"
-            />
+            <CommentSection />
           </div>
         </Fade>
       </Modal>

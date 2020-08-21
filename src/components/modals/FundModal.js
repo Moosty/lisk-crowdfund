@@ -7,12 +7,12 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InfoIcon from "@material-ui/icons/Info";
 import React, { useContext, useEffect, useState } from "react";
-import withReducer from "../store/withReducer";
-import reducer from "../store/reducers";
-import * as Actions from "../store/actions";
+import withReducer from "../../store/withReducer";
+import reducer from "../../store/reducers";
+import * as Actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { FundTransaction, RegisterTransaction } from "@moosty/lisk-crowdfund-transactions";
-import AppContext from "../AppContext";
+import AppContext from "../../AppContext";
 import { utils } from '@liskhq/lisk-transactions';
 
 const { convertBeddowsToLSK } = utils;

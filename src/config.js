@@ -4,4 +4,5 @@ export const config = {
   extendedApiUrl: 'http://51.15.112.191:2255/extended-api/',
   periodLength: 60*60*24,
   votePeriod: 60*60,
+  epoch: new Date('2020-08-01T00:00:00.000Z').getTime() / 1000,
 }

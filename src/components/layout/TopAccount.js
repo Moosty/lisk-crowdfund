@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import withReducer from '../store/withReducer';
-import reducer from '../store/reducers';
-import * as Actions from '../store/actions';
+import withReducer from '../../store/withReducer';
+import reducer from '../../store/reducers';
+import * as Actions from '../../store/actions';
 import IconButton from "@material-ui/core/IconButton";
 import { utils } from '@liskhq/lisk-transactions';
 import clsx from "clsx";

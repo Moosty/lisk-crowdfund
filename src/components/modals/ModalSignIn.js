@@ -4,10 +4,10 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
-import { SignInForm } from '.';
-import withReducer from "../store/withReducer";
-import reducer from '../store/reducers';
-import * as Actions from '../store/actions';
+import { SignInForm } from '../index';
+import withReducer from "../../store/withReducer";
+import reducer from '../../store/reducers';
+import * as Actions from '../../store/actions';
 import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({

@@ -2,16 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import moment from 'moment';
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import { useDispatch, useSelector } from "react-redux";
-import reducer from '../../store/reducers';
-import * as Actions from '../../store/actions';
-import withReducer from "../../store/withReducer";
-import { config } from "../../config";
-import { fromTimeStamp } from "../../utils/time";
+import reducer from 'app/store/reducers';
+import withReducer from "app/store/withReducer";
+import { config } from "app/config";
+import { fromTimeStamp } from "app/utils/time";
 import AppContext from "../../AppContext";
-import { FundModal } from "../FundModal";
+import { FundModal } from "../modals/FundModal";
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {

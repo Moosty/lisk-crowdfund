@@ -6,10 +6,10 @@ import Fade from "@material-ui/core/Fade";
 import Modal from "@material-ui/core/Modal";
 import React, { useEffect } from "react";
 
-import { NewsletterSignUp } from "./";
-import * as Actions from "../store/actions";
-import reducer from "../store/reducers";
-import withReducer from "../store/withReducer";
+import { NewsletterSignUp } from "../index";
+import * as Actions from "../../store/actions";
+import reducer from "../../store/reducers";
+import withReducer from "../../store/withReducer";
 
 const useStyles = makeStyles((theme) => ({
   modal: {

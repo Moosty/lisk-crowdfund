@@ -4,13 +4,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import { ModalAddCrowdfund, ModalSignIn } from '.';
-import withReducer from "../store/withReducer";
+import { ModalAddCrowdfund, ModalSignIn } from '../index';
+import withReducer from "../../store/withReducer";
 import { useSelector } from "react-redux";
-import { ModalNewsletterSignUp } from "./";
+import { ModalNewsletterSignUp } from "../index";
 import { TopAccount } from "./TopAccount";
 import { drawerWidth, TopDrawer } from "./TopDrawer";
-import reducer from "../store/reducers";
+import reducer from "../../store/reducers";
 
 const useStyles = makeStyles((theme) => ({
   root: {

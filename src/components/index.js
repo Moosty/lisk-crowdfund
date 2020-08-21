@@ -2,39 +2,39 @@ import { ProgressSection } from "./card/ProgressSection";
 import { CrowdfundStepper } from "./CrowdfundStepper";
 import { Accordeon } from "./Accordeon";
 import { ButtonBases } from "./ButtonBases";
-import { CardsContainer } from "./CardsContainer";
 import { Container } from "./Container";
 import { Filter } from "./Filter";
-import { Header } from "./Header";
-import { Header2 } from "./Header2";
+import { Header } from "./layout/Header";
+import { Header2 } from "./layout/Header2";
 import { MenuCard } from "./MenuCard";
 import { MobileMenu } from "./MobileMenu";
-import { ModalAddCrowdfund } from "./ModalAddCrowdfund";
-import { ModalNewsletterSignUp } from "./ModalNewsletterSignUp";
-import { ModalSignIn } from "./ModalSignIn";
+import { ModalAddCrowdfund } from "./modals/ModalAddCrowdfund";
+import { ModalNewsletterSignUp } from "./modals/ModalNewsletterSignUp";
+import { ModalSignIn } from "./modals/ModalSignIn";
 import { NewsletterSignUp } from "./NewsletterSignUp";
 import { Notifier } from "./Notifier";
 import { ProjectInfo } from "./ProjectInfo";
 import { ProjectUpdates } from "./ProjectUpdates";
 import { SignInForm } from "./SignInForm";
-import { SingleCard } from "./card/SingleCard";
 import { SingleItem } from "./SingleItem";
 import { StepDate } from "./crowdfundsteps/StepDate";
 import { StepGeneral } from "./crowdfundsteps/StepGeneral";
 import { StepTechnical } from "./crowdfundsteps/StepTechnical";
-import { Footer } from "./Footer";
+import { Footer } from "./layout/Footer";
 import { TabsCrowdfund } from "./TabsCrowdfund";
 import { TimelineVertical } from "./TimelineVertical";
-import { TopBar } from "./TopBar";
+import { TopBar } from "./layout/TopBar";
 import { Update } from "./Update";
-import { ModalComment } from "./ModalComment";
+import { ModalComment } from "./modals/ModalComment";
 import { CommentSection } from "./CommentSection";
 import { Comment } from "./Comment";
 import { AccordeonWallet } from "./AccordeonWallet";
-import { TransactionModal } from "./TransactionModal";
-import { VoteModal } from "./VoteModal";
+import { TransactionModal } from "./modals/TransactionModal";
+import { VoteModal } from "./modals/VoteModal";
 import { LiskComponent } from "./Lisk";
-import { StartModal } from './StartModal';
+import { StartModal } from './modals/StartModal';
+import { RefundModal } from './modals/RefundModal';
+import { ProjectImage } from "app/components/ProjectImage";
 
 export {
   LiskComponent,
@@ -46,7 +46,6 @@ export {
   StepGeneral,
   StepTechnical,
   MenuCard,
-  SingleCard,
   CrowdfundStepper,
   ButtonBases,
   TimelineVertical,
@@ -58,9 +57,9 @@ export {
   SingleItem,
   TabsCrowdfund,
   ProjectInfo,
+  ProjectImage,
   ProjectUpdates,
   Header,
-  CardsContainer,
   Header2,
   Update,
   Container,
@@ -74,4 +73,5 @@ export {
   VoteModal,
   AccordeonWallet,
   StartModal,
+  RefundModal,
 };

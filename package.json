@@ -34,6 +34,7 @@
     "redux": "^4.0.5",
     "redux-localstorage": "^0.4.1",
     "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
     "tailwindcss": "^1.6.0"
   },
   "scripts": {

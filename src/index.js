@@ -13,7 +13,7 @@ import { Footer, LiskComponent, ModalNewsletterSignUp, Notifier, TopBar } from "
 
 const api = new APIClient([config.apiUrlClient]);
 const networkIdentifier = '93d00fe5be70d90e7ae247936a2e7d83b50809c79b73fa14285f02c842348b3e';
-export const epoch = new Date('2020-08-01T00:00:00.000Z').getTime() / 1000;
+export const epoch = config.epoch;
 
 ReactDOM.render(
   <AppContext.Provider
@@ -30,7 +30,6 @@ ReactDOM.render(
           <LiskComponent/>
           <Notifier/>
           <ModalNewsletterSignUp/>
-
           <Switch>
             <Route path="/wallet">
               <TopBar/>

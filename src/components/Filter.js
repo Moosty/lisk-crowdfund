@@ -84,7 +84,7 @@ export const Filter = withReducer('Filter', reducer)((props) => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select-label"
-          value={status}
+          value={status || "all"}
           onChange={(e) => {
             if (e.target.value === "all") {
               if (!filter) {
@@ -137,7 +137,7 @@ export const Filter = withReducer('Filter', reducer)((props) => {
           <MenuItem value="all">
             <em>all</em>
           </MenuItem>
-          {categories.map(c => <MenuItem value={c.value}>{c.label}</MenuItem>)}
+          {categories.map(c => <MenuItem key={c.value} value={c.value}>{c.label}</MenuItem>)}
         </Select>
       </FormControl>
     </div>

@@ -56,6 +56,7 @@ export const Accordeon = withReducer('Accordeon', reducer)((props) => {
           <div className="flex flex-col w-full">
             {investments && investments.map(i => (
               <MenuCard
+                key={`${i.publicKey}-iii`}
                 type="investment"
                 title={i.title}
                 investment={i.amount}
@@ -77,7 +78,7 @@ export const Accordeon = withReducer('Accordeon', reducer)((props) => {
         <AccordionDetails>
           <div className="flex flex-col w-full">
             {crowdfunds && wallet && wallet.account && wallet.account.publicKey && crowdfunds.projects.filter(p => p.asset.owner === wallet.account.publicKey).map(p => (
-              <MenuCard type="crowdfund" title={p.asset.title} timeLeft="24" crowdfund={p.asset}/>
+              <MenuCard key={p.publicKey} type="crowdfund" title={p.asset.title} timeLeft="24" crowdfund={p.asset}/>
             ))}
             </div>
         </AccordionDetails>

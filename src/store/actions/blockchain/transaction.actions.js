@@ -1,5 +1,5 @@
 import * as Actions from '../';
-import { config } from "../../../config";
+import { config } from "app/config";
 
 export const DO_TRANSACTION = 'DO_TRANSACTION';
 export const GET_TRANSACTION = 'GET_TRANSACTION';

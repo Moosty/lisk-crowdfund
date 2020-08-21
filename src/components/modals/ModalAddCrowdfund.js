@@ -8,10 +8,10 @@ import React from "react";
 import { useHistory, useParams } from 'react-router-dom';
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
-import { CrowdfundStepper, ProjectInfo } from "../components";
-import * as Actions from "../store/actions";
-import reducer from "../store/reducers";
-import withReducer from "../store/withReducer";
+import { CrowdfundStepper, ProjectInfo } from "../index";
+import * as Actions from "../../store/actions";
+import reducer from "../../store/reducers";
+import withReducer from "../../store/withReducer";
 import IconButton from "@material-ui/core/IconButton";
 
 //* Modal met Stepper *//

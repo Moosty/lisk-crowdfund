@@ -24,6 +24,7 @@ export default (state = defaultState, action) => {
     case Actions.ADD_USERS:
       return {
         ...state,
+        loading: false,
         users: removeDuplicates([
           ...state.users,
           ...action.users,

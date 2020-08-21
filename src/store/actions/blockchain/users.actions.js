@@ -1,4 +1,4 @@
-import { config } from "../../../config";
+import { config } from "app/config";
 
 export const LOAD_USERS = '[users] load users';
 export const DONE_USERS = '[users] done users';
@@ -22,16 +22,17 @@ export const getUsers = (users) => (async (dispatch) => {
       },
       method: "GET"
     }
+    let userList = [];
     for(let u in users) {
       const result = await fetch(`${config.apiUrl}accounts?publicKey=${users[u].senderPublicKey}`, options);
       if (result) {
         const jsonResult = await result.json();
-        dispatch(doneUsers())
         if (jsonResult && jsonResult.data) {
-          dispatch(addUsers(jsonResult.data));
+          userList.push(jsonResult.data[0])
         }
       }
     }
+    dispatch(addUsers(userList));
   } catch (err) {
     console.error(err)
   }
