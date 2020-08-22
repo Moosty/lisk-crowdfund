@@ -6,8 +6,9 @@ import { ProgressSection } from "app/components";
 import AppContext from "app/AppContext";
 import { allowedToRefund, calculateInvestments, getCurrentPeriod } from "app/utils/projects";
 import * as States from './states';
+import { Investments } from "app/components/card/crowdfund/Investments";
 
-export const CrowdfundStatus = memo(({wallet, crowdfund}) => {
+export const CrowdfundStatus = memo(({wallet, crowdfund, fullpage}) => {
   const [state, setState] = useState(null);
   const {epoch} = useContext(AppContext);
   const [currentPeriod, setCurrentPeriod] = useState(null);
@@ -79,5 +80,7 @@ export const CrowdfundStatus = memo(({wallet, crowdfund}) => {
       votes={crowdfund.asset.votes}
       publicKey={crowdfund.publicKey}
     />)}
+    {fullpage && crowdfund.asset.investments.filter(i => i.address === wallet.account.address).length > 0 && <Investments address={wallet.account.address} crowdfund={crowdfund} defaultOpen={fullpage} />}
+    {crowdfund.asset.investments.length > 0 && <Investments crowdfund={crowdfund} defaultOpen={fullpage} />}
   </div>;
 });

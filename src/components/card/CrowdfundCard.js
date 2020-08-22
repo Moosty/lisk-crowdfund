@@ -60,7 +60,7 @@ export const CrowdfundCard = withRouter(withReducer('CrowdfundCard', reducer)(({
           {crowdfund.asset.description && crowdfund.asset.description.length > 100 ? `${crowdfund.asset.description.substr(0, 100)}...` : crowdfund.asset.description}
         </Typography>
         {fullpage && <CrowdfundOwner username={username} owner={crowdfund.asset.owner} start={crowdfund.asset.startFunding} />}
-        <CrowdfundStatus crowdfund={crowdfund} wallet={wallet} />
+        <CrowdfundStatus crowdfund={crowdfund} wallet={wallet} fullpage={fullpage}/>
       </CardContent>
     </Card>
   );
