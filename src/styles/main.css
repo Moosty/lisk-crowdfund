@@ -14447,6 +14447,10 @@ video {
   background: transparent; /* make scrollbar transparent */
 }
 
+:focus {
+  outline: none!important;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

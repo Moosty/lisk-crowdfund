@@ -18,6 +18,7 @@
     "autosuggest-highlight": "^3.1.1",
     "axios": "^0.19.2",
     "buffer": "https://github.com/corbifex/buffer.git",
+    "console-feed": "^3.0.1",
     "jsonp": "^0.2.1",
     "lisk-crowdfund-transactions": "../lisk-crowdfund-transactions/",
     "lodash": "^4.17.20",

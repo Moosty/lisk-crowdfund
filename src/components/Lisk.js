@@ -1,20 +1,59 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { config } from "../config";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import withReducer from '../store/withReducer';
 import reducer from '../store/reducers';
 import * as Actions from '../store/actions';
+import AppContext from "app/AppContext";
 
 export const LiskComponent = withReducer('LiskComponent', reducer)(props => {
   const dispatch = useDispatch();
+  const { api } = useContext(AppContext);
+  const [lastHeight, setLastHeight] = useState(null);
+  const { account } = useSelector(({blockchain}) => blockchain.wallet);
 
   useEffect(() => {
     // Initialize blockchain data
     dispatch(Actions.getUsers());
     dispatch(Actions.getCrowdfunds());
     loadUsers(103);
+    watchBlocks();
   }, []);
+
+  const watchBlocks = async () => {
+    const lastBlocks = await api.blocks.get({
+      sort: 'height:desc',
+      limit: 1
+    });
+    if (lastBlocks.data && lastBlocks.data.length > 0) {
+      if (lastBlocks.data[0].height > lastHeight) {
+        dispatch(Actions.loadAccount(account.address, Actions.updateAccount))
+        setLastHeight(lastBlocks.data[0].height)
+        if (lastBlocks.data[0].numberOfTransactions > 0) {
+          getBlockTxs(lastBlocks.data[0].height);
+        }
+      }
+    }
+    setTimeout(watchBlocks, 5000);
+  }
+
+  const getBlockTxs = async height => {
+    const txs = await api.transactions.get({
+      height
+    });
+    if (txs && txs.data && txs.data.length > 0) {
+      console.log(txs)
+      // eslint-disable-next-line array-callback-return
+      txs.data.map(t => {
+        if (t.type === 13001) {
+          dispatch(Actions.getUsers());
+        } else {
+          dispatch(Actions.getCrowdfunds());
+        }
+      });
+    }
+  };
 
   const loadUsers = async offset => {
     const users = await fetch(

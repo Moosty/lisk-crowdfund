@@ -4,7 +4,13 @@ import { getNow } from "app/utils";
 import { config } from "app/config";
 import { ProgressSection } from "app/components";
 import AppContext from "app/AppContext";
-import { allowedToRefund, calculateInvestments, getCurrentPeriod } from "app/utils/projects";
+import {
+  allowedToClaim,
+  allowedToRefund,
+  calculateInvestments,
+  getCurrentPeriod,
+  nextPeriodToClaim
+} from "app/utils/projects";
 import * as States from './states';
 import { Investments } from "app/components/card/crowdfund/Investments";
 
@@ -31,17 +37,24 @@ export const CrowdfundStatus = memo(({wallet, crowdfund, fullpage}) => {
       }
     }
 
+    if (crowdfund.asset.owner === wallet.account.publicKey && crowdfund.asset.status !== "REFUND STATE" && crowdfund.asset.startProject > -1) {
+      const nextPayment = nextPeriodToClaim(crowdfund.asset.startProject, crowdfund.asset.payments);
+      const allowed = allowedToClaim(crowdfund.asset.startProject, crowdfund.asset.payments, nextPayment);
+      console.log(crowdfund.publicKey, allowed)
+      if (allowed) {
+        return 'claim';
+      }
+    }
+
     if (crowdfund.asset.status === "REFUND STATE") {
-      const refund = allowedToRefund(crowdfund, wallet.address)
+      const refund = allowedToRefund(crowdfund, wallet.account.address)
       return refund > BigInt(0) ? 'refund' : 'closed';
     }
 
     if (crowdfund.asset.startFunding <= getNow(epoch) && crowdfund.asset.startFunding + config.periodLength < getNow(epoch) && funds < crowdfund.asset.goal) {
-        const refund = allowedToRefund(crowdfund, wallet.address)
+        const refund = allowedToRefund(crowdfund, wallet.account.address)
         return refund > BigInt(0) ? 'refund' : 'closed';
     }
-
-    // todo claim
 
     if (crowdfund.asset.state === 'FUNDED STATE' && crowdfund.asset.startProject > getNow(epoch)) {
       return 'await start';
@@ -68,6 +81,7 @@ export const CrowdfundStatus = memo(({wallet, crowdfund, fullpage}) => {
     {state === 'new' && <States.NewState goal={crowdfund.asset.goal} start={crowdfund.asset.startFunding} />}
     {(state === "closed" || state === "refund") && <States.Closed state={state} publicKey={crowdfund.publicKey} />}
     {state === 'funded' && <States.Funded />}
+    {state === 'claim' && <States.Claim state={state} publicKey={crowdfund.publicKey}/>}
     {state === 'set start' && <States.Start publicKey={crowdfund.publicKey} />}
     {state === 'await start' && <States.WaitStart start={crowdfund.asset.startProject} />}
     {state === "started" && (<States.Started

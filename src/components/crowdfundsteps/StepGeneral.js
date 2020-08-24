@@ -52,10 +52,6 @@ export const StepGeneral = withReducer(
   const dispatch = useDispatch();
   const form = useSelector(({ blockchain }) => blockchain.crowdfund.createForm);
 
-  useEffect(() => {
-    console.log(form);
-  }, [form]);
-
   return (
     <form
       className="flex flex-row w-full flex-wrap"

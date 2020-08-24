@@ -12,18 +12,19 @@ import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
 import * as Actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { RefundTransaction } from "@moosty/lisk-crowdfund-transactions";
 import AppContext from "../../AppContext";
 import { utils } from '@liskhq/lisk-transactions';
+import { ClaimTransaction } from "lisk-crowdfund-transactions/dist-node";
+import { allowedToClaim, amountToClaim, nextPeriodToClaim } from "app/utils/projects";
 
-const { convertBeddowsToLSK } = utils;
+const {convertBeddowsToLSK} = utils;
 
-export const RefundModal = memo(withReducer('RefundModal', reducer)((props) => {
+export const ClaimModal = memo(withReducer('ClaimModal', reducer)((props) => {
   const dispatch = useDispatch();
   const {api, networkIdentifier, epoch} = useContext(AppContext);
-  const { open, type, fundraiser } = useSelector(({ modal }) => modal);
-  const crowdfund = useSelector(({ blockchain }) => blockchain.crowdfunds.projects.find(c => c.publicKey === fundraiser));
-  const { wallet } = useSelector(({ blockchain }) => blockchain);
+  const {open, type, fundraiser} = useSelector(({modal}) => modal);
+  const crowdfund = useSelector(({blockchain}) => blockchain.crowdfunds.projects.find(c => c.publicKey === fundraiser));
+  const {wallet} = useSelector(({blockchain}) => blockchain);
   const [password, setPassword] = useState("");
   const [startDate, setStartDate] = useState("");
   const [passphrase, setPassphrase] = useState("");
@@ -37,13 +38,9 @@ export const RefundModal = memo(withReducer('RefundModal', reducer)((props) => {
 
   useEffect(() => {
     if (crowdfund) {
-      signRefundTx();
+      signClaimTx();
     }
   }, [password, passphrase, startDate, crowdfund])
-
-  useEffect(() => {
-          console.log(fundraiser, props.publicKey, crowdfund);
-  }, [fundraiser, props.publicKey, crowdfund]);
 
   const calculateInvestments = investments => {
     let totalInvestments = BigInt(0);
@@ -76,7 +73,7 @@ export const RefundModal = memo(withReducer('RefundModal', reducer)((props) => {
     return amountLeft * calculateVoteStake(fundraiser.asset.investments);
   }
 
-  const signRefundTx = () => {
+  const signClaimTx = () => {
     const tx = {
       senderPublicKey: wallet.account.publicKey,
       networkIdentifier,
@@ -84,10 +81,12 @@ export const RefundModal = memo(withReducer('RefundModal', reducer)((props) => {
       passphrase: wallet.passphrase || passphrase,
       asset: {
         fundraiser: fundraiser,
-        amount: allowedToRefund(crowdfund).toString(),
+        amount: amountToClaim(crowdfund.asset.goal, crowdfund.asset.periods).toString(),
+        message: "-",
+        period: nextPeriodToClaim(crowdfund.asset.startProject, crowdfund.asset.payments)
       }
     };
-    const transaction = new RefundTransaction(tx);
+    const transaction = new ClaimTransaction(tx);
     transaction.nonce = transaction.nonce.toString();
     transaction.sign(networkIdentifier, wallet.passphrase);
     transaction.fee = transaction.minFee.toString();
@@ -96,7 +95,7 @@ export const RefundModal = memo(withReducer('RefundModal', reducer)((props) => {
   }
 
   const handleConfirm = () => {
-    const transaction = signRefundTx();
+    const transaction = signClaimTx();
     try {
       transaction.sign(networkIdentifier, wallet.passphrase);
       dispatch(Actions.doTransaction(transaction, api));
@@ -116,23 +115,21 @@ export const RefundModal = memo(withReducer('RefundModal', reducer)((props) => {
         style={{marginRight: 10}}
         onClick={() => {
           if (wallet && wallet.account && wallet.account.address) {
-            dispatch(Actions.openModal('refundModal', props.publicKey))
-          } else {
-            dispatch(Actions.openModal('signin'))
+            dispatch(Actions.openModal('claimModal', props.publicKey))
           }
         }}
       >
-        Refund investment
+        Claim payout
       </Button>
       {crowdfund && <Dialog
         fullWidth
-        open={open && type === "refundModal"}
+        open={open && type === "claimModal"}
         onClose={() => dispatch(Actions.closeModal())}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          Refund investment: `{crowdfund.asset.title}`
+          Claim payout: `{crowdfund.asset.title}`
         </DialogTitle>
         {/*<MenuCard type="voteItem" title="The Best sunglasses" />*/}
         <DialogContent>
@@ -152,8 +149,9 @@ export const RefundModal = memo(withReducer('RefundModal', reducer)((props) => {
           <div className="flex flex-col mt-2">
             <span className="text-gray-600 text-sm ">
               Transaction Fee:{" "}
-              <Tooltip title="The transaction fee is the amount of tokens you will pay to perform this action. It will be paid in the native token.">
-                <InfoIcon fontSizeSmall />
+              <Tooltip
+                title="The transaction fee is the amount of tokens you will pay to perform this action. It will be paid in the native token.">
+                <InfoIcon fontSizeSmall/>
               </Tooltip>
             </span>
             <span className="text-red-600 text-sm font-bold">{convertBeddowsToLSK(fee)}CFT</span>
@@ -163,7 +161,7 @@ export const RefundModal = memo(withReducer('RefundModal', reducer)((props) => {
           <Button onClick={() => dispatch(Actions.closeModal())} color="primary">
             Cancel
           </Button>
-          <Button disabled={!wallet.passphrase && !passphrase} onClick={handleConfirm} color="secondary" >
+          <Button disabled={!wallet.passphrase && !passphrase} onClick={handleConfirm} color="secondary">
             Confirm
           </Button>
         </DialogActions>

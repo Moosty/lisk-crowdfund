@@ -28,10 +28,6 @@ export const StepDate = withReducer('stepDate', reducer)((props) => {
   const [color, setColor] = useState("#4070f4")
   const form = useSelector(({blockchain}) => blockchain.crowdfund.createForm);
 
-  useEffect(() => {
-    console.log(form);
-  }, [form]);
-
   const getBase64 = (file, cb) => {
     let reader = new FileReader();
     reader.readAsDataURL(file);

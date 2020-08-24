@@ -60,8 +60,32 @@ export const allowedToRefund = (fundraiser, address) => {
   const payedAmount = payedFiltered.length > 0 ?
     payedFiltered.reduce((accumulator, currentValue) => accumulator + currentValue) :
     BigInt(0);
+  const payedSender = fundraiser.asset.payments
+    .filter(p => p.type === 1 && p.recipient === address)
+    .map(p => BigInt(p.amount));
+  const payedSenderAmount = payedSender.length > 0 ? payedSender.reduce((accumulator, currentValue) => accumulator + currentValue) : BigInt(0);
+
   const amountLeft = calculateInvestments(fundraiser.asset.investments) - payedAmount;
-  return amountLeft * calculateVoteStake(fundraiser.asset.investments, address);
+  return (amountLeft * calculateVoteStake(fundraiser.asset.investments, address)) - payedSenderAmount;
+}
+
+export const nextPeriodToClaim = (startTime, payments) => {
+  let lastPayment = 0;
+  payments.map(p => lastPayment = p.period > p.period ? lastPayment : lastPayment)
+  return lastPayment + 1;
+}
+
+export const allowedToClaim = (startTime, payments, period) => {
+  if (payments.find(p =>
+    p.type === 0 &&
+    p.period === period)) {
+    return false;
+  }
+  return getCurrentPeriod(startTime) >= period && (period * config.periodLength) + startTime < getNow(config.epoch);
+}
+
+export const amountToClaim = (goal, periods) => {
+  return BigInt(goal) / BigInt(periods);
 }
 
 export const getCurrentPeriod = (startProject) => {

@@ -15,12 +15,7 @@ export const StepTechnical = withReducer(
 )((props) => {
   const dispatch = useDispatch();
   const form = useSelector(({ blockchain }) => blockchain.crowdfund.createForm);
-
   const [possibleVotingPeriods, setPossibleVotingPeriods] = useState([]);
-
-  useEffect(() => {
-    console.log(form);
-  }, [form]);
 
   useEffect(() => {
     if (form.periods) {

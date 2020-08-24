@@ -34,6 +34,7 @@ import { VoteModal } from "./modals/VoteModal";
 import { LiskComponent } from "./Lisk";
 import { StartModal } from './modals/StartModal';
 import { RefundModal } from './modals/RefundModal';
+import { ClaimModal } from './modals/ClaimModal';
 import { ProjectImage } from "app/components/ProjectImage";
 
 export {
@@ -74,4 +75,5 @@ export {
   AccordeonWallet,
   StartModal,
   RefundModal,
+  ClaimModal,
 };
