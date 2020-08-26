@@ -24,7 +24,7 @@ const BorderLinearProgress = withStyles((theme) => ({
   },
 }))(LinearProgress);
 
-export const Started = memo(({publicKey, currentPeriod, periods, goal, start, address, votes, investments}) => {
+export const Started = memo(({publicKey, currentPeriod, periods, goal, start, address, votes, investments, sidebar}) => {
   const {epoch} = useContext(AppContext);
   const [isInvestor, setIsInvestor] = useState(false);
   const [didVote, setDidVote] = useState(false);
@@ -41,7 +41,7 @@ export const Started = memo(({publicKey, currentPeriod, periods, goal, start, ad
 
   return (
     <div className="flex flex-col w-full mt-4 content-end">
-      <div className="w-full flex flex-row space justify-between">
+      {!sidebar && <div className="w-full flex flex-row space justify-between">
         <div className="flex flex-col">
           <div className="flex flex-row">
             <div className="text-sm text-gray-700">
@@ -59,7 +59,7 @@ export const Started = memo(({publicKey, currentPeriod, periods, goal, start, ad
             {goal && goal.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}CFT
           </span>
         </div>
-      </div>
+      </div>}
       <div className="mt-2">
         <BorderLinearProgress
           variant="determinate"

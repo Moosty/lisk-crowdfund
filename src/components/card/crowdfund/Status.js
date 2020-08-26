@@ -14,7 +14,7 @@ import {
 import * as States from './states';
 import { Investments } from "app/components/card/crowdfund/Investments";
 
-export const CrowdfundStatus = memo(({wallet, crowdfund, fullpage}) => {
+export const CrowdfundStatus = memo(({wallet, crowdfund, fullpage, sidebar}) => {
   const [state, setState] = useState(null);
   const {epoch} = useContext(AppContext);
   const [currentPeriod, setCurrentPeriod] = useState(null);
@@ -79,7 +79,7 @@ export const CrowdfundStatus = memo(({wallet, crowdfund, fullpage}) => {
   return <div>
     {state === 'open' && <ProgressSection crowdfund={crowdfund.publicKey}/>}
     {state === 'new' && <States.NewState goal={crowdfund.asset.goal} start={crowdfund.asset.startFunding} />}
-    {(state === "closed" || state === "refund") && <States.Closed state={state} publicKey={crowdfund.publicKey} />}
+    {(state === "closed" || state === "refund") && <States.Closed sidebar={sidebar} state={state} publicKey={crowdfund.publicKey} />}
     {state === 'funded' && <States.Funded />}
     {state === 'claim' && <States.Claim state={state} publicKey={crowdfund.publicKey}/>}
     {state === 'set start' && <States.Start publicKey={crowdfund.publicKey} />}
@@ -93,8 +93,9 @@ export const CrowdfundStatus = memo(({wallet, crowdfund, fullpage}) => {
       investments={crowdfund.asset.investments}
       votes={crowdfund.asset.votes}
       publicKey={crowdfund.publicKey}
+      sidebar={sidebar}
     />)}
     {fullpage && crowdfund.asset.investments.filter(i => i.address === wallet.account.address).length > 0 && <Investments address={wallet.account.address} crowdfund={crowdfund} defaultOpen={fullpage} />}
-    {crowdfund.asset.investments.length > 0 && <Investments crowdfund={crowdfund} defaultOpen={fullpage} />}
+    {!sidebar && crowdfund.asset.investments.length > 0 && <Investments crowdfund={crowdfund} defaultOpen={fullpage} />}
   </div>;
 });

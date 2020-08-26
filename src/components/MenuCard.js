@@ -4,6 +4,7 @@ import Avatar from "@material-ui/core/Avatar";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import { CrowdfundStatus } from "app/components/card/crowdfund/Status";
 
 const useStyles = makeStyles((theme) => ({
   root: (props) => ({
@@ -48,22 +49,20 @@ export const MenuCard = (props) => {
                 src="/images/pexels-photo-3951901.jpeg"
               />
               <div className="flex flex-col">
-                <span style={{ color: "#f50057", fontWeight: "bold" }}>
+                <span style={{color: "#f50057", fontWeight: "bold"}}>
                   {props.title}
                 </span>
-                <span style={{ color: "#9a9a9a", fontSize: "12px" }}>
-                  {props.investment}
+                <span style={{color: "#9a9a9a", fontSize: "14px"}}>
+                  {props.investment}CFT
                 </span>
               </div>
             </div>
-            <div className=" w-1/4 flex flex-col justify-end px-4">
-              <Button size="small" variant="contained" color="secondary">
-                Vote
-              </Button>
-            </div>
+
           </div>
-          <BorderLinearProgress my-variant="determinate" value={50} />
-          <Divider />
+          <div className="">
+            <CrowdfundStatus sidebar wallet={props.wallet} crowdfund={props.crowdfund}/>
+          </div>
+          <Divider/>
         </div>
       )}
 
@@ -77,28 +76,17 @@ export const MenuCard = (props) => {
                 src="/images/pexels-photo-3951901.jpeg"
               />
               <div className="flex flex-col">
-                <span style={{ color: "#f50057", fontWeight: "bold" }}>
+                <span style={{color: "#f50057", fontWeight: "bold"}}>
                   {props.title}
-                </span>
-                <span style={{ color: "#9a9a9a", fontSize: "12px" }}>
-                  {props.timeLeft} days left
                 </span>
               </div>
             </div>
-            <div className=" w-1/4 flex flex-col justify-end px-4">
-              <Button size="small" variant="contained" color="secondary">
-                Start
-              </Button>
-            </div>
+
           </div>
-          <span
-            className="text-center"
-            style={{ color: "#9a9a9a", fontSize: "12px" }}
-          >
-            Raised: 10.000 / 25.000 LSK
-          </span>
-          <BorderLinearProgress my-variant="determinate" value={50} />
-          <Divider />
+          <div className="">
+            <CrowdfundStatus sidebar wallet={props.wallet} crowdfund={props.crowdfund}/>
+          </div>
+          <Divider/>
         </div>
       )}
 
@@ -112,10 +100,10 @@ export const MenuCard = (props) => {
                 src="/images/pexels-photo-3951901.jpeg"
               />
               <div className="flex flex-col">
-                <span style={{ color: "#f50057", fontWeight: "bold" }}>
+                <span style={{color: "#f50057", fontWeight: "bold"}}>
                   {props.title}
                 </span>
-                <span style={{ color: "#9a9a9a", fontSize: "12px" }}>
+                <span style={{color: "#9a9a9a", fontSize: "12px"}}>
                   Current moment: 2/12 Months
                 </span>
               </div>
@@ -124,10 +112,10 @@ export const MenuCard = (props) => {
           </div>
           <span
             className="text-center"
-            style={{ color: "#9a9a9a", fontSize: "12px" }}
+            style={{color: "#9a9a9a", fontSize: "12px"}}
           />
-          <BorderLinearProgress my-variant="determinate" value={15} />
-          <Divider />
+          <BorderLinearProgress my-variant="determinate" value={15}/>
+          <Divider/>
         </div>
       )}
 
@@ -141,10 +129,10 @@ export const MenuCard = (props) => {
                 src="/images/pexels-photo-3951901.jpeg"
               />
               <div className="flex flex-col">
-                <span style={{ color: "#f50057", fontWeight: "bold" }}>
+                <span style={{color: "#f50057", fontWeight: "bold"}}>
                   {props.title}
                 </span>
-                <span style={{ color: "#9a9a9a", fontSize: "12px" }}>
+                <span style={{color: "#9a9a9a", fontSize: "12px"}}>
                   {props.month}
                 </span>
               </div>
@@ -155,8 +143,8 @@ export const MenuCard = (props) => {
               </Button>
             </div>
           </div>
-          <BorderLinearProgress my-variant="determinate" value={50} />
-          <Divider />
+          <BorderLinearProgress my-variant="determinate" value={50}/>
+          <Divider/>
         </div>
       )}
     </div>

@@ -1,3 +1,4 @@
+/* global BigInt */
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
@@ -8,7 +9,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { MenuCard } from "../components";
 import withReducer from "app/store/withReducer";
 import reducer from "app/store/reducers";
-import * as Actions from "app/store/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 export const Accordeon = withReducer('Accordeon', reducer)((props) => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const { wallet, crowdfunds } = useSelector(({blockchain}) => blockchain);
+  const {wallet, crowdfunds} = useSelector(({blockchain}) => blockchain);
   const [investments, setInvestments] = useState([]);
 
   useEffect(() => {
@@ -32,21 +32,23 @@ export const Accordeon = withReducer('Accordeon', reducer)((props) => {
       let listInvestments = [];
       crowdfunds.projects.map(p => {
         const invests = p.asset.investments.filter(i => i.address === wallet.account.address);
-        let amount = 0;
+        let amount = BigInt(0);
         invests.map(i => {
-          amount += Number(i.amount);
+          amount += BigInt(i.amount);
         });
-        listInvestments.push({publicKey: p.publicKey, title: p.asset.title, amount, crowdfund: p});
+        if (amount > BigInt(0)) {
+          listInvestments.push({publicKey: p.publicKey, title: p.asset.title, amount: amount.toString(), crowdfund: p});
+        }
       })
       setInvestments(listInvestments);
     }
-  },[crowdfunds.projects, wallet])
+  }, [crowdfunds.projects, wallet])
 
   return (
     <div className={classes.root}>
       <Accordion>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon/>}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
@@ -61,7 +63,8 @@ export const Accordeon = withReducer('Accordeon', reducer)((props) => {
                 title={i.title}
                 investment={i.amount}
                 publicKey={i.publicKey}
-                crowdfund={i.crowdfund.asset}
+                crowdfund={i.crowdfund}
+                wallet={wallet}
               />
             ))}
           </div>
@@ -69,7 +72,7 @@ export const Accordeon = withReducer('Accordeon', reducer)((props) => {
       </Accordion>
       <Accordion>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon/>}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
@@ -78,14 +81,21 @@ export const Accordeon = withReducer('Accordeon', reducer)((props) => {
         <AccordionDetails>
           <div className="flex flex-col w-full">
             {crowdfunds && wallet && wallet.account && wallet.account.publicKey && crowdfunds.projects.filter(p => p.asset.owner === wallet.account.publicKey).map(p => (
-              <MenuCard key={p.publicKey} type="crowdfund" title={p.asset.title} timeLeft="24" crowdfund={p.asset}/>
+              <MenuCard
+                key={p.publicKey}
+                type="crowdfund"
+                title={p.asset.title}
+                timeLeft="24"
+                crowdfund={p}
+                wallet={wallet}
+              />
             ))}
-            </div>
+          </div>
         </AccordionDetails>
       </Accordion>
       <Accordion disabled>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon/>}
           aria-controls="panel3a-content"
           id="panel3a-header"
         >
