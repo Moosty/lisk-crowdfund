@@ -35,7 +35,7 @@ export const CrowdfundCard = withRouter(withReducer('CrowdfundCard', reducer)(({
   const history = useHistory();
   const wallet = useSelector(({blockchain}) => blockchain.wallet, isEqual);
   const username = useSelector(({blockchain}) => blockchain.users.users
-    .find(u => u.publicKey === crowdfund.asset.owner).username, isEqual);
+    .find(u => u.publicKey === crowdfund.asset.owner)?.username, isEqual);
 
   return (
     <Card className={fullpage ? classes.fullpage : classes.root}>
