@@ -8,19 +8,18 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InfoIcon from "@material-ui/icons/Info";
 import React, { memo, useContext, useEffect, useState } from "react";
-import withReducer from "../../store/withReducer";
-import reducer from "../../store/reducers";
-import * as Actions from "../../store/actions";
+import withReducer from "app/store/withReducer";
+import reducer from "app/store/reducers";
+import * as Actions from "app/store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { RefundTransaction } from "@moosty/lisk-crowdfund-transactions";
 import AppContext from "../../AppContext";
 import { utils } from '@liskhq/lisk-transactions';
-
-const { convertBeddowsToLSK } = utils;
+const { convertLSKToBeddows, convertBeddowsToLSK } = utils;
 
 export const RefundModal = memo(withReducer('RefundModal', reducer)((props) => {
   const dispatch = useDispatch();
-  const {api, networkIdentifier, epoch} = useContext(AppContext);
+  const {api, networkIdentifier} = useContext(AppContext);
   const { open, type, fundraiser } = useSelector(({ modal }) => modal);
   const crowdfund = useSelector(({ blockchain }) => blockchain.crowdfunds.projects.find(c => c.publicKey === fundraiser));
   const { wallet } = useSelector(({ blockchain }) => blockchain);
@@ -84,7 +83,7 @@ export const RefundModal = memo(withReducer('RefundModal', reducer)((props) => {
       passphrase: wallet.passphrase || passphrase,
       asset: {
         fundraiser: fundraiser,
-        amount: allowedToRefund(crowdfund).toString(),
+        amount: convertLSKToBeddows(allowedToRefund(crowdfund).toString()),
       }
     };
     const transaction = new RefundTransaction(tx);

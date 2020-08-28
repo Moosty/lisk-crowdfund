@@ -10,6 +10,8 @@ import { config } from "app/config";
 import { fromTimeStamp } from "app/utils/time";
 import AppContext from "../../AppContext";
 import { FundModal } from "../modals/FundModal";
+import { utils } from '@liskhq/lisk-transactions';
+const { convertBeddowsToLSK, convertLSKToBeddows } = utils;
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -47,9 +49,9 @@ export const ProgressSection = withReducer('ProgressSection', reducer)(props => 
     <div className="flex flex-col w-full mt-4 content-end">
       <div className="w-full flex flex-row space justify-between">
         <div className="flex flex-row">
-          <h1>{investments && investments.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}/</h1>
+          <h1>{investments && convertBeddowsToLSK(investments.toString())}/</h1>
           <h1
-            className="font-bold">{crowdfund && crowdfund.asset && crowdfund.asset.goal && crowdfund.asset.goal.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} CFT</h1>
+            className="font-bold">{crowdfund && crowdfund.asset && crowdfund.asset.goal && convertBeddowsToLSK(crowdfund.asset.goal)} CFT</h1>
         </div>
 
         <div>{crowdfund && crowdfund.asset.investments.length} Backers</div>

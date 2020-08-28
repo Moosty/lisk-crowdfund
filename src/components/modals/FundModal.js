@@ -11,11 +11,10 @@ import withReducer from "../../store/withReducer";
 import reducer from "../../store/reducers";
 import * as Actions from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { FundTransaction, RegisterTransaction } from "@moosty/lisk-crowdfund-transactions";
+import { FundTransaction } from "@moosty/lisk-crowdfund-transactions";
 import AppContext from "../../AppContext";
 import { utils } from '@liskhq/lisk-transactions';
-
-const { convertBeddowsToLSK } = utils;
+const { convertBeddowsToLSK, convertLSKToBeddows } = utils;
 
 export const FundModal = withReducer('fundModal', reducer)((props) => {
   const dispatch = useDispatch();
@@ -51,7 +50,7 @@ export const FundModal = withReducer('fundModal', reducer)((props) => {
       passphrase: passphrase || wallet.passphrase,
       asset: {
         fundraiser: fundraiser,
-        amount: amount.toString(),
+        amount: convertLSKToBeddows(amount.toString()),
         message
       }
     };

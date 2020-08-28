@@ -8,6 +8,8 @@ import { config } from "app/config";
 import AppContext from "app/AppContext";
 import { withStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import { utils } from '@liskhq/lisk-transactions';
+const { convertBeddowsToLSK, convertLSKToBeddows } = utils;
 
 const BorderLinearProgress = withStyles((theme) => ({
   root: {
@@ -56,7 +58,7 @@ export const Started = memo(({publicKey, currentPeriod, periods, goal, start, ad
         <div className="flex flex-col">
           <div className="text-sm text-gray-700">Total Raised:</div>
           <span className="">
-            {goal && goal.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}CFT
+            {goal && convertBeddowsToLSK(goal)}CFT
           </span>
         </div>
       </div>}

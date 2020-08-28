@@ -7,16 +7,15 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InfoIcon from "@material-ui/icons/Info";
 import React, { useContext, useEffect, useState } from "react";
-import withReducer from "../../store/withReducer";
-import reducer from "../../store/reducers";
-import * as Actions from "../../store/actions";
+import withReducer from "app/store/withReducer";
+import reducer from "app/store/reducers";
+import * as Actions from "app/store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { FundTransaction, RegisterTransaction, StartTransaction } from "@moosty/lisk-crowdfund-transactions";
 import AppContext from "../../AppContext";
-import { utils } from '@liskhq/lisk-transactions';
 import { getNow, toTimeStamp } from "../../utils";
-
-const { convertBeddowsToLSK } = utils;
+import { utils } from '@liskhq/lisk-transactions';
+const { convertBeddowsToLSK, convertLSKToBeddows } = utils;
 
 export const ConfirmAddCrowdfundModal = withReducer('ConfirmAddCrowdfundModal', reducer)((props) => {
   const dispatch = useDispatch();
@@ -47,7 +46,7 @@ export const ConfirmAddCrowdfundModal = withReducer('ConfirmAddCrowdfundModal', 
       nonce: wallet.account.nonce.toString(),
       passphrase: wallet.passphrase,
       asset: {
-        goal: form.goal.toString(),
+        goal: convertLSKToBeddows(form.goal.toString()),
         voteTime: form.voting,
         periods: form.periods,
         title: form.title,

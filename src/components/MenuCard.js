@@ -5,6 +5,8 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import { CrowdfundStatus } from "app/components/card/crowdfund/Status";
+import { utils } from '@liskhq/lisk-transactions';
+const { convertBeddowsToLSK, convertLSKToBeddows } = utils;
 
 const useStyles = makeStyles((theme) => ({
   root: (props) => ({
@@ -53,7 +55,7 @@ export const MenuCard = (props) => {
                   {props.title}
                 </span>
                 <span style={{color: "#9a9a9a", fontSize: "14px"}}>
-                  {props.investment}CFT
+                  {props.investment && convertBeddowsToLSK(props.investment)}CFT
                 </span>
               </div>
             </div>

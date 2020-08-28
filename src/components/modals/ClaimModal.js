@@ -17,7 +17,7 @@ import { utils } from '@liskhq/lisk-transactions';
 import { ClaimTransaction } from "lisk-crowdfund-transactions/dist-node";
 import { allowedToClaim, amountToClaim, nextPeriodToClaim } from "app/utils/projects";
 
-const {convertBeddowsToLSK} = utils;
+const {convertLSKToBeddows} = utils;
 
 export const ClaimModal = memo(withReducer('ClaimModal', reducer)((props) => {
   const dispatch = useDispatch();
@@ -81,7 +81,7 @@ export const ClaimModal = memo(withReducer('ClaimModal', reducer)((props) => {
       passphrase: wallet.passphrase || passphrase,
       asset: {
         fundraiser: fundraiser,
-        amount: amountToClaim(crowdfund.asset.goal, crowdfund.asset.periods).toString(),
+        amount: convertLSKToBeddows(amountToClaim(crowdfund.asset.goal, crowdfund.asset.periods).toString()),
         message: "-",
         period: nextPeriodToClaim(crowdfund.asset.startProject, crowdfund.asset.payments)
       }

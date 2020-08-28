@@ -19,11 +19,18 @@ export default (state = defaultState, action) => {
         passphrase: action.passphrase,
       }
     case Actions.UPDATE_NONCE:
-      return {
-        ...state,
-        account: {
-          ...state.account,
-          nonce: (Number(state.account.nonce) + 1).toString(),
+      if (state.account.address) {
+        return {
+          ...state,
+          account: {
+            ...state.account,
+            nonce: (Number(state.account.nonce) + 1).toString(),
+          }
+        }
+      } else {
+        return {
+          ...state,
+          account: {}
         }
       }
     case Actions.LOGOUT_ACCOUNT:
@@ -63,11 +70,18 @@ export default (state = defaultState, action) => {
         },
       }
     case Actions.UPDATE_ACCOUNT:
-      return {
-        ...state,
-        account: {
-          ...state.account,
-          ...action.account,
+      if (state.account.address) {
+
+        return {
+          ...state,
+          account: {
+            ...state.account,
+            ...action.account,
+          }
+        }
+      } else {
+        return {
+          ...state
         }
       }
     default:

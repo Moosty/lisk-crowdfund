@@ -40,7 +40,6 @@ export const CrowdfundStatus = memo(({wallet, crowdfund, fullpage, sidebar}) => 
     if (crowdfund.asset.owner === wallet.account.publicKey && crowdfund.asset.status !== "REFUND STATE" && crowdfund.asset.startProject > -1) {
       const nextPayment = nextPeriodToClaim(crowdfund.asset.startProject, crowdfund.asset.payments);
       const allowed = allowedToClaim(crowdfund.asset.startProject, crowdfund.asset.payments, nextPayment);
-      console.log(crowdfund.publicKey, allowed)
       if (allowed) {
         return 'claim';
       }

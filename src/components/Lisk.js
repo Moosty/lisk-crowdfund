@@ -12,14 +12,21 @@ export const LiskComponent = withReducer('LiskComponent', reducer)(props => {
   const { api } = useContext(AppContext);
   const [lastHeight, setLastHeight] = useState(null);
   const { account } = useSelector(({blockchain}) => blockchain.wallet);
+  const [timer, setTimer] = useState(0);
 
   useEffect(() => {
     // Initialize blockchain data
     dispatch(Actions.getUsers());
     dispatch(Actions.getCrowdfunds());
     loadUsers(103);
-    watchBlocks();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      watchBlocks()
+      setTimer(timer + 1);
+    }, 5000)
+  }, [timer]);
 
   const watchBlocks = async () => {
     const lastBlocks = await api.blocks.get({
@@ -28,14 +35,17 @@ export const LiskComponent = withReducer('LiskComponent', reducer)(props => {
     });
     if (lastBlocks.data && lastBlocks.data.length > 0) {
       if (lastBlocks.data[0].height > lastHeight) {
-        dispatch(Actions.loadAccount(account.address, Actions.updateAccount))
+        console.log(account)
+        if (account.address) {
+          dispatch(Actions.loadAccount(account.address, Actions.updateAccount))
+        }
         setLastHeight(lastBlocks.data[0].height)
         if (lastBlocks.data[0].numberOfTransactions > 0) {
           getBlockTxs(lastBlocks.data[0].height);
         }
       }
     }
-    setTimeout(watchBlocks, 5000);
+    // setTimeout(watchBlocks, 5000);
   }
 
   const getBlockTxs = async height => {
@@ -43,7 +53,6 @@ export const LiskComponent = withReducer('LiskComponent', reducer)(props => {
       height
     });
     if (txs && txs.data && txs.data.length > 0) {
-      console.log(txs)
       // eslint-disable-next-line array-callback-return
       txs.data.map(t => {
         if (t.type === 13001) {
@@ -61,7 +70,6 @@ export const LiskComponent = withReducer('LiskComponent', reducer)(props => {
     );
     if (users.ok) {
       const json = await users.json();
-
       if (json.data && json.data.length > 0) {
         dispatch(Actions.getUsers(json.data));
       }
